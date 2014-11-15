@@ -1,0 +1,12 @@
+# Version 0.1
+
+CACHE MANIFEST
+/css/*
+/js/*
+/font/*
+
+NETWORK:
+*
+
+FALLBACK:
+/html/ /index.html
