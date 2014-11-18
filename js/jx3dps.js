@@ -905,8 +905,8 @@ $(function(){
 				function GET_SKT(skilltime,adtspeed){
 					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*10.24+adtspeed*10.24+1024) )*0.0625;
 				};
-				var test = GET_SKT(3,11.88);
-				console.log(test);
+				/*var test = GET_SKT(3,11.88);
+				console.log(test);*/
 
 		//计算方法 - 2014.11.17
 			this.dpsMethod = Number($("#dpsMethod").val());
