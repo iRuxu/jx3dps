@@ -1016,6 +1016,7 @@ label {
 }
 #box #footer ul.author img {
   width: 40px;
+  height: 40px;
   display: block;
 }
 #box #footer ul.author i {
