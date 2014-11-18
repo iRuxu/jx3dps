@@ -509,13 +509,6 @@ $(function(){
 			},
 		};
 
-	//定义增益兑换比例 2014.11.18
-		var s_HT = 4500,
-			s_CT = 4500,
-			s_CF = 1800,
-			s_WS = 3375,
-			s_SP = 5478.2;
-
 	//定义目标系数 2014.11.17
 		//90木桩,91木桩,92木桩,93木桩,94木桩,DXC,QHL,副本..
 		var HT_NEED = [102.5,105,110,120,110,110],
@@ -524,6 +517,13 @@ $(function(){
 			PF_CFT = [5964,6201,6439,6676,6439,6439],
 			PF_CEIL = [4763,5221,5702,6152,5702,5702];
 			/*DF_NEED = [4295,4473,4651,4829,5007],*/
+
+	//定义增益兑换比例 2014.11.18
+		var s_HT = 4500,
+			s_CT = 4500,
+			s_CF = 1800,
+			s_WS = 3375,
+			s_SP = 5478.2;
 			
 	//定义固定增益对象 2014.11.16～2014.11.18重写结构
 		var buffcat = ['ng_Y','ng_G','wg_L','wg_S',
@@ -831,6 +831,8 @@ $(function(){
 				};
 				this.R_ST = GET_ST();
 			//R会效 = 会效 + 会效增益
+				this.adCF1 = addBuff('ng_CF');
+				this.adCF2 = addBuff('wg_CF');
 				function GET_CF(basecat,addcat){
 					var round_CF = basecat/100 + addBuff(addcat);
 					if(round_CF<1.75){
@@ -890,20 +892,21 @@ $(function(){
 				this.R_PA1 = GET_PFX(that.R_PF1);
 				this.R_PA2 = GET_PFX(that.R_PF2);
 			//R加速与技能实际运功时间方法
-				this.R_SP = this.baseSP/100 + addBuff('ty_SP');
+				this.adSP = addBuff('ty_SP');
+				this.R_SP = this.baseSP/100 + this.adSP;
 				//R运功实际时间 = floor( T/0.0625*1024/floor(S*10.24+S1+1024) )*0.0625
 				//T = {} 技能初始释放时间  S=默认急速 S1 = 急速加成，转换为数值
 
 				//设置和入库技能原始时间
 				var skillTime = adSkill[ROLE]['skill_name'][4];
 				//设置急速加成 = 职业加成 + BUFF增益
-				var adtSP = adt[ROLE]['speedAd'] + addBuff('ty_SP');
+				var adtSP = adt[ROLE]['speedAd'] + this.adSP;
 				//获取技能当前运功时间方法
 				function GET_SKT(skilltime,adtspeed){
 					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*10.24+adtspeed*10.24+1024) )*0.0625;
 				};
-				//var test = GET_SKT(3,11.88);
-				//console.log(test);
+				var test = GET_SKT(3,11.88);
+				console.log(test);
 
 		//计算方法 - 2014.11.17
 			this.dpsMethod = Number($("#dpsMethod").val());
@@ -944,7 +947,7 @@ $(function(){
 				console.log(ex);
 
 				//运算获取方案结果
-				var finalist = new JX3DPS().go();
+				/*var finalist = new JX3DPS().go();
 				var validate_finalist = function(){
 					for(i=0;i<finalist.length;i++){
 						if ( isNaN(finalist[i]) ){
@@ -960,19 +963,19 @@ $(function(){
 					}
 				};
 				validate_finalist();
-				console.log(finalist);
+				console.log(finalist);*/
 
 				//数据获取成功/错误提示
-				if (validate_finalist()){
+				/*if (validate_finalist()){
 					showdate();
 				}else{
 					errordate();
-				}
+				}*/
 				
 				//添加入数据面板
-				$("#date td").html(function(i){
+				/*$("#date td").html(function(i){
 					return finalist[i];
-				})
+				})*/
 			}
 		})
 	
