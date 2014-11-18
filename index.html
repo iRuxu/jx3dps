@@ -34,7 +34,7 @@
 	<div id="header">
 		<div id="title">
 			<h1><a href="http://jx3dps.com">Jx3dps</a></h1>
-			<span id="version" class="ui-button-primary" title="更新说明">v.01 Beta</span>
+			<span id="version" class="ui-button-primary" title="更新说明">v.02 Beta</span>
 			<div id="role-wrap">
 				<select name="role" id="role" placeholder="请选择一个心法 - jx3dps.com" value="">
 					<option></option>
@@ -81,8 +81,8 @@
 							<th title="说明信息" id="date2-t">92木桩</th>
 							<th title="说明信息" id="date3-t">93木桩</th>
 							<th title="说明信息" id="date4-t">94木桩</th>
-							<th title="说明信息" id="date5-t">DMG/XZ</th>
-							<th title="说明信息" id="date6-t">DXC/QHL</th>
+							<th title="说明信息" id="date5-t">DXC</th>
+							<th title="说明信息" id="date6-t">QHL</th>
 							<th title="说明信息" id="date7-t">特殊情况</th>
 							<th title="说明信息" id="date8-t">浮动区间</th>
 						</tr>
@@ -119,34 +119,40 @@
 		<form action="index.html" id="dpsForm" >
 			<!-- 基础属性 -->
 			<ul class="dps-prop">
-				<li class="ng yuanqi tl"><label for="baseY">元气</label><input type="text" id="baseY" name="baseY" maxlength="4" autocomplete="on" required/></li>
-				<li class="ng zl"><label for="baseG">根骨</label><input type="text" id="baseG" name="baseG"  maxlength="4" autocomplete="on" required/></li>
-				<li class="wg"><label for="baseS">身法</label><input type="text" id="baseS" name="baseS"  maxlength="4" autocomplete="on" required/></li>
-				<li class="wg lidao"><label for="baseL">力道</label><input type="text" id="baseL" name="baseL"  maxlength="4" autocomplete="on" required/></li>
+				<li class="ng yuanqi tl"><label for="baseY">元气</label><input type="text" id="baseY" name="baseY" maxlength="4" autocomplete="on" /></li>
+				<li class="ng zl"><label for="baseG">根骨</label><input type="text" id="baseG" name="baseG"  maxlength="4" autocomplete="on" /></li>
+				<li class="wg lidao"><label for="baseL">力道</label><input type="text" id="baseL" name="baseL"  maxlength="4" autocomplete="on" /></li>
+				<li class="wg"><label for="baseS">身法</label><input type="text" id="baseS" name="baseS"  maxlength="4" autocomplete="on" /></li>
 				<li class="ng tl">
-					<label for="baseAP1" class="help">攻击<span>内功攻击</span></label><input type="text" id="baseAP1" name="baseAP1" placeholder="* 基础攻击" maxlength="5" autocomplete="on" required/>
+					<label for="baseAP1" class="help">攻击<span>内功攻击</span></label><input type="text" id="baseAP1" name="baseAP1" placeholder="* 基础攻击" maxlength="5" autocomplete="on" />
 					<label for="baseAP1" class="help info"><span>基础攻击，非面板攻击</span></label>
 				</li>
 				<li class="wg">
-					<label for="baseAP2" class="help">攻击<span>外功攻击</span></label><input type="text" id="baseAP2" name="baseAP2" placeholder="* 基础攻击" maxlength="5" autocomplete="on" required/>
+					<label for="baseAP2" class="help">攻击<span>外功攻击</span></label><input type="text" id="baseAP2" name="baseAP2" placeholder="* 基础攻击" maxlength="5" autocomplete="on" />
 					<label for="baseAP2" class="help info"><span>基础攻击，非面板攻击</span></label>
 				</li>
 				<li class="zl">
-					<label for="baseAP3" class="help">治疗<span>基础治疗量</span></label><input type="text" id="baseAP3" name="baseAP3" placeholder="* 基础治疗量" maxlength="5" autocomplete="on" required/>
+					<label for="baseAP3" class="help">治疗<span>基础治疗量</span></label><input type="text" id="baseAP3" name="baseAP3" placeholder="* 基础治疗量" maxlength="5" autocomplete="on" />
 					<label for="baseAP3" class="help info"><span>基础治疗量，非面板治疗量</span></label>
 				</li>
-				<li class="ng"><label for="baseHT1" class="help">命中<span>内功命中</span></label><input type="text" id="baseHT1" name="baseHT1" maxlength="6" autocomplete="on" required/><span class="units">%</span></li>
-				<li class="wg tl"><label for="baseHT2" class="help">命中<span>外功命中</span></label><input type="text" id="baseHT2" name="baseHT2" maxlength="6" autocomplete="on" required/><span class="units">%</span></li>
-				<li class="ng zl"><label for="baseCT1" class="help">会心<span>内功会心</span></label><input type="text" id="baseCT1" name="baseCT1" maxlength="5" autocomplete="on" required/><span class="units">%</span></li>
-				<li class="wg tl"><label for="baseCT2" class="help">会心<span>外功会心</span></label><input type="text" id="baseCT2" name="baseCT2" maxlength="5" autocomplete="on" required/><span class="units">%</span></li>
-				<li class="ng zl"><label for="baseCF1" class="help">会效<span>内功会效</span></label><input type="text" id="baseCF1" name="baseCF1" maxlength="6" autocomplete="on" required/><span class="units">%</span></li>
-				<li class="wg tl"><label for="baseCF2" class="help">会效<span>外功会效</span></label><input type="text" id="baseCF2" name="baseCF2" maxlength="6" autocomplete="on" required/><span class="units">%</span></li>
-				<li class="ng tl"><label for="basePF1" class="help">破防<span>内功破防</span></label><input type="text" id="basePF1" name="basePF1" maxlength="4" autocomplete="on" required/></li>
-				<li class="wg"><label for="basePF2" class="help">破防<span>外功破防</span></label><input type="text" id="basePF2" name="basePF2" maxlength="4" autocomplete="on" required/></li>
-				<li class="ty"><label for="baseSP" class="help">加速<span>内/外功攻速</span></label><input type="text" id="baseSP" name="baseSP" placeholder="* 加速数值"  maxlength="4" autocomplete="on" required/>
-					<label for="baseSP" class="help info"><span>请输入具体加速数值</span></label>
+				<li class="wg">
+					<label for="weapAP1" class="help">武器-<span>外功武器最低攻击值</span></label><input type="text" id="weapAP1" name="weapAP1" placeholder="* 武器最低攻击" maxlength="5" autocomplete="on" />
+					<label for="weapAP1" class="help info"><span>武器最低攻击值</span></label>
 				</li>
-				<li class="ty nozl"><label for="baseWS">无双</label><input type="text" id="baseWS" name="baseWS" maxlength="5" autocomplete="on" required/><span class="units">%</span></li>
+				<li class="wg">
+					<label for="weapAP2" class="help">武器+<span>外功武器最高攻击值</span></label><input type="text" id="weapAP2" name="weapAP2" placeholder="* 武器最高攻击" maxlength="5" autocomplete="on" />
+					<label for="weapAP2" class="help info"><span>武器最高攻击值</span></label>
+				</li>
+				<li class="ng"><label for="baseHT1" class="help">命中<span>内功命中</span></label><input type="text" id="baseHT1" name="baseHT1" maxlength="6" autocomplete="on" /><span class="units">%</span></li>
+				<li class="wg tl"><label for="baseHT2" class="help">命中<span>外功命中</span></label><input type="text" id="baseHT2" name="baseHT2" maxlength="6" autocomplete="on" /><span class="units">%</span></li>
+				<li class="ng zl"><label for="baseCT1" class="help">会心<span>内功会心</span></label><input type="text" id="baseCT1" name="baseCT1" maxlength="5" autocomplete="on" /><span class="units">%</span></li>
+				<li class="wg tl"><label for="baseCT2" class="help">会心<span>外功会心</span></label><input type="text" id="baseCT2" name="baseCT2" maxlength="5" autocomplete="on" /><span class="units">%</span></li>
+				<li class="ng zl"><label for="baseCF1" class="help">会效<span>内功会效</span></label><input type="text" id="baseCF1" name="baseCF1" maxlength="6" autocomplete="on" /><span class="units">%</span></li>
+				<li class="wg tl"><label for="baseCF2" class="help">会效<span>外功会效</span></label><input type="text" id="baseCF2" name="baseCF2" maxlength="6" autocomplete="on" /><span class="units">%</span></li>
+				<li class="ng tl"><label for="basePF1" class="help">破防<span>内功破防</span></label><input type="text" id="basePF1" name="basePF1" maxlength="4" autocomplete="on" /></li>
+				<li class="wg"><label for="basePF2" class="help">破防<span>外功破防</span></label><input type="text" id="basePF2" name="basePF2" maxlength="4" autocomplete="on" /></li>
+				<li class="ty"><label for="baseSP" class="help">加速</label><input type="text" id="baseSP" name="baseSP"  maxlength="4" autocomplete="on" /><span class="units">%</span></li>
+				<li class="ty nozl"><label for="baseWS">无双</label><input type="text" id="baseWS" name="baseWS" maxlength="5" autocomplete="on" /><span class="units">%</span></li>
 			</ul>
 
 			<!-- 小药加成+节日特殊 -->
@@ -201,7 +207,7 @@
 						</optgroup>
 						<optgroup id="addYP1-B" label="外功" class="wg">
 							<option value="5"  class="tl">润肺香囊(会效)</option>
-							<option value="6">健体香囊(外功破防)</option>
+							<option value="6">健体香囊(破防)</option>
 							<option value="7">尚·柏桂香囊(力道)</option>
 							<option value="8">尚·桂枝香囊(身法)</option>
 						</optgroup>
@@ -260,7 +266,7 @@
 					</select>
 				</li>
 				<li class="ty filter"><label for="addTX1">雷特效</label>
-					<select name="addTX1" id="addTX1" placeholder="装备特效">
+					<select name="addTX1" id="addTX1" placeholder="装备特效" disabled>
 						<option value="0">无</option>
 						<optgroup label="内功" id="addTX1-A" class="ng">
 							<option value="1">雷·锐刃</option>
@@ -270,7 +276,7 @@
 							<option value="5">雷·痛切</option>
 							<option value="6">雷·痛切</option>
 						</optgroup>
-						<optgroup label="外功" id="addTX1-B" class="wg">
+						<optgroup label="外功" id="addTX1-B" class="wg"> 
 							<option value="1">雷·锐刃</option>
 							<option value="2">雷·激流</option>
 							<option value="3">雷·斩铁</option>
@@ -289,7 +295,7 @@
 					</select>
 				</li>
 				<li class="ty filter"><label for="addTX2">水特效</label>
-					<select name="addTX2" id="addTX2" placeholder="装备特效">
+					<select name="addTX2" id="addTX2" placeholder="装备特效" disabled>
 						<option value="0">无</option>
 						<optgroup label="内功" id="addTX2-1" class="ng">
 							<option value="2">水·锐刃</option>
@@ -318,7 +324,7 @@
 					</select>
 				</li>
 				<li class="ty filter"><label for="addTX3">风特效</label>
-					<select name="addTX3" id="addTX3" placeholder="装备特效">
+					<select name="addTX3" id="addTX3" placeholder="装备特效" disabled>
 						<option value="0">无</option>
 						<optgroup label="内功" id="addTX3-A" class="ng">
 							<option value="2">风·痛切</option>
@@ -351,7 +357,7 @@
 			<!-- 团队BUFF+阵眼+其他 -->
 			<ul class="dps-raid">
 				<li class="ty"><span class="raidbuff zhenfai">阵法</span>
-					<select name="raidZF" id="raidZF" placeholder="选择小队阵法">
+					<select disabled name="raidZF" id="raidZF" placeholder="选择小队阵法" >
 						<option value="0">无</option>
 						<option value="1">天鼓雷音阵</option>
 						<option value="2">万蛊噬心阵</option>
@@ -363,54 +369,63 @@
 						<option value="8">卫公折冲阵</option>
 					</select>
 				</li>
-				<li class="ty" id="raidZY"><span class="raidbuff">阵眼</span>
+				<!-- <li class="ty" id="raidZY"><span class="raidbuff">阵眼</span>
 					<input type="radio" id="raidZY1" name="raidZY" value="0" checked/><label for="raidZY1">非阵眼</label></input><input type="radio" id="raidZY2" name="raidZY" value="1" /><label for="raidZY2">拿阵眼</label></input>
+				</li> -->
+				<li class="ty"><span class="raidbuff buyu">不语</span>
+					<select name="raidBY" id="raidBY" placeholder="选择不语项链" >
+						<option value="0">无</option>
+						<option value="1">急速不语</option>
+						<option value="2">会心不语</option>
+					</select>
+					<!-- <input type="checkbox" id="raidBY" name="raidBY" value="0"/><label for="raidBY">急速不语</label></input> -->
 				</li>
 				<li class="ty" id="raidXQ"><span class="raidbuff">袖气</span>
-					<input type="radio" id="raidXQ_no" name="raidXQ" value="0" checked/><label for="raidXQ_no">无袖气</label></input><input type="radio" id="raidXQ_big" name="raidXQ" value="1" /><label for="raidXQ_big">大袖气</label></input><input type="radio" id="raidXQ_small" name="raidXQ" value="2" /><label for="raidXQ_small">小袖气</label></input>
+					<input type="radio" id="raidXQ_no" name="raidXQ" value="0" checked/><label for="raidXQ_no">无</label></input><input type="radio" id="raidXQ_big" name="raidXQ" value="1" /><label for="raidXQ_big">大</label></input><input type="radio" id="raidXQ_small" name="raidXQ" value="2" /><label for="raidXQ_small">小</label></input>
 				</li>
-				<li class="wg" id="raidL"><span class="raidbuff">打雷</span>
-					<input type="radio" id="raidL1" name="raidL" value="0" checked/><label for="raidL1">无雷</label></input><input type="radio" id="raidL2" name="raidL" value="1" /><label for="raidL2">憾如雷</label></input>
+				<li class="ty nozl" id="raidJH"><span class="raidbuff">戒火</span>
+					<input type="radio" id="raidJH_no" name="raidJH" value="0" checked/><label for="raidJH_no">无</label></input><input type="radio" id="raidJH_big" name="raidJH" value="1" /><label for="raidJH_big">5%</label></input><input type="radio" id="raidJH_small" name="raidJH" value="2" /><label for="raidJH_small">3%</label></input>
+				</li>
+				<li class="wg" id="raidL"><span class="raidbuff">天策</span>
+					<input type="radio" id="raidL1" name="raidL" value="0" checked/><label for="raidL1">无</label></input><input type="radio" id="raidL2" name="raidL" value="1" /><label for="raidL2">憾如雷</label></input>
 				</li>
 				<li class="ty" id="raidQC"><span class="raidbuff">气场</span>
 					<input class="ng zl tl" type="checkbox" id="raidQC1" name="raidQC" value="1"/><label for="raidQC1" class="ng zl tl">破苍穹</label></input>
 					<input class="wg tl" type="checkbox" id="raidQC2" name="raidQC" value="2"/><label for="raidQC2" class="wg tl">碎星辰</label></input>
 				</li>
-				<li class="ty nozl"><span class="raidbuff">大旗</span>
-					<input type="checkbox" id="raidDQ" name="raidDQ" value="0"/><label for="raidDQ">义薄云天 <span class="coverage"> 5% </span></label></input>
-				</li>
-				<li class="ty nozl"><span class="raidbuff">戒火</span>
-					<input type="checkbox" id="raidJH" name="raidJH" value="0"/><label for="raidJH">戒火斩 <span class="coverage" title=""> 100% </span></label></input>
+				<li class="ty nozl"><span class="raidbuff">曼舞</span>
+					<input type="checkbox" id="raidMW" name="raidMW" value="0"/><label for="raidMW">曼舞6层 <span class="coverage"> 100% </span></label></input>
 				</li>
 				<li class="ty nozl"><span class="raidbuff">枯残</span>
 					<input type="checkbox" id="raidKC" name="raidKC" value="0"/><label for="raidKC">蛇影枯残 <span class="coverage"> 100% </span></label></input>
 				</li>
-				<li class="ty nozl"><span class="raidbuff">朝圣</span>
-					<input type="checkbox" id="raidCSY" name="raidCSY" value="0"/><label for="raidCSY">朝圣炎 <span class="coverage"> 5% </span></label></input>
-				</li>
-				<li class="ng"><span class="raidbuff">繁音</span>
-					<input type="checkbox" id="raidFY" name="raidFY" value="0"/><label for="raidFY">繁音急节 <span class="coverage"> 5% </span></label></input>
-				</li>
-				<li class="ng"><span class="raidbuff">金刚</span>
+				<li class="ng"><span class="raidbuff">易经</span>
 					<input type="checkbox" id="raidJG" name="raidJG" value="0"/><label for="raidJG">金刚怒目 <span class="coverage"> 100% </span></label></input>
+					<i class="info"><span>易经45%,其他职业15%</span></i>
 				</li>
-				<li class="wg"><span class="raidbuff">傲血</span>
-					<input type="checkbox" id="raidTC" name="raidTC" value="0"/><label for="raidTC">激雷+致残+致伤</label></input>
-				</li>
-				<li class="wg"><span class="raidbuff">命陨</span>
+				<li class="wg"><span class="raidbuff">惊羽</span>
 					<input type="checkbox" id="raidMY" name="raidMY" value="0"/><label for="raidMY">命陨 <span class="coverage"> 100% </span></label></input>
 				</li>
-				<li class="wg tl"><span class="raidbuff">上香</span>
+				<li class="wg tl"><span class="raidbuff">藏剑</span>
 					<input type="checkbox" id="raidCJ" name="raidCJ" value="0"/><label for="raidCJ">梅隐香 <span class="coverage"> 100% </span></label></input>
 				</li>
-				<li class="wg"><span class="raidbuff">喝酒</span>
-					<input type="checkbox" id="raidGB" name="raidGB" value="0"/><label for="raidGB">酣畅淋漓 <span class="coverage"> 95% </span></label></input>
+				<li class="wg"><span class="raidbuff">丐帮</span>
+					<input type="checkbox" id="raidGB" name="raidGB" value="0"/><label for="raidGB">酣畅淋漓 <span class="coverage"> 100% </span></label></input>
+				</li>
+				<li class="ty nozl"><span class="raidbuff">大旗</span>
+					<input disabled type="checkbox" id="raidDQ" name="raidDQ" value="0"/><label for="raidDQ">义薄云天 <span class="coverage"> 5% </span></label></input>
+				</li>
+				<li class="ty nozl"><span class="raidbuff">朝圣</span>
+					<input disabled type="checkbox" id="raidCSY" name="raidCSY" value="0"/><label for="raidCSY">朝圣炎 <span class="coverage"> 5% </span></label></input>
+				</li>
+				<li class="ng"><span class="raidbuff">冰心</span>
+					<input disabled type="checkbox" id="raidFY" name="raidFY" value="0"/><label for="raidFY">繁音急节 <span class="coverage"> 5% </span></label></input>
+				</li>
+				<li class="wg"><span class="raidbuff">傲血</span>
+					<input disabled type="checkbox" id="raidTC" name="raidTC" value="0"/><label for="raidTC">激雷+致残+致伤</label></input>
 				</li>
 				<li class="ty"><span class="raidbuff">橙武</span>
-					<input type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
-				</li>
-				<li class="ty nozl"><span class="raidbuff">曼舞</span>
-					<input type="checkbox" id="raidMW" name="raidMW" value="0"/><label for="raidMW">曼舞6层 <span class="coverage"> 100% </span></label></input>
+					<input disabled type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
 				</li>
 				<!-- <li class="ty guanzi"><span class="raidbuff">罐子</span>
 					<input type="checkbox" id="raidDMZF" name="raidDMZF" value="0" disabled /><label for="raidDMZF">大漠的祝福 <span class="coverage"> 50% </span></label></input>
@@ -423,7 +438,7 @@
 			<!-- 职业秘籍+特殊镇派+输出套路/算法 -->
 			<ul class="dps-role"> 
 				<li class="ty filter"><label for="roleTZ">套装</label>
-					<select name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
+					<select disabled name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
 						<option value="0">未激活任何套装属性</option>
 						<optgroup label="冰心" class="bx">
 							<option value="1">红(内功)球10层</option>
@@ -525,7 +540,7 @@
 					<label for="raidTZ" class="help info"><span>套装说明</span></label>
 				</li>
 				<li class="ty filter"><label for="roleMJ">秘籍</label>
-					<select name="roleMJ" id="roleMJ" placeholder="秘籍特殊配置方案">
+					<select disabled name="roleMJ" id="roleMJ" placeholder="秘籍特殊配置方案">
 						<option value="0">标准秘籍配置方案</option>
 						<optgroup label="冰心" class="bx">
 							<option value="0">红(内功)球10层</option>
@@ -729,7 +744,7 @@
 					<label for="roleQX" class="help info"><span>奇穴说明</span></label>
 				</li>
 				<li class="ty filter"><label for="roleFM">附魔</label>
-					<select name="roleFM" id="roleFM" placeholder="请选择技能附魔方案">
+					<select disabled name="roleFM" id="roleFM" placeholder="请选择技能附魔方案">
 						<option value="0">无技能附魔</option>
 						<optgroup label="冰心" class="bx">
 							<option value="0">红(内功)球10层</option>
@@ -854,10 +869,10 @@
 							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="傲血" class="ax">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="1">龙蔡倍数通用算法</option>
+							<option value="2">蓝(外功)球10层</option>
+							<option value="3">蓝(外功)球10层</option>
+							<option value="4">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="焚影" class="fy">
 							<option value="0">红(内功)球10层</option>
@@ -951,26 +966,27 @@
 	<div id="footer" class="">
 		<ul class="download">
 			<li><a href="https://github.com/iRuxu/jx3dps"><span class="iconfont">&#xe615;</span>Github</a></li>
-			<li><a href="https://github.com/iRuxu/jx3dps/archive/offline.zip"><span class="iconfont">&#xe618;</span>离线版</a></li>
+			<li><a href="https://github.com/iRuxu/jx3dps/archive/gh-pages.zip"><span class="iconfont">&#xe618;</span>离线版</a></li>
 			<li><a href=""><span class="iconfont">&#xe616;</span>iPhone</a></li>
 			<li><a href=""><span class="iconfont">&#xe614;</span>Android</a></li>
 		</ul>
 
 		<ul class="author">
-			<a href="" title="Author:浮烟"><img src="img/yz.jpg" alt="iRuxu@浮烟"><i></i></a>
-			<a href="" title="Contributor"><img src="img/yz.jpg" alt="萧南歌"><i></i></a>
-			<a href="" title="Contributor"><img src="img/yz.jpg" alt="泠落"><i></i></a>
-			<a href="http://weibo.com/678099560" title="Contributor:松狮"><img src="img/ss.jpg" alt="松狮"><i></i></a>
-			<a href="" title="Contributor"><img src="img/yz.jpg" alt="龙蔡"><i></i></a>
-			<a href="" title="Contributor"><img src="img/yz.jpg" alt="红诗"><i></i></a>
+			<a href="http://weibo.com/yuanzi0512" title="Author:浮烟"><img src="img/yz.jpg" alt="iRuxu@浮烟"><i></i></a>
+			<a href="http://weibo.com/u/2948185517/home?topnav=1&wvr=6" title="Contributor:萧南歌"><img src="img/xng.jpg" alt="萧南歌"><i></i></a>
+			<a href="http://www.weibo.com/u/1695852775/home?wvr=5" title="Contributor:龙蔡"><img src="img/lc.png" alt="龙蔡"><i></i></a>
+			<a href="http://weibo.com/p/1005051625334777/home?from=page_100505&mod=TAB#place" title="Union:胖叔叔"><img src="img/ps.jpg" alt="胖叔叔"><i></i></a>
+			<!-- http://weibo.com/678099560 松狮,泠落,绝对规则,红诗-->
+			<a href="" title="More Contributor.."><img src="img/yz.jpg" alt=""><i></i></a>
+			<a href="http://weibo.com/u/1360089194" title="+Add You"><img src="img/juedui.jpg" alt="绝对规则"><i></i></a>
 		</ul>
 		
 		<ul class="links">
 			<li><a href="mailto:17229398@qq.com">合作联系</a></li>
 			<li><a href="https://github.com/iRuxu/jx3dps/blob/master/LICENSE">GPLv2协议</a></li>
-			<li><a href="https://github.com/iRuxu/jx3dps/blob/master/log.txt">更新日志</a></li>
-			<li><a href="">历史版本</a></li>
-			<li><a href="">使用帮助</a></li>
+			<li><a href="https://github.com/iRuxu/jx3dps/blob/gh-pages/README.md">更新日志</a></li>
+			<li><a href="https://github.com/iRuxu/jx3dps/releases">历史版本</a></li>
+			<li><a href="#">使用帮助</a></li>
 			<li><a href="http://weibo.com/yuanzi0512">建议反馈</a></li>
 		</ul>
 
@@ -990,5 +1006,6 @@
 		</ul>
 	</div>
 </div>
+<!-- <div style="display:none"><script src="http://s96.cnzz.com/z_stat.php?id=1000192850&web_id=1000192850" language="JavaScript"></script></div> -->
 </body>
 </html>
