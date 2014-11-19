@@ -258,7 +258,7 @@ CSS file for jx3dps.com
         a:active{color:@active;}
         table td{border:1px solid #ddd;padding:2px 5px;font-size:12px;line-height: 24px;}
         legend{padding:0;white-space:normal;border:0;*margin-left:-7px;}
-        ::selection{background-color:@basecolor;color:@color;}
+        ::selection{background-color:@basecolor;color:#fff;}
         label{cursor:pointer;}
 
     //For Test
@@ -269,7 +269,7 @@ CSS file for jx3dps.com
 //--------------------------------------------------------------
     //重置jui部分样式
         .ui-dialog.ui-widget-content{overflow: hidden !important;border-radius: 6px !important;}
-        .ui-widget-overlay{height:110%;}
+        .ui-widget-overlay{height:120%;}
         .ui-dialog .ui-dialog-titlebar-close{right:20px;/*color:@basecolor;*/}
         .ui-widget-content {
             border:1px solid #ccc;border-radius:4px;border-top-left-radius:0;
@@ -477,6 +477,18 @@ CSS file for jx3dps.com
                 label{vertical-align: top;}
                 label.info{margin-right:0}
                 .ui-selectmenu-button{width:210px !important;}
+
+                #gotips{
+                    background-color: #fff;
+                    color:@color;
+                    width:168px;
+                    margin:10px auto 0 auto;
+                    height: auto;
+                    border:1px solid #ddd;
+                    padding:5px;
+                    line-height: 24px;
+                    border-radius:4px;
+                }
             }
             .ui-buttonset{ 
                 label{
@@ -507,30 +519,6 @@ CSS file for jx3dps.com
                     }
                     span{font-size:28px;.dbi;margin-right: 10px;}
                 }
-                &.author{
-                    .fr;
-                    a{display:block;margin-right:10px;.fl;text-align: center;.pr;overflow:hidden;
-                        &:hover i{
-                            left: 100%;
-                            transition: .5s;
-                            -o-transition: .5s;
-                            -moz-transition: .5s;
-                            -webkit-transition: .5s;
-                        }
-                    }
-                    img{width:40px;height:40px;display:block;}
-                    i{position: absolute;
-                        left: -100%;
-                        top: 0;
-                        width: 100%;
-                        height: 100%;
-                        transform: skewx(-25deg);
-                        -o-transform: skewx(-25deg);
-                        -moz-transform: skewx(-25deg);
-                        -webkit-transform: skewx(-25deg);
-                        background-image: -webkit-linear-gradient(0deg,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0));
-                    }
-                }
                 &.links{
                     clear: both;
                     padding:0;
@@ -541,6 +529,31 @@ CSS file for jx3dps.com
                 text-transform: uppercase;
             }
 
+        }
+        
+        .author{
+            .fr;
+            a{display:block;margin-right:10px;.fl;text-align: center;.pr;overflow:hidden;
+                &:hover i{
+                    left: 100%;
+                    transition: .5s;
+                    -o-transition: .5s;
+                    -moz-transition: .5s;
+                    -webkit-transition: .5s;
+                }
+            }
+            img{width:40px;height:40px;display:block;}
+            i{position: absolute;
+                left: -100%;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                transform: skewx(-25deg);
+                -o-transform: skewx(-25deg);
+                -moz-transform: skewx(-25deg);
+                -webkit-transform: skewx(-25deg);
+                background-image: -webkit-linear-gradient(0deg,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0));
+            }
         }
     }
 

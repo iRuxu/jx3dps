@@ -12,6 +12,7 @@ $(function(){
 	//第三方UI初始化 2014.11.8
 		$("#box").tooltip();
 		$("#option").dialog({modal:true,closeText:'关闭',width:400,height:200,autoOpen:false,});
+		$("#contributors").dialog({modal:true,closeText:'关闭',width:400,height:300,autoOpen:false,});
 		$("#main select").selectmenu();
 		$("#role").select2();
 		$("input[type='button']").button();
@@ -147,22 +148,27 @@ $(function(){
 		console.log('> 帮助信息载入完成');
 
 	//设置面板  2014.11.13
-			$("#open-option").click(function(event) {
-				$("#option").dialog('open');
-			});
-			$("#skin").change(function(event) {
-				var skin_state = $("#skin").prop('checked');
-				if(skin_state){
-					$("#main select").selectmenu();
-					/*$("#main select").selectmenu('refresh');*/
-					$(".dps-raid input").not('#raidALL,#raidZF,#raidBY').buttonset();
-					$("#raidZY,#raidXQ,#raidL,#raidJH").buttonset();
-				}else{
-					$("#main select").selectmenu('destroy');
-					$(".dps-raid input").not('#raidALL,#raidZF,#raidBY').button('destroy');
-				}
-			});
-		
+		$("#open-option").click(function(event) {
+			$("#option").dialog('open');
+		});
+		$("#skin").change(function(event) {
+			var skin_state = $("#skin").prop('checked');
+			if(skin_state){
+				$("#main select").selectmenu();
+				/*$("#main select").selectmenu('refresh');*/
+				$(".dps-raid input").not('#raidALL,#raidZF').buttonset();
+				$("#raidZY,#raidXQ,#raidL,#raidJH").buttonset();
+			}else{
+				$("#main select").selectmenu('destroy');
+				$(".dps-raid input").not('#raidALL,#raidZF').button('destroy');
+			}
+		});
+
+	//贡献者名单
+		$("#more").click(function(event) {
+			$("#contributors").dialog('open');
+		});
+
 	//全选功能 2014.11.9
 		$("#raidALL").change(function(){
 			var checkall = $(this).prop('checked');
@@ -353,7 +359,12 @@ $(function(){
 			if(ROLE=='nh'){
 				$(".yuanqi").show();
 			}
-			//提示
+			//8次过滤：重定义部分对象数值
+			if(ROLE=='yj'){
+				buff[16][1]['ng_APc']=0.45;
+			}else{
+				buff[16][1]['ng_APc']=0.15;
+			}
 			console.log('> 职业关联项过滤完成');
 		}
 
@@ -389,69 +400,83 @@ $(function(){
 		var adt = {
 			bx : {
 				propAdCat : 1,
-				propApAdd : 0.25,
+				propApAdd : 2.85,
 				speedAd : 4.88,
 			},
 			hj : {
 				propAdCat : 0,
-				propApAdd : 0.25,
+				propApAdd : 2.85,
+				speedAd : 4.88,
 			},
 			dj : {
 				propAdCat : 1,
-				propApAdd : 0.25,
+				propApAdd : 2.85,
+				speedAd : 0,
 			},
 			ax : {
 				propAdCat : 2,
-				propApAdd : 0.25,
-				propCtAdd : 0.25,
+				propApAdd : 2.4,
+				speedAd : 0,
 			},
 			fy : {
 				propAdCat : 0,
-				propApAdd : 0.25,
+				propApAdd : 2.85,
+				speedAd : 5.08,
 			},
 			yj : {
 				propAdCat : 0,
-				propApAdd : 0.25,
+				propApAdd : 2.7,
+				speedAd : 0,
 			},
 			qc : {
 				propAdCat : 1,
-				propApAdd : 0.25,
+				propApAdd : 2.7,
+				speedAd : 6,  //新版本待修改
 			},
 			jc : {
 				propAdCat : 3,
-				propApAdd : 0.25,
+				propApAdd : 2.25,
+				speedAd : 0,
 			},
 			tl : {
 				propAdCat : 0,
-				propApAdd : 0.25,
+				propApAdd : 2.6,
+				speedAd : 0,
 			},
 			jy : {
 				propAdCat : 2,
-				propApAdd : 0.25,
+				propApAdd : 2.25,
+				speedAd : 0,
 			},
 			cj : {
 				propAdCat : 3,
-				propApAdd : 0.25,
+				propApAdd : 2.4,
+				speedAd : 0,
 			},
 			gb : {
 				propAdCat : 2,
-				propApAdd : 0.25,
+				propApAdd : 2.3,
+				speedAd : 0,
 			},
 			fs : {
 				propAdCat : 3,
-				propApAdd : 0.25,
+				propApAdd : 2.5,
+				speedAd : 0,
 			},
 			nx : {
 				propAdCat : 1,
-				propApAdd : 0.25,
+				propApAdd : 5.75,
+				speedAd : 0,
 			},
 			nh : {
 				propAdCat : 1,
-				propApAdd : 0.25,
+				propApAdd : 5.5,
+				speedAd : 0,
 			},
 			nd : {
 				propAdCat : 1,
-				propApAdd : 0.25,
+				propApAdd : 6,
+				speedAd : 0,
 			},
 		}
 
@@ -529,7 +554,8 @@ $(function(){
 		var buffcat = ['ng_Y','ng_G','wg_L','wg_S',
 						'ng_AP','ng_APc','ng_APs','wg_AP','wg_APc','wg_APs','wp_AP','zl_AP','zl_APc',
 						'ng_HT','wg_HT','ng_CT','wg_CT','ng_CF','wg_CF','ng_PF','wg_PF','ng_PFc','wg_PFc',
-						'ty_SP','ty_WS'];
+						'ty_SP','ty_WS',
+						'ng_YC','ng_GC','wg_LC','wg_SC'];
 		//ng_Y元气，ng_G根骨，wg_L力道，wg_S身法
 		//ng_AP内功基础攻击点数，ng_APc内功基础攻击%，ng_APs内功易伤%
 		//wg_AP外功基础攻击点数，wg_APc外功基础攻击%，wg_APs外功易伤%，wp_AP武器攻击
@@ -537,23 +563,24 @@ $(function(){
 		//ng_HT内功命中，wg_HT外功命中，ng_CT内功会心，wg_CT外功会心，ng_CF内功会效，wg_CF外功会效
 		//ng_PF内功破防，wg_PF外功破防，ng_PFc内功破防%，wg_PFc外功破防%
 		//ty_SP加速%，ty_WS无双%
+		//ng_YC元气百分比,ng_GC根骨百分比,wg_LC力道百分比,wg_SC身法百分比
 		var buff = [
-			[//feast:团队宴席	
+			[//0feast:团队宴席	
 				{},
 				{ng_Y : 122,ng_G:122,wg_L:122,wg_S:122},//1芙蓉出水宴
 			],
-			[//fish:帮会宴席
+			[//1fish:帮会宴席
 				{},
 				{ng_HT:0.01,wg_HT:0.01,ty_WS:0.03}, //1蒸鱼菜盘
 			],
-			[//sp1:食品辅助
+			[//2sp1:食品辅助
 				{},
 				{ng_Y:73,}, //1佳·逍遥固元汤(元气)
 				{ng_G:73,}, //2佳·白芷增骨汤(根骨)
 				{wg_L:73,}, //3佳·安荣力劲汤(力道)
 				{wg_S:73,}, //4佳·君子知身汤(身法)
 			],
-			[//sp2:食品增强
+			[//3sp2:食品增强
 				{},
 				{ng_CF:195/s_CF},//1佳·合饼卷菜(会效)
 				{ng_PF:195}, //2佳·虎皮凤爪(破防)
@@ -561,7 +588,7 @@ $(function(){
 				{wg_PF:195}, //4佳·芋丝蒸肉糕(破防)
 				{wg_AP:220}, //5佳·麻香软骨脆(外功基础)
 			],
-			[//yp1 :药品辅助
+			[//4yp1 :药品辅助
 				{},
 				{ng_CF:195/s_CF},//1壮骨香囊(会效)
 				{ng_PF:195}, //2提神香囊(破防)
@@ -572,7 +599,7 @@ $(function(){
 				{wg_L:110}, //7尚·柏桂香囊(力道)
 				{wg_S:110}, //8尚·桂枝香囊(身法)
 			],
-			[//yp2 :药品增强
+			[//5yp2 :药品增强
 				{},
 				{ng_CF:292/s_CF},//1尚·上品玉露丹(会效)
 				{ng_CT:195/s_CT}, //2上品玉露散(会心)
@@ -581,82 +608,118 @@ $(function(){
 				{ng_CT:195/s_CT}, //5中品万花丹(会心)
 				{ng_HT:195/s_HT}, //6中品聚神丹(命中)
 			],
-			[//moshi :磨石
+			[//6moshi :磨石
 				{},
 				{ng_AP:264}, //1内功
 				{wg_AP:220}, //2外功
 				{zl_AP:521}, //3治疗
 			],
-			[//jz : 饺子
+			[//7jz : 饺子
 				{},
 				{ng_Y : 25,ng_G:25,wg_L:2,wg_S:25}, //1戏凤饺
 				{ng_Y : 15,ng_G:15,wg_L:15,wg_S:15}, //2煮烂饺子
 			],
-			[//qiu : 五彩球
+			[//8qiu : 五彩球
 				{},
 				{ng_AP : 170}, //1红球
 				{wg_AP : 170,zl_AP:340}, //2蓝球
 				{ng_AP : 170,wg_AP:170,zl_AP:340}, //3红蓝球
 			],
-			[//sp : 特殊食物
+			[//9sp : 特殊食物
 				{},
 				{wg_AP : 116,ng_AP:116},  //1红烧青鱼
 			],
-			[//xiuqi : 袖气
+			[//10xiuqi : 袖气
 				{},
 				{ng_Y : 74,ng_G:74,wg_L:74,wg_S:74}, //1大袖气
 				{ng_Y : 37,ng_G:37,wg_L:37,wg_S:37}, //2小袖气
 			],
-			[//jiehuo : 戒火斩
+			[//11jiehuo : 戒火斩
 				{},
 				{wg_APs : 0.05,ng_APs : 0.05,}, //1大戒火
 			 	{wg_APs : 0.03,ng_APs : 0.03,}, //2小戒火
 			],
-			[//lei : 憾如雷
+			[//12lei : 憾如雷
 				{},
 				{wg_AP : 217}, //憾如雷
 			],
-			[//qichang : 气场
+			[//13qichang : 气场
 				{},
 				{ng_CT:0.05,ng_CF:0.1},	//1破苍穹
 				{wg_CT:0.05,wg_CF:0.1}, //2碎星辰
 				{ng_CT:0.05,ng_CF:0.1,wg_CT:0.05,wg_CF:0.1}, //3破苍穹+碎星辰
 			],
-			[//manwu : 曼舞
+			[//14manwu : 曼舞
 				{},
 				{ws : 84/s_WS,} //曼舞
 			],
-			[//kc : 枯残
+			[//15kc : 枯残
 				{},
 				{wg_APs : 0.06,ng_APs : 0.06,} //枯残
 			],
-			[//yj : 金刚怒目
+			[//16yj : 金刚怒目
 				{},
 				{ng_APc : 0.15,}, //金刚
+
 			],
-			[//jy : 命陨
+			[//17jy : 命陨
 				{},
 				{wg_APs: 0.1,}, //惊羽
 			], 
-			[//cj : 梅隐香
+			[//18cj : 梅隐香
 				{},
 				{wg_HT : 61/s_HT,wg_PFc : 0.2,}, //藏剑
 			],
-			[//gb : 丐帮
+			[//19gb : 丐帮
 				{},
 				{wg_CT : 0.1,}, //丐帮
 			],
-			[//buyu : 不语
+			[//20buyu : 不语
 				{},
 				{ty_SP : 400/s_SP,}, //急速不语
 				{ng_CT:200,ng_CF:200,wg_CT:200,wg_CF:200}, //会心不语
 			],
-			/*[//zf : 阵法
+			[//21jilei : 激雷 8/30*100% ~ 20%外功破防
 				{},
+				{wg_PFc:0.0533},
 			],
-			[//zy : 阵眼
+			[//22fy : 冰心 30/120*100% ~ 30%内功攻击
 				{},
-			],*/
+				{ng_APc:0.075},
+			],
+			[//23csy : 朝圣炎 8/150*100% ～ 30%基础
+				{},
+				{ng_APc:0.016,wg_APc:0.016,zl_APc:0.016},
+			],
+			[//24dq : 大旗  30/240*100% ~ 20%基础
+				{},
+				{ng_APc:0.025,wg_APc:0.025,zl_APc:0.025},
+			],
+			[//25tc : 破风+致残+致伤
+				{},
+				{wg_APs:0.10875},
+			],
+			[//26zf : 阵法
+				{},
+				{ng_APc:0.15,ng_HT:0.03,ng_PFc:0.2}, //1易经，天鼓雷音阵
+				{ng_CT:0.08,ng_HT:0.03,ng_CF:0.1}, //2气纯,九宫八卦阵
+				{ng_CT:0.03,ng_APc:0.05,ng_CF:0.1,ng_PFc:0.15}, //3毒经，万蛊噬心阵
+				{ng_APc:0.05,ng_CT:0.08}, //4明教，炎威破魔阵
+				{ng_APc:0.05,ng_PFc:0.2}, //5花间，七绝逍遥阵
+				{ng_APc:0.075,ng_PFc:0.15}, //6冰心，九音惊弦阵
+				{ng_YC:0.03}, //7天罗，千机百变阵
+				
+				{wg_CT:0.08,wg_HT:0.03,wg_CF:0.1}, //8剑纯，北斗七星阵
+				{wg_APc:0.05,wg_PFc:0.2,wg_PF:600}, //9丐帮，降龙伏虎阵
+				{wg_APc:0.05,wg_PFc:0.2,wg_LC:0.02}, //10傲血，卫公折冲阵
+				{ng_SC:0.03,wg_APc:0.05,wg_CF:0.2}, //11藏剑，依山观澜阵
+				{wg_LC:0.03,wg_HT:0.03,wg_PFc:0.1,wg_CT:0.025}, //12惊羽，流星赶月阵
+				{wg_CT:0.03,wg_HT:0.03,wg_CF:0.1}, //13分山，锋凌横绝阵
+				
+				{zl_APc:0.15,ng_GC:0.03}, //14奶花，落星惊鸿阵
+				{zl_APc:0.1,ng_GC:0.03}, //15奶毒，妙手织天阵
+				{zl_APc:0.05,ng_GC:0.03}, //16奶秀，花月凌风阵
+			],
 		]
 
 		//遍历定义未定义属性为0
@@ -673,7 +736,7 @@ $(function(){
 		}; 
 		TraversalBuff();
 		//console.log(buff[0][1]['ng_AP']);
-		
+
 	//构造数据对象 - 2014.11.15～2014.11.18
 		function JX3DPS(){
 		//职业
@@ -710,15 +773,15 @@ $(function(){
 			this.addJZ= Number($("#addJZ").val());
 			this.addQQ= Number($("#addQQ").val());
 			this.addSP= Number($("#addSP").val());
+			this.addBY = Number($("#addBY").val());
 			this.addTX1= Number($("#addTX1").val());
 			this.addTX2= Number($("#addTX2").val());
 			this.addTX3 = Number($("#addTX3").val());
 		//团队Buff索引取值
 			this.raidZF = Number($("#raidZF").val());
-			this.raidZY = Number($("#raidZY input[name='raidZY']:checked").val());
-			this.raidBY = Number($("#raidBY").val());
+			//this.raidZY = Number($("#raidZY input[name='raidZY']:checked").val());
+
 			this.raidXQ = Number($("#raidXQ input[name='raidXQ']:checked").val());
-			this.raidJH = Number($("#raidJH input[name='raidJH']:checked").val());
 			this.raidL = Number($("#raidL input[name='raidL']:checked").val());
 			this.raidQC = (function(){
 				var qc_a = $("#raidQC1").prop('checked');
@@ -734,15 +797,21 @@ $(function(){
 				}
 			})();
 			this.raidMW = $("#raidMW").prop('checked') ? 1 : 0;
-			this.raidKC = $("#raidKC").prop('checked') ? 1 : 0;
+			
 			this.raidJG = $("#raidJG").prop('checked') ? 1 : 0;
 			this.raidMY = $("#raidMY").prop('checked') ? 1 : 0;
 			this.raidCJ = $("#raidCJ").prop('checked') ? 1 : 0;
 			this.raidGB = $("#raidGB").prop('checked') ? 1 : 0;
-			this.raidDQ = $("#raidDQ").prop('checked') ? 1 : 0;
-			this.raidCSY= $("#raidCSY").prop('checked') ? 1 : 0;
+
+			this.raidJL = $("#raidJL").prop('checked') ? 1 : 0;
 			this.raidFY = $("#raidFY").prop('checked') ? 1 : 0;
+			this.raidCSY= $("#raidCSY").prop('checked') ? 1 : 0;
+			this.raidDQ = $("#raidDQ").prop('checked') ? 1 : 0;
+			
+			this.raidJH = Number($("#raidJH input[name='raidJH']:checked").val());
+			this.raidKC = $("#raidKC").prop('checked') ? 1 : 0;
 			this.raidTC = $("#raidTC").prop('checked') ? 1 : 0;
+			
 			this.raidCW = $("#raidCW").prop('checked') ? 1 : 0;
 		//职业方案索引取值
 			this.roleTZ = Number($("#roleTZ").val());
@@ -754,9 +823,9 @@ $(function(){
 			this.addMS,this.addJZ,this.addQQ,this.addSP,
 			this.raidXQ,this.raidJH,this.raidL,this.raidQC,
 			this.raidMW,this.raidKC,this.raidJG,this.raidMY,this.raidCJ,this.raidGB,
-			this.raidBY
+			this.addBY,this.raidJL,this.raidFY,this.raidCSY,this.raidDQ,this.raidTC,this.raidZF
 			];
-			//！important --- 待添加阵法+阵眼+覆盖率buff等
+			//！important --- 待添加阵眼+特效+橙武buff等
 
 			function addBuff(buffcat){
 				var zbuff = 0;
@@ -777,11 +846,26 @@ $(function(){
 				this.adAP1c = addBuff('ng_APc');
 				this.adAP2c = addBuff('wg_APc');
 				this.adAP3c = addBuff('zl_APc');
-			
-			//固定攻击 = 职业属性点数 × {属性点加成}
-				var adtBase = [this.baseY,this.baseG,this.baseL,this.baseS];
-				this.propAP = adtBase[adt[ROLE]['propAdCat']]*adt[ROLE]['propApAdd'];
 
+			//基础属性增益点数 = 食品类 + BUFF类 
+				this.adY = addBuff('ng_Y');
+				this.adG = addBuff('ng_G');
+				this.adL = addBuff('wg_L');
+				this.adS = addBuff('wg_S');
+
+			//基础属性增益百分比 = BUFF类 
+				this.adYC = addBuff('ng_YC');
+				this.adGC = addBuff('ng_GC');
+				this.adLC = addBuff('wg_LC');
+				this.adSC = addBuff('wg_SC');
+
+			//固定攻击 = 职业属性点数 × {属性点加成}
+				var adtBase = [this.baseY,this.baseG,this.baseL,this.baseS],
+					adtProp = ['ng_Y','ng_G','wg_L','wg_S'],
+					adtPPAD = ['ng_YC','ng_GC','wg_LC','wg_SC'];
+				this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))*adt[ROLE]['propApAdd'];
+				//var test  = addBuff(adtPPAD[adt[ROLE]['propAdCat']]);
+				//console.log(test);
 			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
 				this.R_AP1 = ( this.baseAP1 + this.adAP1 ) * ( 1 + this.adAP1c);
 				this.R_AP2 = ( this.baseAP2 + this.adAP2 ) * ( 1 + this.adAP2c);
@@ -821,7 +905,7 @@ $(function(){
 			//R无双 = 无双 + 无双增益
 				this.adWS = addBuff('ty_WS');
 				this.R_WS = this.baseWS/100 + this.adWS;
-			//识破率 = ([无双需求]-Z无双<0) ? 0 : ([无双需求]-Z无双<0)
+			//识破率 = ([无双需求]-Z无双<0) ? 0 : ([无双需求]-Z无双)
 				function GET_ST(){
 					var shipo = [];
 					for (var i=0;i<WS_NEED.length;i++) {
@@ -847,6 +931,16 @@ $(function(){
 				this.R_CF1 = GET_CF(that.baseCF1,'ng_CF');
 				this.R_CF2 = GET_CF(that.baseCF2,'wg_CF');
 			//Z会效 = R会效 + {会效加成：秘籍+奇穴}
+				function Round_CF(cf){
+					if(cf<1.75){
+						cf=1.75;
+					}else if(cf>3){
+						cf=3;
+					}else{
+						cf = cf;
+					}
+					return cf;
+				}
 				//this.Z_CF1 = this.R_CF1 + adSkill[ROLE]['skill_name'][2];
 				//this.Z_CF2 = this.R_CF2 + adSkill[ROLE]['skill_name'][2];
 			//R会心 = 会心 + 会心增益
@@ -891,22 +985,25 @@ $(function(){
 				};
 				this.R_PA1 = GET_PFX(that.R_PF1);
 				this.R_PA2 = GET_PFX(that.R_PF2);
+			//易伤加成
+				this.adYS1 = addBuff('ng_APs');
+				this.adYS2 = addBuff('wg_APs');
+				this.R_YS1 = 1+this.adYS1;
+				this.R_YS2 = 1+this.adYS2;
 			//R加速与技能实际运功时间方法
 				this.adSP = addBuff('ty_SP');
-				this.R_SP = this.baseSP/100 + this.adSP;
+				this.R_SP = this.baseSP/100 + this.adSP + adt[ROLE]['speedAd']/100; //ex:22.2
 				//R运功实际时间 = floor( T/0.0625*1024/floor(S*10.24+S1+1024) )*0.0625
 				//T = {} 技能初始释放时间  S=默认急速 S1 = 急速加成，转换为数值
 
 				//设置和入库技能原始时间
 				var skillTime = adSkill[ROLE]['skill_name'][4];
-				//设置急速加成 = 职业加成 + BUFF增益
-				var adtSP = adt[ROLE]['speedAd'] + this.adSP;
 				//获取技能当前运功时间方法
-				function GET_SKT(skilltime,adtspeed){
-					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*10.24+adtspeed*10.24+1024) )*0.0625;
+				function GET_SKT(skilltime){
+					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*1024+1024) )*0.0625;
 				};
-				/*var test = GET_SKT(3,11.88);
-				console.log(test);*/
+				//var test = GET_SKT(3);
+				//console.log(test);
 
 		//计算方法 - 2014.11.17
 			this.dpsMethod = Number($("#dpsMethod").val());
