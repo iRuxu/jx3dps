@@ -1,12 +1,12 @@
-# Version 0.1
+# Version 0.3
 
 CACHE MANIFEST
 /css/*
 /js/*
-/font/*
+/img/*
 
 NETWORK:
-*
+
 
 FALLBACK:
 /html/ /index.html
