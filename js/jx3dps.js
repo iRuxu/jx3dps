@@ -353,17 +353,17 @@ $(function(){
 			//6次过滤：治疗单独过滤规则
 			if(CAT=='zl'){
 				$(".nozl").hide();
-				$(".dps-add").on('selectmenuopen','.filter select',function(event,ui){
+				/*$(".dps-add").on('selectmenuopen','.filter select',function(event,ui){
 					$("#addSP1-menu li:contains('内功')").show().nextUntil('.ui-selectmenu-optgroup').show();
 					$("#addSP2-menu li:contains('内功')").show().nextUntil('.ui-selectmenu-optgroup').show();
 					$("#addYP1-menu li:contains('内功')").show().nextUntil('.ui-selectmenu-optgroup').show();
 					$("#addYP2-menu li:contains('内功')").show().nextUntil('.ui-selectmenu-optgroup').show();
-				})
+				})*/
 			}
 			//7次过滤：特殊职业奶花单独补充过滤规则
-			if(ROLE=='nh'){
+			/*if(ROLE=='nh'){
 				$(".yuanqi").show();
-			}
+			}*/
 			//8次过滤：重定义部分对象数值
 			if(ROLE=='yj'){
 				buff[16][1]['ng_APc']=0.45;
@@ -399,6 +399,15 @@ $(function(){
 			console.log('> 数据输出模式切换成功');
 		}
 	
+	//通用属性加成
+		var tyAdd = {
+			//0攻击，1会心，2会效，3破防
+			Y : [0.3,0,0,0.25],
+			G : [0,0.3,0.15,0],
+			L : [0.25,0,0,0.25],
+			S : [0,0.3,0.15,0],
+		}
+
 	//定义职业心法与急速加成 2014.11.16
 
 		//propAdCat: 0元气,1根骨,2力道,3身法,4体质
@@ -407,81 +416,145 @@ $(function(){
 				propAdCat : 1,
 				propApAdd : 2.85,
 				speedAd : 4.88,
+				propCountAdd : 0,
+				propCTAdd:0.08,
+				propCFAdd:0.02,
+				propPFAdd:0,
 			},
 			hj : {
 				propAdCat : 0,
 				propApAdd : 2.85,
 				speedAd : 4.88,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0.08,
 			},
 			dj : {
 				propAdCat : 1,
 				propApAdd : 2.85,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0.08,
 			},
 			ax : {
 				propAdCat : 2,
 				propApAdd : 2.4,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0.08,
 			},
 			fy : {
 				propAdCat : 0,
 				propApAdd : 2.85,
 				speedAd : 5.08,
+				propCountAdd : 0,
+				propCTAdd:0.08,
+				propCFAdd:0.02,
+				propPFAdd:0,
 			},
 			yj : {
 				propAdCat : 0,
 				propApAdd : 2.7,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0.15,
+				propCFAdd:0.05,
+				propPFAdd:0,
 			},
 			qc : {
 				propAdCat : 1,
 				propApAdd : 2.7,
 				speedAd : 6,  //新版本待修改
+				propCountAdd : 0,
+				propCTAdd:0.15,
+				propCFAdd:0.05,
+				propPFAdd:0,
 			},
 			jc : {
 				propAdCat : 3,
 				propApAdd : 2.25,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0.15,
+				propCFAdd:0.05,
+				propPFAdd:0,
 			},
 			tl : {
 				propAdCat : 0,
 				propApAdd : 2.6,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0.2,
+				propCFAdd:0.08,
+				propPFAdd:0,
 			},
 			jy : {
 				propAdCat : 2,
 				propApAdd : 2.25,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0.15,
+				propCFAdd:0.05,
+				propPFAdd:0,
 			},
 			cj : {
 				propAdCat : 3,
 				propApAdd : 2.4,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0.08,
 			},
 			gb : {
 				propAdCat : 2,
 				propApAdd : 2.3,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0.15,
 			},
 			fs : {
 				propAdCat : 3,
 				propApAdd : 2.5,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0,
 			},
 			nx : {
 				propAdCat : 1,
 				propApAdd : 5.75,
 				speedAd : 0,
+				propCountAdd : 0.05,
+				propCTAdd:0.08,
+				propCFAdd:0.02,
+				propPFAdd:0,
 			},
 			nh : {
 				propAdCat : 1,
 				propApAdd : 5.5,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0.15,
+				propCFAdd:0.05,
+				propPFAdd:0,
 			},
 			nd : {
 				propAdCat : 1,
 				propApAdd : 6,
 				speedAd : 0,
+				propCountAdd : 0,
+				propCTAdd:0,
+				propCFAdd:0,
+				propPFAdd:0,
 			},
 		}
 
@@ -579,7 +652,7 @@ $(function(){
 		var buff = [
 			[//0feast:团队宴席	
 				{},
-				{ng_Y : 122,ng_G:122,wg_L:122,wg_S:122},//1芙蓉出水宴
+				{ng_Y:122,ng_G:122,wg_L:122,wg_S:122,},//1芙蓉出水宴
 			],
 			[//1fish:帮会宴席
 				{},
@@ -689,7 +762,8 @@ $(function(){
 			[//20buyu : 不语
 				{},
 				{ty_SP : 400/s_SP,}, //急速不语
-				{ng_CT:200,ng_CF:200,wg_CT:200,wg_CF:200}, //会心不语
+				{ng_CT:200/s_CT,ng_CF:200/s_CF,wg_CT:200/s_CT,wg_CF:200/s_CF}, //会心不语
+				{ng_AP:540,wg_AP:540}, //会心不语
 			],
 			[//21jilei : 激雷 8/30*100% ~ 20%外功破防
 				{},
@@ -865,46 +939,62 @@ $(function(){
 			};
 			//武器平均攻击
 				this.weapAP = (this.weapAP1 + this.weapAP2 ) / 2 + addBuff('wp_AP');
-
-			//基础攻击增益点数 = 食品类 + BUFF类
-				this.adAP1 = addBuff('ng_AP');
-				this.adAP2 = addBuff('wg_AP');
-				this.adAP3 = addBuff('zl_AP');
-
-			//基础攻击增益百分比 = BUFF类 + 阵法
-				this.adAP1c = addBuff('ng_APc');
-				this.adAP2c = addBuff('wg_APc');
-				this.adAP3c = addBuff('zl_APc');
-
+			//增益运算对象
+				var adtBase = [this.baseY,this.baseG,this.baseL,this.baseS],
+					adtProp = ['ng_Y','ng_G','wg_L','wg_S'],
+					adtPPAD = ['ng_YC','ng_GC','wg_LC','wg_SC'];
 			//基础属性增益点数 = 食品类 + BUFF类 
 				this.adY = addBuff('ng_Y');
 				this.adG = addBuff('ng_G');
 				this.adL = addBuff('wg_L');
 				this.adS = addBuff('wg_S');
-
 			//基础属性增益百分比 = BUFF类 
 				this.adYC = addBuff('ng_YC');
 				this.adGC = addBuff('ng_GC');
 				this.adLC = addBuff('wg_LC');
 				this.adSC = addBuff('wg_SC');
-
-			//固定攻击 = 职业属性点数 × {属性点加成}
-				var adtBase = [this.baseY,this.baseG,this.baseL,this.baseS],
-					adtProp = ['ng_Y','ng_G','wg_L','wg_S'],
-					adtPPAD = ['ng_YC','ng_GC','wg_LC','wg_SC'];
-				this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))*adt[ROLE]['propApAdd'];
+			//副属性最终增益点数(含buff倍数加成)
+				this.R_YADD = this.adY*(1+this.adYC);
+				this.R_GADD = this.adG*(1+this.adGC);
+				this.R_LADD = this.adL*(1+this.adLC);
+				this.R_SADD = this.adS*(1+this.adSC);
+			//主属性最终增益点数(含倍数与奇穴加成)
+				this.R_PROPADD = addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd']);
+			//固定攻击 = （原主属性点数 + 主属性增益点数）× 主属性倍数加成 × 主属性攻击加成 + （原副属性点数 + 副属性增益点数）× 副属性倍数加成 × 副属性攻击加成
+				if(CAT=='ng'){
+					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))
+							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
+							*adt[ROLE]['propApAdd']
+							+(this.baseY+this.adY)*(1+this.adYC)*tyAdd.Y[0];
+				}else if(CAT=='wg'){
+					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))
+							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
+							*adt[ROLE]['propApAdd']
+							+(this.baseL+this.adL)*(1+this.adLC)*tyAdd.L[0];
+				}else if(CAT=='zl'){
+					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))
+							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
+							*adt[ROLE]['propApAdd']
+				}
 				this.baseAP3_X = Number($("#baseAP3").val());
 				function GET_BASEZLAP(){
 					if(ROLE=='nx'){
-						return (that.baseAP3_X-that.propAP)/1.3027;
+						return (that.baseAP3_X-adtBase[adt[ROLE]['propAdCat']])/1.3027;
 					}else{
-						return (that.baseAP3_X-that.propAP);
+						return (that.baseAP3_X-adtBase[adt[ROLE]['propAdCat']]);
 					}
 				};
 				this.baseAP3 = GET_BASEZLAP();
-				//var test  = addBuff(adtPPAD[adt[ROLE]['propAdCat']]);
-				//console.log(test);
 			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
+				//基础攻击增益点数 = 食品类 + BUFF类
+				this.adAP1 = addBuff('ng_AP');
+				this.adAP2 = addBuff('wg_AP');
+				this.adAP3 = addBuff('zl_AP');
+				//基础攻击增益百分比 = BUFF类 + 阵法
+				this.adAP1c = addBuff('ng_APc');
+				this.adAP2c = addBuff('wg_APc');
+				this.adAP3c = addBuff('zl_APc');
+
 				this.R_AP1 = ( this.baseAP1 + this.adAP1 ) * ( 1 + this.adAP1c);
 				this.R_AP2 = ( this.baseAP2 + this.adAP2 ) * ( 1 + this.adAP2c);
 				function GET_RAP3(){
@@ -921,24 +1011,13 @@ $(function(){
 				this.R_MAP1 = this.R_AP1 + this.propAP;
 				this.R_MAP2 = this.R_AP2 + this.propAP;
 				this.R_MAP3 = this.R_AP3 + this.propAP;
-			//Z基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比+{基础攻击加成}）
-				//this.Z_AP1 = ( this.baseAP1 + this.adAP1 ) * ( 1 + this.adAP1c + adSkill[ROLE]['skill_name'][0]);
-				//this.Z_AP2 = ( this.baseAP2 + this.adAP2 ) * ( 1 + this.adAP2c + adSkill[ROLE]['skill_name'][0]);
-				//this.Z_AP3 = ( this.baseAP3 + this.adAP3 ) * ( 1 + this.adAP3c + adSkill[ROLE]['skill_name'][0]);
-			//Z面板攻击 = Z基础攻击 + 固定攻击
-				//this.Z_MAP1 = this.Z_AP1 + this.propAP;
-				//this.Z_MAP2 = this.Z_AP2 + this.propAP;
-				//this.Z_MAP3 = this.Z_AP3 + this.propAP;
-			//命中增益
+			
+			//R_HT命中 = 命中 + 命中总增益 + {技能加成}
 				this.adHT1 = addBuff('ng_HT');
 				this.adHT2 = addBuff('wg_HT');
-			//R命中 = 命中 + 命中增益
 				this.R_HT1 = this.baseHT1/100 + this.adHT1;
 				this.R_HT2 = this.baseHT2/100 + this.adHT2;
-			//Z命中 = R命中 + {命中加成：秘籍+奇穴}
-				//this.Z_HT1 = this.R_HT1 + adSkill[ROLE]['skill_name'][3];
-				//this.Z_HT2 = this.R_HT2 + adSkill[ROLE]['skill_name'][3];
-			//偏离率 = ([命中需求]-Z命中<0) ? 0 : ([命中需求]-Z命中)
+			//R_MISS偏离率 = ([命中需求]-Z命中<0) ? 0 : ([命中需求]-Z命中)
 				function GET_MISS(R_HT){
 					var miss = [];
 					for (var i=0;i<HT_NEED.length;i++) {
@@ -948,10 +1027,10 @@ $(function(){
 				};
 				this.R_MISS1 = GET_MISS(that.R_HT1);
 				this.R_MISS2 = GET_MISS(that.R_HT2);
-			//R无双 = 无双 + 无双增益
+			//R_WS无双 = 无双 + 无双增益
 				this.adWS = addBuff('ty_WS');
 				this.R_WS = this.baseWS/100 + this.adWS;
-			//识破率 = ([无双需求]-Z无双<0) ? 0 : ([无双需求]-Z无双)
+			//R_ST识破率 = ([无双需求]-Z无双<0) ? 0 : ([无双需求]-Z无双)
 				function GET_ST(){
 					var shipo = [];
 					for (var i=0;i<WS_NEED.length;i++) {
@@ -960,54 +1039,39 @@ $(function(){
 					return shipo;
 				};
 				this.R_ST = GET_ST();
-			//R会效 = 会效 + 会效增益
+			//R_CF会效 = 会效 + 会效总增益 + {技能加成}
 				this.adCF1 = addBuff('ng_CF');
 				this.adCF2 = addBuff('wg_CF');
-				function GET_CF(basecat,addcat){
-					var round_CF = basecat/100 + addBuff(addcat);
-					if(round_CF<1.75){
-						round_CF=1.75;
-					}else if(round_CF>3){
-						round_CF=3;
-					}else{
-						round_CF = basecat/100 + addBuff(addcat);
-					}
-					return round_CF;
-				};
-				this.R_CF1 = GET_CF(that.baseCF1,'ng_CF');
-				this.R_CF2 = GET_CF(that.baseCF2,'wg_CF');
-			//Z会效 = R会效 + {会效加成：秘籍+奇穴}
+				//最终会效 = 填入会效 + 会效增益%
+				//+ 最终主属性增益点数 × 主属性职业会效加成
+				//+ 最终主类型增益点数 × 通用属性加成
+				this.CF1_now = this.baseCF1/100 + this.adCF1 + this.R_PROPADD*adt[ROLE]['propCFAdd']/s_CF + this.R_GADD*tyAdd.G[2]/s_CF;
+				this.CF2_now = this.baseCF2/100 + this.adCF2 + this.R_PROPADD*adt[ROLE]['propCFAdd']/s_CF + this.R_SADD*tyAdd.S[2]/s_CF;
 				function Round_CF(cf){
 					if(cf<1.75){
 						cf=1.75;
 					}else if(cf>3){
 						cf=3;
-					}else{
-						cf = cf;
 					}
 					return cf;
-				}
-				//this.Z_CF1 = this.R_CF1 + adSkill[ROLE]['skill_name'][2];
-				//this.Z_CF2 = this.R_CF2 + adSkill[ROLE]['skill_name'][2];
-			//R会心 = 会心 + 会心增益
+				};
+				this.R_CF1 = Round_CF(that.CF1_now);
+				this.R_CF2 = Round_CF(that.CF2_now);
+			//R_CT会心 = 会心 + 会心总增益 + {技能加成}
 				this.adCT1 = addBuff('ng_CT');
 				this.adCT2 = addBuff('wg_CT');
-				this.CT1_now = (function(){
-					var ct_now = that.baseCT1/100 + that.adCT1;
-					if (ct_now > 1) {
+				function Round_CT(ct){
+					if (ct > 1) {
 						return 1;
-					}else{
-						return ct_now;
 					}
-				})();
-				this.CT2_now = (function(){
-					var ct_now = that.baseCT2/100 + that.adCT2;
-					if (ct_now > 1) {
-						return 1;
-					}else{
-						return ct_now;
-					}
-				})();
+				}
+				//最终会心 = 填入会心 + 会心增益%
+				//+ 主属性增益点数×（1+主属性点数倍数增益加成+职业奇穴主属性倍数增益）× 主属性职业会心加成
+				//+ 主类型（根骨/身法）增益点数 × （1+属性点数倍数增益加成）× 通用属性加成
+				this.CT1_now = that.baseCT1/100 + that.adCT1 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_GADD*tyAdd.G[1]/s_CT;
+				this.CT1_now = Round_CT(that.CT1_now);
+				this.CT2_now = that.baseCT2/100 + that.adCT2 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_SADD*tyAdd.S[1]/s_CT;
+				this.CT2_now = Round_CT(that.CT2_now);
 				function GET_CT(missArr,ct_now){
 					var CT_space = [];
 					for (i=0;i<that.R_ST.length;i++){
@@ -1021,21 +1085,18 @@ $(function(){
 				};
 				this.R_CT1 = GET_CT(that.R_MISS1,that.CT1_now);
 				this.R_CT2 = GET_CT(that.R_MISS2,that.CT2_now);
-			//Z会心 = R会心 + {会心加成：秘籍+奇穴}
-				//this.Z_CT1_now = this.CT1_now + adSkill[ROLE]['skill_name'][1];
-				//this.Z_CT2_now = this.CT2_now + adSkill[ROLE]['skill_name'][1];
-				//this.Z_CT1 = GET_CT(that.R_MISS1,that.Z_CT1_now);
-				//this.Z_CT2 = GET_CT(that.R_MISS2,that.Z_CT2_now);
-			//R破防 = (破防 + 破防增益) * (1+破防百分比增益)
+			//R_PF破防 = (破防 + 破防增益 + 属性破防增益) * (1+破防百分比增益)
 				this.adPF1 = addBuff('ng_PF');
 				this.adPF1c = addBuff('ng_PFc');
 				this.adPF2 = addBuff('wg_PF');
 				this.adPF2c = addBuff('wg_PFc');
-				this.R_PF1 = (this.basePF1 + this.adPF1)*(1+this.adPF1c);
-				this.R_PF2 = (this.basePF2 + this.adPF2)*(1+this.adPF2c);
-			//破防加成 = （最终破防-目标内防）/目标内防系数
-				/*DF_TAR = [290,570,873,1145,873,873],
-				PF_CFT = [5964,6201,6439,6676,6439,6439],*/
+
+				//属性增益点数破防加成=
+				//主属性最终增益点数 × 主属性职业破防点数加成
+				//+ 主类型增益点数 × （1+主类型属性点数倍数增益加成）× 通用属性加成
+				this.R_PF1 = (this.basePF1 + this.adPF1 + this.R_PROPADD*adt[ROLE]['propPFAdd'] + this.R_YADD*tyAdd.Y[3])*(1+this.adPF1c);
+				this.R_PF2 = (this.basePF2 + this.adPF2 + this.R_PROPADD*adt[ROLE]['propPFAdd'] + this.R_LADD*tyAdd.L[3])*(1+this.adPF2c);
+			//R_PA破防加成 = （最终破防-目标内防）/目标内防系数
 				function GET_PFX(pfvalue){
 					var PFX = [];
 					for (i=0;i<DF_TAR.length;i++){
@@ -1045,26 +1106,22 @@ $(function(){
 				};
 				this.R_PA1 = GET_PFX(that.R_PF1);
 				this.R_PA2 = GET_PFX(that.R_PF2);
-			//易伤加成
+			//R_YS易伤加成
 				this.adYS1 = addBuff('ng_APs');
 				this.adYS2 = addBuff('wg_APs');
 				this.R_YS1 = 1+this.adYS1;
 				this.R_YS2 = 1+this.adYS2;
-			//R加速与技能实际运功时间方法
+			//R_SP加速与技能实际运功时间方法
 				this.adSP = addBuff('ty_SP');
 				this.R_SP = this.baseSP/100 + this.adSP + adt[ROLE]['speedAd']/100; //ex:0.22
 				//R运功实际时间 = floor( T/0.0625*1024/floor(S*10.24+S1+1024) )*0.0625
 				//T = {} 技能初始释放时间  S=默认急速 S1 = 急速加成，转换为数值
 
-				//设置和入库技能原始时间
-				//var skillTime = adSkill[ROLE]['skill_name'][4];
 				//获取技能当前运功时间方法
 				function GET_SKT(skilltime){
 					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*1024+1024) )*0.0625;
 				};
-				//var test = GET_SKT(3);
-				//console.log(test);
-			//外功技能频率与平砍频率
+				//外功技能频率与平砍频率
 				function GET_WGSKT(){
 					return 16/Math.floor(1.5*16*1024/(1024+Math.floor(that.R_SP*1024)))
 				}
@@ -1263,7 +1320,7 @@ $(function(){
 	//加载storage数据 - 2014.11.20重写优化
 		function LOAD_DATE(){
 			//读取storage中的数据
-				var stodate = dpsLocation.getItem('jx3dps');
+				var stodate = dpsLocation['jx3dps'];
 			//将JSON转换为JS对象
 				var newdate = JSON.parse(stodate);
 			//动态创建克隆html元素 + 遍历对象对应的数组添加到表格中
@@ -1287,7 +1344,7 @@ $(function(){
 							for(i=0;i<newdate[x].length;i++){
 								j--;
 								$(which_adddate).eq(i).children('td').html(function(index){
-									return newdate.dps[j][index];
+									return newdate[x][j][index];
 								})
 							}
 						}
@@ -1296,6 +1353,8 @@ $(function(){
 					}
 				}
 				INDEX_DATE();
+				
 		}
-		LOAD_DATE();
+		
+		$(window).load(LOAD_DATE);
 })
