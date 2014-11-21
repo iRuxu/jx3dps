@@ -529,10 +529,10 @@ $(function(){
 				skill_name : [0.2,0.1,0.1]  
 			},
 			nx : {
-				xiangwuhot : [1.08], 
-				xiangwufirst : [1.08], 
-				shangyuan : [1.08], 
-				shangyuanlast : [1.08], 
+				xiangwu : [0.08], 
+				xiangwufirst : [0], 
+				shangyuan : [0.07], 
+				shangyuanlast : [0.07], 
 				wangmu : [0,0.1], 
 				fengxiu : [0], 
 				huixue : [0.12,0.1,0.1], 
@@ -1072,18 +1072,19 @@ $(function(){
 					var nxArr = [];
 					console.log(adSkill.nx);
 					//翔舞+上元
-					nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*adSkill.nx.xiangwuhot[0]*that.addZLS);
-					nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*adSkill.nx.xiangwuhot[0]*that.addZLS);
+					nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.xiangwu[0])*that.addZLS);
 					//翔鸾舞柳
-					nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*adSkill.nx.xiangwufirst[0]*that.addZLS);
+					nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
+					//上元点鬟
+					nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
 					//上元末跳
-					nxArr[3]=0;
+					nxArr[3]=Math.round((that.R_MAP3*0.417+640)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
 					//王母挥袂
-					nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1.05*that.raidCW));
+					nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1+0.05*that.raidCW));
 					//风袖低昂
 					nxArr[5]=Math.round((that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
 					//回雪飘摇
-					nxArr[6]=Math.round((that.R_MAP3*0.083+200)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
+					nxArr[6]=Math.round((that.R_MAP3*0.25+382)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
 					//玲珑箜篌
 					nxArr[7]=Math.round((0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS);
 					return nxArr;

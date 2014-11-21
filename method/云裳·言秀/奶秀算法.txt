@@ -1,0 +1,56 @@
+R_MAP3 最终面板治疗
+R_AP3  最终基础治疗
+propAP 固定治疗量
+R_CF1  最终会效
+CT1_now 最终会心
+GET_SKT（）
+
+adSkill.nx.wangmu[1] 奇穴莫辞加成-0.1
+addZLS 妙手五彩石加成- 1.08（五级） 1.1（六级）——没选就是1，选了就是对应的值
+adSkill.nx.xiangwu[0] 翔舞秘籍加成 1.08
+adSkill.nx.huixue[0] 回雪秘籍加成 0.12
+
+0.05*that.raidCW 橙武回雪加成 0.05
+1.05*that.raidCW 橙武王母加成 1.05
+
+QX_XR 奇穴香蕊加成 0.1
+QX_BH 奇穴冰华加成 0.1
+QX_QM 奇穴青梅嗅加成 0.1
+QX_WY 奇穴晚阳加成 0.2
+========================================
+技能期望：
+
+翔舞&上元：
+(that.R_MAP3*0.083+200)*(1+that.CT1_now*(R_CF1-1))*adSkill.nx.xiangwu[0]*that.addZLS;
+（R_MAP3*0.083+200）*（1+CT1_now*(R_CF1-1)）*WCS*MJ_XW
+
+翔舞首跳：（无奇穴双鸾则此期望为0）
+(that.R_MAP3*0.2+200)*(1+that.CT1_now*(R_CF1-1))*adSkill.nx.xiangwu[0]*that.addZLS;
+（R_MAP3*0.2+200）*（1+CT1_now*(R_CF1-1)）*WCS
+
+上元末跳：
+
+
+王母挥袂：
+(that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1.05*that.raidCW);
+（R_MAP3*0.7812+1622）*(1+(CT1_now+QX_WM)*(R_CF1-1))*WCS*CW_WM
+
+风袖低昂：
+(that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS;
+（R_MAP3*0.9896+702）*（1+CT1_now*(R_CF1-1)）*WCS
+
+
+回雪：
+(that.R_MAP3*0.083+200)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW))
+（R_MAP3*0.083+200）*（1+(CT1_now+QX_XR)*(R_CF1-1+QX_XR)）*WCS*(1+MJ_HX+QX_BH+QX_WY+CW_HX)
+
+玲珑：
+(0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS;
+（0.25*R_AP3+0.083*propAP+201）*（1+(CT1_now+QX_QM)*(R_CF1-1+QX_QM)）*WCS
+
+
+=========================================
+
+下次用半角括号 TAT
+真正的运算公式里 其实会给每个变量前面加个that. 不过你可以忽视 我补上就是
+还少个上元末跳
