@@ -978,9 +978,9 @@ $(function(){
 				this.baseAP3_X = Number($("#baseAP3").val());
 				function GET_BASEZLAP(){
 					if(ROLE=='nx'){
-						return (that.baseAP3_X-adtBase[adt[ROLE]['propAdCat']])/1.3027;
+						return (that.baseAP3_X-adtBase[adt[ROLE]['propAdCat']]*adt[ROLE]['propApAdd'])/1.3027;
 					}else{
-						return (that.baseAP3_X-adtBase[adt[ROLE]['propAdCat']]);
+						return (that.baseAP3_X-adtBase[adt[ROLE]['propAdCat']]*adt[ROLE]['propApAdd']);
 					}
 				};
 				this.baseAP3 = GET_BASEZLAP();
