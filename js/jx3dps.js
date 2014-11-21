@@ -896,9 +896,9 @@ $(function(){
 				this.baseAP3 = (function(){
 					var zl_ap = Number($("#baseAP3").val());
 					if(ROLE=='nx'){
-						return (zl_ap-that.propAP);
-					}else{
 						return (zl_ap-that.propAP)/1.3027;
+					}else{
+						return (zl_ap-that.propAP);
 					}
 				})
 				//var test  = addBuff(adtPPAD[adt[ROLE]['propAdCat']]);
