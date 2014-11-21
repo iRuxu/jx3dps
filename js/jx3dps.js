@@ -900,7 +900,7 @@ $(function(){
 					}else{
 						return (zl_ap-that.propAP);
 					}
-				})
+				})();
 				//var test  = addBuff(adtPPAD[adt[ROLE]['propAdCat']]);
 				//console.log(test);
 			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
@@ -1079,7 +1079,6 @@ $(function(){
 				},
 				function(){ //2言秀·云裳
 					var nxArr = [];
-					console.log(adSkill.nx);
 					//翔舞+上元
 					nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.xiangwu[0])*that.addZLS);
 					//翔鸾舞柳
