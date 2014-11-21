@@ -972,9 +972,8 @@ $(function(){
 							*adt[ROLE]['propApAdd']
 							+(this.baseL+this.adL)*(1+this.adLC)*tyAdd.L[0];
 				}else if(CAT=='zl'){
-					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))
-							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
-							*adt[ROLE]['propApAdd']
+					//固定治疗量 = [（原根骨 + 根骨增益点数）× （1+根骨倍数增益加成） + 根骨增益点数×（1+奇穴内置加成）] * 职业治疗量加成
+					this.propAP = ((this.baseG+this.adG)*(1+this.adGC) + this.adG*(1+adt[ROLE]['propCountAdd']))*adt[ROLE]['propApAdd'] ;
 				}
 				this.baseAP3_X = Number($("#baseAP3").val());
 				function GET_BASEZLAP(){
@@ -1011,7 +1010,6 @@ $(function(){
 				this.R_MAP1 = this.R_AP1 + this.propAP;
 				this.R_MAP2 = this.R_AP2 + this.propAP;
 				this.R_MAP3 = this.R_AP3 + this.propAP;
-			
 			//R_HT命中 = 命中 + 命中总增益 + {技能加成}
 				this.adHT1 = addBuff('ng_HT');
 				this.adHT2 = addBuff('wg_HT');
