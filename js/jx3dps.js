@@ -769,7 +769,7 @@ $(function(){
 			this.baseL = Number($("#baseL").val());
 			this.baseAP1 = Number($("#baseAP1").val());
 			this.baseAP2 =  Number($("#baseAP2").val());
-			this.baseAP3 = Number($("#baseAP3").val());
+			
 			this.weapAP1 = Number($("#weapAP1").val());
 			this.weapAP2 = Number($("#weapAP2").val());
 			this.baseHT1 = Number($("#baseHT1").val());
@@ -892,6 +892,15 @@ $(function(){
 					adtProp = ['ng_Y','ng_G','wg_L','wg_S'],
 					adtPPAD = ['ng_YC','ng_GC','wg_LC','wg_SC'];
 				this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))*adt[ROLE]['propApAdd'];
+				
+				this.baseAP3 = (function(){
+					var zl_ap = Number($("#baseAP3").val());
+					if(ROLE=='nx'){
+						return (zl_ap-that.propAP);
+					}else{
+						return (zl_ap-that.propAP)/1.3027;
+					}
+				})
 				//var test  = addBuff(adtPPAD[adt[ROLE]['propAdCat']]);
 				//console.log(test);
 			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
