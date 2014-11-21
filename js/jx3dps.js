@@ -964,10 +964,10 @@ $(function(){
 				this.R_PROPADD = addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd']);
 			//propAP额外攻击&治疗量
 
-				/*this.propAP = (adtBase[adt[ROLE]['propAdCat']]*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
+				this.propAP = (adtBase[adt[ROLE]['propAdCat']]*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
 						+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
-						*adt[ROLE]['propApAdd'];*/
-
+						*adt[ROLE]['propApAdd'];
+/*
 				//额外治疗量 = 【填入根骨×(1+%阵法增益) + 增益根骨×(1+%奇穴增益)】× 职业属性加成
 				if(CAT=='zl'){
 					this.propAP = ( this.baseG*(1+this.adGC) + this.adG*(1+adt[ROLE]['propCountAdd']))*adt[ROLE]['propApAdd'];
@@ -989,7 +989,7 @@ $(function(){
 
 					//额外攻击 =  原始额外攻击 + 增益额外攻击
 					this.propAP = this.basePropAP + this.addPropAP;
-				}
+				}*/
 
 			//R_AP基础攻击 = （原始基础攻击 + 基础攻击增益点数 + 元气力道天然攻击加成）×（1+基础攻击增益百分比）
 				//基础攻击增益点数 = 食品类 + BUFF类
