@@ -960,15 +960,15 @@ $(function(){
 				this.R_SADD = this.adS*(1+this.adSC);
 			//主属性最终增益点数(含倍数与奇穴加成)
 				this.R_PROPADD = addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd']);
-			//固定攻击 = （原主属性点数 + 主属性增益点数）× 主属性倍数加成 × 主属性攻击加成 + （原副属性点数 + 副属性增益点数）× 副属性倍数加成 × 副属性攻击加成
+			//固定攻击 = （原主属性点数 + 主属性增益点数*(1+奇穴内置加成)）× 主属性倍数加成 × 主属性攻击加成 + （原副属性点数 + 副属性增益点数）× 副属性倍数加成 × 副属性攻击加成
 				if(CAT=='ng'){
-					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))
-							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
+					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
+							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
 							*adt[ROLE]['propApAdd']
 							+(this.baseY+this.adY)*(1+this.adYC)*tyAdd.Y[0];
 				}else if(CAT=='wg'){
-					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))
-							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
+					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
+							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
 							*adt[ROLE]['propApAdd']
 							+(this.baseL+this.adL)*(1+this.adLC)*tyAdd.L[0];
 				}else if(CAT=='zl'){
