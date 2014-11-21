@@ -972,8 +972,8 @@ $(function(){
 							*adt[ROLE]['propApAdd']
 							+(this.baseL+this.adL)*(1+this.adLC)*tyAdd.L[0];
 				}else if(CAT=='zl'){
-					//固定治疗量 = [（原根骨 + 根骨增益点数）× （1+根骨倍数增益加成） + 根骨增益点数×（1+奇穴内置加成）] * 职业治疗量加成
-					this.propAP = ((this.baseG+this.adG)*(1+this.adGC) + this.adG*(1+adt[ROLE]['propCountAdd']))*adt[ROLE]['propApAdd'] ;
+					//固定治疗量 = [（原根骨 + 根骨增益点数×（1+奇穴内置加成））× （1+根骨倍数增益加成）] * 职业治疗量加成
+					this.propAP = ((this.baseG + this.adG*(1+adt[ROLE]['propCountAdd']))*(1+this.adGC)*adt[ROLE]['propApAdd'] ;
 				}
 				this.baseAP3_X = Number($("#baseAP3").val());
 				function GET_BASEZLAP(){
