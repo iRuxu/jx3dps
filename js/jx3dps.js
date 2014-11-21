@@ -843,7 +843,9 @@ $(function(){
 			this.baseS = Number($("#baseS").val());
 			this.baseL = Number($("#baseL").val());
 			this.baseAP1 = Number($("#baseAP1").val());
+			this.baseMAP1 = Number($("#baseMAP1").val());
 			this.baseAP2 =  Number($("#baseAP2").val());
+			this.baseMAP2 =  Number($("#baseMAP2").val());
 			
 			this.weapAP1 = Number($("#weapAP1").val());
 			this.weapAP2 = Number($("#weapAP2").val());
@@ -960,21 +962,48 @@ $(function(){
 				this.R_SADD = this.adS*(1+this.adSC);
 			//主属性最终增益点数(含倍数与奇穴加成)
 				this.R_PROPADD = addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd']);
-			//固定攻击 = （原主属性点数 + 主属性增益点数*(1+奇穴内置加成)）× 主属性倍数加成 × 主属性攻击加成 + （原副属性点数 + 副属性增益点数）× 副属性倍数加成 × 副属性攻击加成
-				if(CAT=='ng'){
-					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
-							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
-							*adt[ROLE]['propApAdd']
-							+(this.baseY+this.adY)*(1+this.adYC)*tyAdd.Y[0];
-				}else if(CAT=='wg'){
-					this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
-							*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
-							*adt[ROLE]['propApAdd']
-							+(this.baseL+this.adL)*(1+this.adLC)*tyAdd.L[0];
-				}else if(CAT=='zl'){
-					//固定治疗量 = [（原根骨 + 根骨增益点数×（1+奇穴内置加成））× （1+根骨倍数增益加成）] * 职业治疗量加成
-					this.propAP = ((this.baseG + this.adG*(1+adt[ROLE]['propCountAdd']))*(1+this.adGC))*adt[ROLE]['propApAdd'] ;
+			//propAP额外攻击&治疗量
+
+				/*this.propAP = (adtBase[adt[ROLE]['propAdCat']]*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
+						+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
+						*adt[ROLE]['propApAdd'];*/
+
+				//额外治疗量 = 【填入根骨×(1+%阵法增益) + 增益根骨×(1+%奇穴增益)】× 职业属性加成
+				if(CAT=='zl'){
+					this.propAP = ( this.baseG*(1+this.adGC) + this.adG*(1+adt[ROLE]['propCountAdd']))*adt[ROLE]['propApAdd'];
+				}else{
+					//原始额外攻击 = 原始面板攻击 - 原始基础攻击
+					if(CAT=='ng'){
+						this.basePropAP = this.baseMAP1 - this.baseAP1;
+					}else if(CAT=='wg'){
+						this.basePropAP = this.baseMAP2 - this.baseAP2;
+					}
+					//增益额外攻击 = 【主属性增益点×（1+主属性点百分比增益+主属性奇穴百分比增益）+ 原始主属性×主属性点百分比增益】×主属性心法攻击加成
+					//增益额外攻击 = 【主属性增益点×（1+主属性点百分比增益+主属性奇穴百分比增益）+ 原始主属性×(主属性点百分比增益+奇穴百分比增益)/(1+奇穴百分比增益)】×主属性心法攻击加成
+					this.addPropAP = //		【主属性增益点 			×		（1+主属性点百分比增益						+	主属性奇穴百分比增益）
+									(addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])
+									 //		原始主属性 				× 		(主属性点百分比增益				+		奇穴百分比增益)			/	(1+奇穴百分比增益)
+									+ adtBase[adt[ROLE]['propAdCat']]*(addBuff(adtPPAD[adt[ROLE]['propAdCat']])+adt[ROLE]['propCountAdd'])/(1+adt[ROLE]['propCountAdd']))
+									 //×主属性心法攻击加成
+									* adt[ROLE]['propApAdd'];
+
+					//额外攻击 =  原始额外攻击 + 增益额外攻击
+					this.propAP = this.basePropAP + this.addPropAP;
 				}
+
+			//R_AP基础攻击 = （原始基础攻击 + 基础攻击增益点数 + 元气力道天然攻击加成）×（1+基础攻击增益百分比）
+				//基础攻击增益点数 = 食品类 + BUFF类
+				this.adAP1 = addBuff('ng_AP');
+				this.adAP2 = addBuff('wg_AP');
+				this.adAP3 = addBuff('zl_AP');
+				//基础攻击增益百分比 = BUFF类 + 阵法
+				this.adAP1c = addBuff('ng_APc');
+				this.adAP2c = addBuff('wg_APc');
+				this.adAP3c = addBuff('zl_APc');
+				//天然加成攻击 = 增益力道/元气×力道/元气固定攻击加成
+				this.R_AP1 = ( this.baseAP1 + this.adAP1 + this.adY*(1+this.adYC)*tyAdd.Y[0] ) * ( 1 + this.adAP1c);
+				this.R_AP2 = ( this.baseAP2 + this.adAP2 + this.adL*(1+this.adLC)*tyAdd.L[0] ) * ( 1 + this.adAP2c);
+				//原始基础治疗量 = 原始面板治疗量 - 原始额外治疗量
 				this.baseAP3_X = Number($("#baseAP3").val());
 				function GET_BASEZLAP(){
 					if(ROLE=='nx'){
@@ -984,18 +1013,7 @@ $(function(){
 					}
 				};
 				this.baseAP3 = GET_BASEZLAP();
-			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
-				//基础攻击增益点数 = 食品类 + BUFF类
-				this.adAP1 = addBuff('ng_AP');
-				this.adAP2 = addBuff('wg_AP');
-				this.adAP3 = addBuff('zl_AP');
-				//基础攻击增益百分比 = BUFF类 + 阵法
-				this.adAP1c = addBuff('ng_APc');
-				this.adAP2c = addBuff('wg_APc');
-				this.adAP3c = addBuff('zl_APc');
-
-				this.R_AP1 = ( this.baseAP1 + this.adAP1 ) * ( 1 + this.adAP1c);
-				this.R_AP2 = ( this.baseAP2 + this.adAP2 ) * ( 1 + this.adAP2c);
+				//基础治疗量
 				function GET_RAP3(){
 					var R_AP3;
 					if(ROLE=='nx'){
@@ -1006,10 +1024,12 @@ $(function(){
 					return R_AP3;
 				}
 				this.R_AP3 = GET_RAP3();
-			//R面板攻击 = R基础攻击 + 固定攻击
+
+			//R_MAP面板攻击 = 基础攻击 + 额外攻击
 				this.R_MAP1 = this.R_AP1 + this.propAP;
 				this.R_MAP2 = this.R_AP2 + this.propAP;
 				this.R_MAP3 = this.R_AP3 + this.propAP;
+			
 			//R_HT命中 = 命中 + 命中总增益 + {技能加成}
 				this.adHT1 = addBuff('ng_HT');
 				this.adHT2 = addBuff('wg_HT');
