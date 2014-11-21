@@ -907,7 +907,16 @@ $(function(){
 			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
 				this.R_AP1 = ( this.baseAP1 + this.adAP1 ) * ( 1 + this.adAP1c);
 				this.R_AP2 = ( this.baseAP2 + this.adAP2 ) * ( 1 + this.adAP2c);
-				this.R_AP3 = ( this.baseAP3 + this.adAP3 ) * ( 1 + this.adAP3c);
+				function GET_RAP3(){
+					var R_AP3;
+					if(ROLE=='nx'){
+						R_AP3 = (that.baseAP3 + that.adAP3 ) * ( 1 + 0.3027 + that.adAP3c);
+					}else{
+						R_AP3 = (that.baseAP3 + that.adAP3 ) * ( 1 + that.adAP3c);
+					}
+					return R_AP3;
+				}
+				this.R_AP3 = GET_RAP3();
 			//R面板攻击 = R基础攻击 + 固定攻击
 				this.R_MAP1 = this.R_AP1 + this.propAP;
 				this.R_MAP2 = this.R_AP2 + this.propAP;
@@ -1055,6 +1064,13 @@ $(function(){
 				};
 				//var test = GET_SKT(3);
 				//console.log(test);
+			//外功技能频率与平砍频率
+				function GET_WGSKT(){
+					return 16/Math.floor(1.5*16*1024/(1024+Math.floor(that.R_SP*1024)))
+				}
+				function GET_PKSKT(){
+					return 16/Math.floor(1.625*16*1024/(1024+Math.floor(that.R_SP*1024)))
+				}
 
 		//计算方法 - 2014.11.17--
 			this.dpsMethod = Number($("#dpsMethod").val());
