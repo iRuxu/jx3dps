@@ -893,12 +893,12 @@ $(function(){
 					adtProp = ['ng_Y','ng_G','wg_L','wg_S'],
 					adtPPAD = ['ng_YC','ng_GC','wg_LC','wg_SC'];
 				this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))*adt[ROLE]['propApAdd'];
+				this.baseAP3_X = Number($("#baseAP3").val());
 				function GET_BASEZLAP(){
-					var zl_ap = Number($("#baseAP3").val());
 					if(ROLE=='nx'){
-						return (zl_ap-that.propAP)/1.3027;
+						return (that.baseAP3_X-that.propAP)/1.3027;
 					}else{
-						return (zl_ap-that.propAP);
+						return (that.baseAP3_X-that.propAP);
 					}
 				};
 				this.baseAP3 = GET_BASEZLAP();
