@@ -759,6 +759,7 @@ $(function(){
 
 	//构造数据对象 - 2014.11.15～2014.11.18
 		function JX3DPS(){
+			var that = this;
 		//职业
 			this.role = window.ROLE;
 			this.cat = window.CAT;
@@ -892,15 +893,15 @@ $(function(){
 					adtProp = ['ng_Y','ng_G','wg_L','wg_S'],
 					adtPPAD = ['ng_YC','ng_GC','wg_LC','wg_SC'];
 				this.propAP = (adtBase[adt[ROLE]['propAdCat']]+addBuff(adtProp[adt[ROLE]['propAdCat']]))*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))*adt[ROLE]['propApAdd'];
-				
-				this.baseAP3 = (function(){
+				function GET_BASEZLAP(){
 					var zl_ap = Number($("#baseAP3").val());
 					if(ROLE=='nx'){
 						return (zl_ap-that.propAP)/1.3027;
 					}else{
 						return (zl_ap-that.propAP);
 					}
-				})();
+				};
+				this.baseAP3 = GET_BASEZLAP();
 				//var test  = addBuff(adtPPAD[adt[ROLE]['propAdCat']]);
 				//console.log(test);
 			//R基础攻击 = （基础攻击 + 基础攻击增益点数）×（1+基础攻击增益百分比）
@@ -929,7 +930,6 @@ $(function(){
 				//this.Z_HT1 = this.R_HT1 + adSkill[ROLE]['skill_name'][3];
 				//this.Z_HT2 = this.R_HT2 + adSkill[ROLE]['skill_name'][3];
 			//偏离率 = ([命中需求]-Z命中<0) ? 0 : ([命中需求]-Z命中)
-				var that = this;
 				function GET_MISS(R_HT){
 					var miss = [];
 					for (var i=0;i<HT_NEED.length;i++) {
