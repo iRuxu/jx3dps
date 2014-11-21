@@ -246,6 +246,29 @@ CSS file for jx3dps.com
             to{width:180px;}
         }
 
+        .shark{
+            .pr;.clip;
+            &:hover i{
+                left: 100%;
+                transition: .5s;
+                -o-transition: .5s;
+                -moz-transition: .5s;
+                -webkit-transition: .5s;
+            }
+            i{position: absolute;
+                left: -100%;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                transform: skewx(-25deg);
+                -o-transform: skewx(-25deg);
+                -moz-transform: skewx(-25deg);
+                -webkit-transform: skewx(-25deg);
+                background-image: -webkit-linear-gradient(0deg,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0));
+            }
+        }
+
+
     //General
         html,body{color:@color;
             font-size:12px;line-height: 180%;
@@ -271,7 +294,7 @@ CSS file for jx3dps.com
         .ui-dialog.ui-widget-content{overflow: hidden !important;border-radius: 6px !important;}
         .ui-widget-overlay{height:120%;}
         .ui-dialog .ui-dialog-titlebar-close{right:20px;/*color:@basecolor;*/}
-        .ui-widget-content {
+        #dpsForm .ui-widget-content {
             border:1px solid #ccc;border-radius:4px;border-top-left-radius:0;
             box-shadow: 0px 0px 3px rgba(221,221,221,0.5);
             margin-top: -1px;
@@ -283,7 +306,7 @@ CSS file for jx3dps.com
         .ui-selectmenu-menu .ui-menu{padding:0;}
         .ui-selectmenu-menu .ui-menu-item{text-indent:10px;height: 26px;line-height: 26px;}
         .ui-selectmenu-menu .ui-state-focus{color:#fff;
-            background-color: #0064cd;
+            background-color: #0064cd !important;
             background-repeat: repeat-x;
             background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
             background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
@@ -323,14 +346,16 @@ CSS file for jx3dps.com
             li:nth-child(16) div{background-position: left -420px;}
         }
 
-    #box{width:1000px;margin:0 auto;padding:20px;
+    @-moz-document url-prefix(){#title h1 a{padding-top:20px;}}
+    #box{width:1000px;margin:0 auto;padding:0 20px;
 
         #header{.clear;.pr;padding-bottom:10px;border-bottom: 1px solid #ccc;
 
             #title{.fl;.pr;
-                h1{font-size:100px;font-family:'Trajanus Roman'; line-height: 100px;
-                    &:hover{-webkit-animation:pulse 1s .2s ease both;}
-                    a{color:#333;cursor:pointer;}
+                h1{font-size:100px;font-family:'Trajanus Roman'; .x;height: 100px;.shark;
+                    a{color:#333;cursor:pointer;height:100% !important;.db;vertical-align:bottom;line-height:100px;
+                        //&:hover{-webkit-animation:pulse 1s .2s ease both;}
+                    }
                 }
                 #version{
                     .pa;right:6px;top:10px;
@@ -338,7 +363,7 @@ CSS file for jx3dps.com
                     box-shadow: 1px 1px 0px #ccc;
                     cursor:help;
                 }
-                #s2id_role{width:280px;margin:10px 0 0 10px;}
+                #s2id_role{width:280px;margin:10px 0 0 10px;z-index:100;}
             }
 
             #mz{margin:0 0 0 320px;
@@ -388,124 +413,149 @@ CSS file for jx3dps.com
         }
 
         #main{min-height:500px;font-size:12px;padding:20px 0;border-top:1px solid #fff;border-bottom: 1px solid #ccc;
-            ul{.fl;min-width:220px;
-                li{
-                    min-width:180px;height:32px;line-height: 32px;margin-bottom: 5px;.pr;
-                    &:hover{}
-                    span.units{color:#777;.pr;left:-20px;}
+            
+            #dpsForm{padding:0 5px;
+                ul{.fl;min-width:220px;
+                    li{
+                        min-width:180px;height:32px;line-height: 32px;margin-bottom: 5px;.pr;
+                        &:hover{}
+                        span.units{color:#777;.pr;left:-20px;}
 
-                    //input
-                        input{height:24px;line-height: 24px;padding:2px 5px;}
-                        input[type='text']{
-                            &:focus{}
-                            &.errorDate{border-color:#cc0000;}
-                        }
-                    //select
-                        select{width:140px;
-                        }
-                        .ui-selectmenu-button{.pr;top:2px;}
-                        .ui-selectmenu-text{color:#666;font-weight: normal;}
+                        //input
+                            input{height:24px;line-height: 24px;padding:2px 5px;}
+                            input[type='text']{
+                                &:focus{}
+                                &.errorDate{border-color:#cc0000;}
+                            }
+                        //select
+                            select{width:140px;
+                            }
+                            .ui-selectmenu-button{.pr;top:2px;width:142px !important; }
+                            .ui-selectmenu-text{color:#666;font-weight: normal;}
 
-                    //label
-                        label{margin-right: 10px;
-                            &:first-child{color:#666;}
-                            &.help{border-bottom: 1px dotted #777;cursor:help !important;
+                        //label
+                            label{margin-right: 10px;
+                                &:first-child{color:#666;}
+                                &.help{border-bottom: 1px dotted #777;cursor:help !important;
+                                    span{display:none;.pa;.rgba(0,0,0,0.8);border-radius:4px;border:1px solid #111;z-index:20;color:#ccc;padding:0 5px;}
+                                    &:hover{
+                                        span{display:block;}
+                                    }
+                                }
+                                &.errorDate{width:0px;min-height:24px;background: url('@{url}/care.gif') no-repeat 5px 10px;
+                                            .pa;padding-left:24px;color:#cc0000;font-weight: bold;
+                                            left:180px;top:0;
+                                            z-index:2;
+                                            .nobreak;
+                                            cursor:help;/*transition:3s;*/
+                                    &:hover{
+                                        animation:showinfo 1s forwards;
+                                        background-color: #cc0000;color:#fff;box-shadow:2px 2px 0px #cbcbcb;
+                                        border-radius:4px;padding-right:5px;
+                                    }
+                                }
+                            }
+                        //info
+                            .info{.dbi;width:24px;height:100%;.y(top);z-index:3;border-bottom: none !important;margin-right:0;
+                                background: url('@{url}/info.png') no-repeat 5px 10px;
+                                &:hover{cursor:help;
+                                    span{.db;}
+                                }
+                                span{right:0px;top:20px;.nobreak;.none;}
+                                }
+                           /* i.info{
                                 span{display:none;.pa;.rgba(0,0,0,0.8);border-radius:4px;border:1px solid #111;z-index:20;color:#ccc;padding:0 5px;}
-                                &:hover{
-                                    span{display:block;}
+                                &:hover{cursor:help;
+                                    span{display: block;width:180px;}
                                 }
-                            }
-                            &.errorDate{width:0px;min-height:24px;background: url('@{url}/care.gif') no-repeat 5px 10px;
-                                        .pa;padding-left:24px;color:#cc0000;font-weight: bold;
-                                        left:180px;top:0;
-                                        z-index:2;
-                                        .nobreak;
-                                        cursor:help;/*transition:3s;*/
-                                &:hover{
-                                    animation:showinfo 1s forwards;
-                                    background-color: #cc0000;color:#fff;box-shadow:2px 2px 0px #cbcbcb;
-                                    border-radius:4px;padding-right:5px;
-                                }
-                            }
-                            &.info{min-width:24px;min-height:24px;padding-left:20px;
-                                    background: url('@{url}/info.png') no-repeat 2px 1px;border-bottom: none;
-                                    z-index:3;
-                                    &:hover{cursor:pointer;}
-                                    span{left:200px;top:20px;.nobreak;}
-                            }
-                        }
-                        i.info{.dbi;width:24px;height:100%;.y(top); z-index:3;
-                            background: url('@{url}/info.png') no-repeat 5px 10px;
-                            span{display:none;.pa;.rgba(0,0,0,0.8);border-radius:4px;border:1px solid #111;z-index:20;color:#ccc;padding:0 5px;}
-                            &:hover{cursor:help;
-                                span{display: block;width:180px;}
-                            }
-                            
-                        }
-                    
-                }
-            }
-            ul.dps-prop{
-                input{width:120px;}
-                li label:first-child{width:34px !important;.dbi;}
-            }
-            ul.dps-add{
-                width:245px;
-                li label{
-                    &:first-child{overflow: hidden;width:48px;.fl;white-space: nowrap;}
-                    &.info{.pa;left:205px;top:8px;
-                        span{left:25px;top:0px;.nobreak;letter-spacing: 0;}
+                                
+                            }*/
+                        
                     }
                 }
-                .icheckbox_square-blue{margin-right: 5px;}
-            }
-            ul.dps-raid{
-                width:240px;
-                li label:first-child{width:34px;.dbi;text-align:right;}
-                .raidbuff{width:34px;.dbi;color:#666;}
-                .zhenfai,.buyu{vertical-align: top;}
-                .iradio_square-blue{margin:0 5px 0 0;}
-                .icheckbox_square-blue{margin:0 5px 0 0;}
-                .coverage{color:#777;}
-                .ui-state-active .coverage{color:#ccc;}
-                .ui-button-text{}
-                .qichang label{margin-right: 6px;}
-                #raidXQ .ui-button-text{padding:.4em .3em;}
-            }
-            ul.dps-role{
-                width:280px;
-                label{vertical-align: top;}
-                label.info{margin-right:0}
-                .ui-selectmenu-button{width:210px !important;}
+                ul.dps-prop{
+                    input{width:120px;}
+                    li label:first-child{width:34px !important;.dbi;}
+                }
+                ul.dps-add{
+                    width:240px;
+                    li label{
+                        &:first-child{overflow: hidden;width:48px;.fl;white-space: nowrap;}
+                    }
+                    .icheckbox_square-blue{margin-right: 5px;}
+                }
+                ul.dps-raid{
+                    width:220px;
+                    li label:first-child{width:34px;.dbi;text-align:right;}
+                    .raidbuff{width:34px;.dbi;color:#666;}
+                    .zhenfai,.buyu{vertical-align: top;}
+                    .iradio_square-blue{margin:0 5px 0 0;}
+                    .icheckbox_square-blue{margin:0 5px 0 0;}
+                    .coverage{color:#777;}
+                    .ui-state-active .coverage{color:#ccc;}
+                    .ui-button-text{}
+                    .qichang label{margin-right: 6px;}
+                    #raidXQ .ui-button-text{padding:.4em .3em;}
+                }
+                ul.dps-role{
+                    width:300px;
+                    label{vertical-align: top;}
+                    label.info{margin-right:0}
+                    .ui-selectmenu-button{width:210px !important;}
 
-                #gotips{
-                    background-color: #fff;
-                    color:@color;
-                    width:168px;
-                    margin:10px auto 0 auto;
-                    height: auto;
-                    border:1px solid #ddd;
-                    padding:5px;
-                    line-height: 24px;
-                    border-radius:4px;
-                }
-            }
-            .ui-buttonset{ 
-                label{
-                    margin-right: -.4em;
-                    height: 12px;
-                    padding:8px 16px 8px 12px;
-                    width:auto;
-                    text-align: center;
-                    .ui-button-text{
-                        padding:0 !important;
+                    #gotips{
+                        background-color: #fff;
+                        color:@color;
+                        width:168px;
+                        margin:10px auto 0 auto;
+                        height: auto;
+                        border:1px solid #ddd;
+                        padding:5px;
+                        line-height: 24px;
+                        border-radius:4px;
                     }
                 }
+                .ui-buttonset{ 
+                    label{
+                        margin-right: -.4em;
+                        height: 12px;
+                        padding:8px 16px 8px 12px;
+                        width:auto;
+                        text-align: center;
+                        .ui-button-text{
+                            padding:0 !important;
+                        }
+                    }
+                }
+                #to{
+                    margin-top: 20px;text-align:center;
+                    #go{width:180px;height:40px;}
+                    .btn{width:180px;height:28px;margin-bottom: 10px;}
+                }
             }
-            #to{
-                margin-top: 20px;text-align:center;
-                #go{width:180px;height:40px;}
-                .btn{width:180px;height:28px;margin-bottom: 10px;}
+
+            #datelist{
+                border:1px solid #ccc;.pr;
+                ul{padding-left: 18px;}
+                ul li {
+                    background-color: #eee;border:1px solid #ccc;margin-right: 5px;
+                    a{display:block;height:100%;cursor: pointer;margin-right: 0;}
+                    a:hover{padding-bottom: .5em;background-color: #fff;border-bottom: none;}
+                    &.ui-tabs-active{border:none;
+                        a{background-color: #0064cd;color:#fff;border:1px solid #0064cd;margin-bottom: 0;
+                            &:hover{}
+                            }
+                    }
+                }
+                .storage-date{
+                    width:100%;
+                    th{background-color: #eee;border:1px solid #ddd;}
+                    td{text-align: center;}
+                }
+                #back-dps{width:80px;height:32px;border:1px solid #ddd;background-color: #0064cd;color:#fff;.dbi;
+                    .pa;right:22px;top:10px;.x;cursor:pointer;line-height: 32px;font-weight: bold;border-radius:4px;
+                    &:hover{border:1px solid #00ccff;color:#ffff00;box-shadow: 0 0 4px #00ccff;}
+                }
             }
         }
 
@@ -533,42 +583,144 @@ CSS file for jx3dps.com
         
         .author{
             .fr;
-            a{display:block;margin-right:10px;.fl;text-align: center;.pr;overflow:hidden;
-                &:hover i{
-                    left: 100%;
-                    transition: .5s;
-                    -o-transition: .5s;
-                    -moz-transition: .5s;
-                    -webkit-transition: .5s;
-                }
-            }
+            a{display:block;margin-right:10px;.fl;text-align: center;.pr;overflow:hidden;.shark;}
             img{width:40px;height:40px;display:block;}
-            i{position: absolute;
-                left: -100%;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                transform: skewx(-25deg);
-                -o-transform: skewx(-25deg);
-                -moz-transform: skewx(-25deg);
-                -webkit-transform: skewx(-25deg);
-                background-image: -webkit-linear-gradient(0deg,rgba(255,255,255,0),rgba(255,255,255,.5),rgba(255,255,255,0));
-            }
         }
     }
 
 
-
 // =Responsive
 //--------------------------------------------------------------
+    //ipad
+    @media only screen and (max-device-width:999px){
+        #box {width:~'calc(100% - 40px)';
+            #header{.pr;
+                #title{width:100%;float:none;padding-top:10px;.clear;border-bottom: 1px dashed #ccc;padding-bottom:5px;
+                    h1{height:30px;font-size:20px;font-family:'Trebuchet MS';.dbi;.fl;
+                         a{padding:0 !important;line-height:30px;text-transform: uppercase;text-align: left;}
+                    }
+                    #version{.fl !important;.pr;margin-left:10px;top:3px;left:0;}
+                    #s2id_role{.dbi;.fl;margin-top:0;}
+                } 
+                #mz {margin: 0;
+                    #nav{padding-top:10px;
+                        #user-panel{.pr;top:-45px;}
+                    }
+                }
+                #result{
+                    
+                }
+            }
+            #main{
+                #dpsForm{
+                    ul.dps-role{.hr;border-top:1px dashed #ccc;width:100% !important;padding-top:5px;
+                        li{.fl;width:50%;
+                        }
+                        #to{.hr;border-top:1px dashed #ccc;
+                            #go{.db;width:100%;margin:10px auto;}
+                            #add-method{.none;}
+                        }
+                    }
+                }
+            }
 
-    //iPad
-    @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:portrait){}
-    @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:landscape){}
+        }
+        .ui-dialog-titlebar span.ui-button-text{.none;}
+    }
 
     //phone
-    @media only screen and (min-device-width:320px) and (max-device-width:720px){}
+    @media only screen and (max-device-width:720px){
+        #box {
+            #header{.pr;
+                #title{
+                 #s2id_role{margin-left:0;}
+                }
+                #mz{
+                    #nav{
+                        a{width:30%;margin-right: 5px;}
+                         #user-panel{.pa;top:10px;right:0;
+                            a{width:auto !important;}
 
-    //other
-    @media only screen and (max-device-width:1000px) {}
+                         } 
+                    }
+                    #result{
+                        .date{.clear;width:100%;
+                            #date{width:100%;}
+                            thead{
+                                .fl;width:30%;
+                                tr{.db;width:100%;}
+                                th{.db;width:100%;border-bottom:1px solid #fff;background-color:#444;color:#fff;}
+                                th:last-child{border-bottom: none;}
+                            }
+                            tbody{
+                                .fl;width:~'calc(70% - 2px)';overflow: hidden;
+                                tr{.db;width:100%;}
+                                td{.db;width:100%;border-top:none;border-bottom:1px solid #ccc;line-height:180%;}
+                                td:first-child{border-left: 1px solid #ccc;}
+                                td:last-child{border-bottom: none;}
+                            }
+                        }
+                        #date-button{
+                            .ps;margin-top: 10px;.clear;
+                            input{.fl;margin-right: 10px;}
+                        }
+                    }
+                }
+            }
+            #main{
+                #dpsForm{
+                    ul{width:100% !important;
 
+                    }
+                    ul.dps-prop{
+                        li{
+                            label:first-child{width:48px !important;.dbi;}
+                            input{width:~"calc(100% - 100px)"}
+                            label.info{.pa;right:0;left:auto;margin:0;.dbi;padding:0;min-width:14px;background-position:0 10px;}
+                        }
+
+                    }
+                    ul.dps-add{
+                        li{
+                             label.info{right:0 !important;left:auto;padding:0;margin:0;}
+                             .ui-selectmenu-button{width:~"calc(100% - 90px)"!important;}
+                        }
+                    }
+                    ul.dps-raid{
+                        li{
+                            span:first-child{width:48px !important;.dbi;}
+                            span.ui-icon{width:14px !important;}
+                            .ui-selectmenu-button{width:~"calc(100% - 90px)"!important;}
+                            .ui-button{width:62%;
+                                .ui-button-text{width:100% !important;}
+                            }
+                            &.ui-buttonset .ui-button{width:15%;}
+                            .coverage{.none !important;}
+                            i{.none;}
+                            label[for='raidQC1'],label[for='raidQC2']{width:25%;}
+
+                        }
+                    }
+                    ul.dps-role{
+                        li{
+                            width:100%;
+                        }
+                    }
+                }
+                #back-dps{.none !important;}
+            }
+
+            #footer{
+                .download{.hr;margin:0 auto;
+                    li{width:50% !important;}
+                }
+                .author{.hr;margin:0 auto;width:100%;float:none;.clear;}
+                .links{.clear;.hr;margin-top: 10px;border-top:1px dotted #ccc;padding-top: 10px !important;
+                    li{width:25%;text-align: right;}
+                }
+                p{.x;padding:0;margin-top: 10px;}
+            }
+        }
+    }
+
+    

@@ -374,6 +374,31 @@ acronym[title] {
     width: 180px;
   }
 }
+.shark {
+  position: relative;
+  overflow: hidden;
+  *zoom: 1;
+}
+.shark:hover i {
+  left: 100%;
+  transition: .5s;
+  -o-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+}
+.shark i {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -ms-transform: skewx(-25deg);
+  transform: skewx(-25deg);
+  -o-transform: skewx(-25deg);
+  -moz-transform: skewx(-25deg);
+  -webkit-transform: skewx(-25deg);
+  background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+}
 html,
 body {
   color: #333333;
@@ -439,7 +464,7 @@ label {
   right: 20px;
   /*color:@basecolor;*/
 }
-.ui-widget-content {
+#dpsForm .ui-widget-content {
   border: 1px solid #ccc;
   border-radius: 4px;
   border-top-left-radius: 0;
@@ -461,7 +486,7 @@ label {
 }
 .ui-selectmenu-menu .ui-state-focus {
   color: #fff;
-  background-color: #0064cd;
+  background-color: #0064cd !important;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
@@ -535,10 +560,15 @@ label {
 .select2-results li:nth-child(16) div {
   background-position: left -420px;
 }
+@-moz-document url-prefix() {
+  #title h1 a {
+    padding-top: 20px;
+  }
+}
 #box {
   width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
 }
 #box #header {
   position: relative;
@@ -561,14 +591,39 @@ label {
 #box #header #title h1 {
   font-size: 100px;
   font-family: 'Trajanus Roman';
-  line-height: 100px;
+  text-align: center;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  *zoom: 1;
 }
-#box #header #title h1:hover {
-  -webkit-animation: pulse 1s .2s ease both;
+#box #header #title h1:hover i {
+  left: 100%;
+  transition: .5s;
+  -o-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+}
+#box #header #title h1 i {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -ms-transform: skewx(-25deg);
+  transform: skewx(-25deg);
+  -o-transform: skewx(-25deg);
+  -moz-transform: skewx(-25deg);
+  -webkit-transform: skewx(-25deg);
+  background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 #box #header #title h1 a {
   color: #333;
   cursor: pointer;
+  height: 100% !important;
+  display: block;
+  vertical-align: bottom;
+  line-height: 100px;
 }
 #box #header #title #version {
   position: absolute;
@@ -584,6 +639,7 @@ label {
 #box #header #title #s2id_role {
   width: 280px;
   margin: 10px 0 0 10px;
+  z-index: 100;
 }
 #box #header #mz {
   margin: 0 0 0 320px;
@@ -717,56 +773,67 @@ label {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #ccc;
 }
-#box #main ul {
+#box #main #dpsForm {
+  padding: 0 5px;
+}
+#box #main #dpsForm ul {
   float: left;
   _display: inline;
   min-width: 220px;
 }
-#box #main ul li {
+#box #main #dpsForm ul li {
   min-width: 180px;
   height: 32px;
   line-height: 32px;
   margin-bottom: 5px;
   position: relative;
   *zoom: 1;
+  /* i.info{
+                                span{display:none;.pa;.rgba(0,0,0,0.8);border-radius:4px;border:1px solid #111;z-index:20;color:#ccc;padding:0 5px;}
+                                &:hover{cursor:help;
+                                    span{display: block;width:180px;}
+                                }
+                                
+                            }*/
 }
-#box #main ul li span.units {
+#box #main #dpsForm ul li span.units {
   color: #777;
   position: relative;
   *zoom: 1;
   left: -20px;
 }
-#box #main ul li input {
+#box #main #dpsForm ul li input {
   height: 24px;
   line-height: 24px;
   padding: 2px 5px;
 }
-#box #main ul li input[type='text'].errorDate {
+#box #main #dpsForm ul li input[type='text'].errorDate {
   border-color: #cc0000;
 }
-#box #main ul li select {
+#box #main #dpsForm ul li select {
   width: 140px;
 }
-#box #main ul li .ui-selectmenu-button {
+#box #main #dpsForm ul li .ui-selectmenu-button {
   position: relative;
   *zoom: 1;
   top: 2px;
+  width: 142px !important;
 }
-#box #main ul li .ui-selectmenu-text {
+#box #main #dpsForm ul li .ui-selectmenu-text {
   color: #666;
   font-weight: normal;
 }
-#box #main ul li label {
+#box #main #dpsForm ul li label {
   margin-right: 10px;
 }
-#box #main ul li label:first-child {
+#box #main #dpsForm ul li label:first-child {
   color: #666;
 }
-#box #main ul li label.help {
+#box #main #dpsForm ul li label.help {
   border-bottom: 1px dotted #777;
   cursor: help !important;
 }
-#box #main ul li label.help span {
+#box #main #dpsForm ul li label.help span {
   display: none;
   position: absolute;
   background: rgba(0, 0, 0, 0.8);
@@ -777,10 +844,10 @@ label {
   color: #ccc;
   padding: 0 5px;
 }
-#box #main ul li label.help:hover span {
+#box #main #dpsForm ul li label.help:hover span {
   display: block;
 }
-#box #main ul li label.errorDate {
+#box #main #dpsForm ul li label.errorDate {
   width: 0px;
   min-height: 24px;
   background: url('../img/care.gif') no-repeat 5px 10px;
@@ -797,7 +864,7 @@ label {
   cursor: help;
   /*transition:3s;*/
 }
-#box #main ul li label.errorDate:hover {
+#box #main #dpsForm ul li label.errorDate:hover {
   -webkit-animation: showinfo 1s forwards;
   animation: showinfo 1s forwards;
   background-color: #cc0000;
@@ -807,25 +874,7 @@ label {
   border-radius: 4px;
   padding-right: 5px;
 }
-#box #main ul li label.info {
-  min-width: 24px;
-  min-height: 24px;
-  padding-left: 20px;
-  background: url('../img/info.png') no-repeat 2px 1px;
-  border-bottom: none;
-  z-index: 3;
-}
-#box #main ul li label.info:hover {
-  cursor: pointer;
-}
-#box #main ul li label.info span {
-  left: 200px;
-  top: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-#box #main ul li i.info {
+#box #main #dpsForm ul li .info {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -833,113 +882,98 @@ label {
   height: 100%;
   vertical-align: top;
   z-index: 3;
+  border-bottom: none !important;
+  margin-right: 0;
   background: url('../img/info.png') no-repeat 5px 10px;
 }
-#box #main ul li i.info span {
-  display: none;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.8);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr=#cc000000, endColorstr=#cc000000);
-  border-radius: 4px;
-  border: 1px solid #111;
-  z-index: 20;
-  color: #ccc;
-  padding: 0 5px;
-}
-#box #main ul li i.info:hover {
+#box #main #dpsForm ul li .info:hover {
   cursor: help;
 }
-#box #main ul li i.info:hover span {
+#box #main #dpsForm ul li .info:hover span {
   display: block;
-  width: 180px;
 }
-#box #main ul.dps-prop input {
+#box #main #dpsForm ul li .info span {
+  right: 0px;
+  top: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: none;
+}
+#box #main #dpsForm ul.dps-prop input {
   width: 120px;
 }
-#box #main ul.dps-prop li label:first-child {
+#box #main #dpsForm ul.dps-prop li label:first-child {
   width: 34px !important;
   display: inline-block;
   *display: inline;
   *zoom: 1;
 }
-#box #main ul.dps-add {
-  width: 245px;
+#box #main #dpsForm ul.dps-add {
+  width: 240px;
 }
-#box #main ul.dps-add li label:first-child {
+#box #main #dpsForm ul.dps-add li label:first-child {
   overflow: hidden;
   width: 48px;
   float: left;
   _display: inline;
   white-space: nowrap;
 }
-#box #main ul.dps-add li label.info {
-  position: absolute;
-  left: 205px;
-  top: 8px;
-}
-#box #main ul.dps-add li label.info span {
-  left: 25px;
-  top: 0px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  letter-spacing: 0;
-}
-#box #main ul.dps-add .icheckbox_square-blue {
+#box #main #dpsForm ul.dps-add .icheckbox_square-blue {
   margin-right: 5px;
 }
-#box #main ul.dps-raid {
-  width: 240px;
+#box #main #dpsForm ul.dps-raid {
+  width: 220px;
 }
-#box #main ul.dps-raid li label:first-child {
+#box #main #dpsForm ul.dps-raid li label:first-child {
   width: 34px;
   display: inline-block;
   *display: inline;
   *zoom: 1;
   text-align: right;
 }
-#box #main ul.dps-raid .raidbuff {
+#box #main #dpsForm ul.dps-raid .raidbuff {
   width: 34px;
   display: inline-block;
   *display: inline;
   *zoom: 1;
   color: #666;
 }
-#box #main ul.dps-raid .zhenfai,
-#box #main ul.dps-raid .buyu {
+#box #main #dpsForm ul.dps-raid .zhenfai,
+#box #main #dpsForm ul.dps-raid .buyu {
   vertical-align: top;
 }
-#box #main ul.dps-raid .iradio_square-blue {
+#box #main #dpsForm ul.dps-raid .iradio_square-blue {
   margin: 0 5px 0 0;
 }
-#box #main ul.dps-raid .icheckbox_square-blue {
+#box #main #dpsForm ul.dps-raid .icheckbox_square-blue {
   margin: 0 5px 0 0;
 }
-#box #main ul.dps-raid .coverage {
+#box #main #dpsForm ul.dps-raid .coverage {
   color: #777;
 }
-#box #main ul.dps-raid .ui-state-active .coverage {
+#box #main #dpsForm ul.dps-raid .ui-state-active .coverage {
   color: #ccc;
 }
-#box #main ul.dps-raid .qichang label {
+#box #main #dpsForm ul.dps-raid .qichang label {
   margin-right: 6px;
 }
-#box #main ul.dps-raid #raidXQ .ui-button-text {
+#box #main #dpsForm ul.dps-raid #raidXQ .ui-button-text {
   padding: .4em .3em;
 }
-#box #main ul.dps-role {
-  width: 280px;
+#box #main #dpsForm ul.dps-role {
+  width: 300px;
 }
-#box #main ul.dps-role label {
+#box #main #dpsForm ul.dps-role label {
   vertical-align: top;
 }
-#box #main ul.dps-role label.info {
+#box #main #dpsForm ul.dps-role label.info {
   margin-right: 0;
 }
-#box #main ul.dps-role .ui-selectmenu-button {
+#box #main #dpsForm ul.dps-role .ui-selectmenu-button {
   width: 210px !important;
 }
-#box #main ul.dps-role #gotips {
+#box #main #dpsForm ul.dps-role #gotips {
   background-color: #fff;
   color: #333333;
   width: 168px;
@@ -950,28 +984,95 @@ label {
   line-height: 24px;
   border-radius: 4px;
 }
-#box #main .ui-buttonset label {
+#box #main #dpsForm .ui-buttonset label {
   margin-right: -0.4em;
   height: 12px;
   padding: 8px 16px 8px 12px;
   width: auto;
   text-align: center;
 }
-#box #main .ui-buttonset label .ui-button-text {
+#box #main #dpsForm .ui-buttonset label .ui-button-text {
   padding: 0 !important;
 }
-#box #main #to {
+#box #main #dpsForm #to {
   margin-top: 20px;
   text-align: center;
 }
-#box #main #to #go {
+#box #main #dpsForm #to #go {
   width: 180px;
   height: 40px;
 }
-#box #main #to .btn {
+#box #main #dpsForm #to .btn {
   width: 180px;
   height: 28px;
   margin-bottom: 10px;
+}
+#box #main #datelist {
+  border: 1px solid #ccc;
+  position: relative;
+  *zoom: 1;
+}
+#box #main #datelist ul {
+  padding-left: 18px;
+}
+#box #main #datelist ul li {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+}
+#box #main #datelist ul li a {
+  display: block;
+  height: 100%;
+  cursor: pointer;
+  margin-right: 0;
+}
+#box #main #datelist ul li a:hover {
+  padding-bottom: .5em;
+  background-color: #fff;
+  border-bottom: none;
+}
+#box #main #datelist ul li.ui-tabs-active {
+  border: none;
+}
+#box #main #datelist ul li.ui-tabs-active a {
+  background-color: #0064cd;
+  color: #fff;
+  border: 1px solid #0064cd;
+  margin-bottom: 0;
+}
+#box #main #datelist .storage-date {
+  width: 100%;
+}
+#box #main #datelist .storage-date th {
+  background-color: #eee;
+  border: 1px solid #ddd;
+}
+#box #main #datelist .storage-date td {
+  text-align: center;
+}
+#box #main #datelist #back-dps {
+  width: 80px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background-color: #0064cd;
+  color: #fff;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  position: absolute;
+  right: 22px;
+  top: 10px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 32px;
+  font-weight: bold;
+  border-radius: 4px;
+}
+#box #main #datelist #back-dps:hover {
+  border: 1px solid #00ccff;
+  color: #ffff00;
+  -webkit-box-shadow: 0 0 4px #00ccff;
+  box-shadow: 0 0 4px #00ccff;
 }
 #box #footer {
   border-top: 1px solid #fff;
@@ -1029,8 +1130,8 @@ label {
   _display: inline;
   text-align: center;
   position: relative;
-  *zoom: 1;
   overflow: hidden;
+  *zoom: 1;
 }
 #box .author a:hover i {
   left: 100%;
@@ -1039,12 +1140,7 @@ label {
   -moz-transition: .5s;
   -webkit-transition: .5s;
 }
-#box .author img {
-  width: 40px;
-  height: 40px;
-  display: block;
-}
-#box .author i {
+#box .author a i {
   position: absolute;
   left: -100%;
   top: 0;
@@ -1056,4 +1152,311 @@ label {
   -moz-transform: skewx(-25deg);
   -webkit-transform: skewx(-25deg);
   background-image: -webkit-linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+}
+#box .author img {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+@media only screen and (max-device-width: 999px) {
+  #box {
+    width: -webkit-calc(100% - 40px);
+    width: calc(100% - 40px);
+  }
+  #box #header {
+    position: relative;
+    *zoom: 1;
+  }
+  #box #header #title {
+    width: 100%;
+    float: none;
+    padding-top: 10px;
+    *zoom: 1;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+  }
+  #box #header #title:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  #box #header #title h1 {
+    height: 30px;
+    font-size: 20px;
+    font-family: 'Trebuchet MS';
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    float: left;
+    _display: inline;
+  }
+  #box #header #title h1 a {
+    padding: 0 !important;
+    line-height: 30px;
+    text-transform: uppercase;
+    text-align: left;
+  }
+  #box #header #title #version {
+    float: left !important;
+    _display: inline !important;
+    position: relative;
+    *zoom: 1;
+    margin-left: 10px;
+    top: 3px;
+    left: 0;
+  }
+  #box #header #title #s2id_role {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    float: left;
+    _display: inline;
+    margin-top: 0;
+  }
+  #box #header #mz {
+    margin: 0;
+  }
+  #box #header #mz #nav {
+    padding-top: 10px;
+  }
+  #box #header #mz #nav #user-panel {
+    position: relative;
+    *zoom: 1;
+    top: -45px;
+  }
+  #box #main #dpsForm ul.dps-role {
+    clear: both;
+    border-top: 1px dashed #ccc;
+    width: 100% !important;
+    padding-top: 5px;
+  }
+  #box #main #dpsForm ul.dps-role li {
+    float: left;
+    _display: inline;
+    width: 50%;
+  }
+  #box #main #dpsForm ul.dps-role #to {
+    clear: both;
+    border-top: 1px dashed #ccc;
+  }
+  #box #main #dpsForm ul.dps-role #to #go {
+    display: block;
+    width: 100%;
+    margin: 10px auto;
+  }
+  #box #main #dpsForm ul.dps-role #to #add-method {
+    display: none;
+  }
+  .ui-dialog-titlebar span.ui-button-text {
+    display: none;
+  }
+}
+@media only screen and (max-device-width: 720px) {
+  #box #header {
+    position: relative;
+    *zoom: 1;
+  }
+  #box #header #title #s2id_role {
+    margin-left: 0;
+  }
+  #box #header #mz #nav a {
+    width: 30%;
+    margin-right: 5px;
+  }
+  #box #header #mz #nav #user-panel {
+    position: absolute;
+    top: 10px;
+    right: 0;
+  }
+  #box #header #mz #nav #user-panel a {
+    width: auto !important;
+  }
+  #box #header #mz #result .date {
+    *zoom: 1;
+    width: 100%;
+  }
+  #box #header #mz #result .date:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  #box #header #mz #result .date #date {
+    width: 100%;
+  }
+  #box #header #mz #result .date thead {
+    float: left;
+    _display: inline;
+    width: 30%;
+  }
+  #box #header #mz #result .date thead tr {
+    display: block;
+    width: 100%;
+  }
+  #box #header #mz #result .date thead th {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    background-color: #444;
+    color: #fff;
+  }
+  #box #header #mz #result .date thead th:last-child {
+    border-bottom: none;
+  }
+  #box #header #mz #result .date tbody {
+    float: left;
+    _display: inline;
+    width: -webkit-calc(70% - 2px);
+    width: calc(70% - 2px);
+    overflow: hidden;
+  }
+  #box #header #mz #result .date tbody tr {
+    display: block;
+    width: 100%;
+  }
+  #box #header #mz #result .date tbody td {
+    display: block;
+    width: 100%;
+    border-top: none;
+    border-bottom: 1px solid #ccc;
+    line-height: 180%;
+  }
+  #box #header #mz #result .date tbody td:first-child {
+    border-left: 1px solid #ccc;
+  }
+  #box #header #mz #result .date tbody td:last-child {
+    border-bottom: none;
+  }
+  #box #header #mz #result #date-button {
+    position: static !important;
+    margin-top: 10px;
+    *zoom: 1;
+  }
+  #box #header #mz #result #date-button:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  #box #header #mz #result #date-button input {
+    float: left;
+    _display: inline;
+    margin-right: 10px;
+  }
+  #box #main #dpsForm ul {
+    width: 100% !important;
+  }
+  #box #main #dpsForm ul.dps-prop li label:first-child {
+    width: 48px !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+  }
+  #box #main #dpsForm ul.dps-prop li input {
+    width: -webkit-calc(100% - 100px);
+    width: calc(100% - 100px);
+  }
+  #box #main #dpsForm ul.dps-prop li label.info {
+    position: absolute;
+    right: 0;
+    left: auto;
+    margin: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    padding: 0;
+    min-width: 14px;
+    background-position: 0 10px;
+  }
+  #box #main #dpsForm ul.dps-add li label.info {
+    right: 0 !important;
+    left: auto;
+    padding: 0;
+    margin: 0;
+  }
+  #box #main #dpsForm ul.dps-add li .ui-selectmenu-button {
+    width: -webkit-calc(100% - 90px) !important;
+    width: calc(100% - 90px) !important;
+  }
+  #box #main #dpsForm ul.dps-raid li span:first-child {
+    width: 48px !important;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+  }
+  #box #main #dpsForm ul.dps-raid li span.ui-icon {
+    width: 14px !important;
+  }
+  #box #main #dpsForm ul.dps-raid li .ui-selectmenu-button {
+    width: -webkit-calc(100% - 90px) !important;
+    width: calc(100% - 90px) !important;
+  }
+  #box #main #dpsForm ul.dps-raid li .ui-button {
+    width: 62%;
+  }
+  #box #main #dpsForm ul.dps-raid li .ui-button .ui-button-text {
+    width: 100% !important;
+  }
+  #box #main #dpsForm ul.dps-raid li.ui-buttonset .ui-button {
+    width: 15%;
+  }
+  #box #main #dpsForm ul.dps-raid li .coverage {
+    display: none !important;
+  }
+  #box #main #dpsForm ul.dps-raid li i {
+    display: none;
+  }
+  #box #main #dpsForm ul.dps-raid li label[for='raidQC1'],
+  #box #main #dpsForm ul.dps-raid li label[for='raidQC2'] {
+    width: 25%;
+  }
+  #box #main #dpsForm ul.dps-role li {
+    width: 100%;
+  }
+  #box #main #back-dps {
+    display: none !important;
+  }
+  #box #footer .download {
+    clear: both;
+    margin: 0 auto;
+  }
+  #box #footer .download li {
+    width: 50% !important;
+  }
+  #box #footer .author {
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+    float: none;
+    *zoom: 1;
+  }
+  #box #footer .author:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  #box #footer .links {
+    *zoom: 1;
+    clear: both;
+    margin-top: 10px;
+    border-top: 1px dotted #ccc;
+    padding-top: 10px !important;
+  }
+  #box #footer .links:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  #box #footer .links li {
+    width: 25%;
+    text-align: right;
+  }
+  #box #footer p {
+    text-align: center;
+    padding: 0;
+    margin-top: 10px;
+  }
 }

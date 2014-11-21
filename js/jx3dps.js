@@ -1,10 +1,10 @@
 /* jx3dps.com
-Version: 0.1
+Version: 0.3
 Author: iRuxu
 Github: https://github.com/iRuxu/jx3dps
 Lincense: GPL v2
 Creat: 2014.11.8
-Modifed : 2014.11.18
+Modifed : 2014.11.20
 */
 var ROLE,CAT;
 $(function(){
@@ -13,6 +13,7 @@ $(function(){
 		$("#box").tooltip();
 		$("#option").dialog({modal:true,closeText:'关闭',width:400,height:200,autoOpen:false,});
 		$("#contributors").dialog({modal:true,closeText:'关闭',width:400,height:300,autoOpen:false,});
+		$("#datelist").tabs();
 		$("#main select").selectmenu();
 		$("#role").select2();
 		$("input[type='button']").button();
@@ -246,6 +247,10 @@ $(function(){
 
 				//数据表头变更
 				ADD_DATE_NAME();
+
+				//如果在存储界面
+				$("#datelist").hide();
+				$("#dpsForm").show();
 		})
 	
 	//定义过滤对象 - 2014.11.14
@@ -370,10 +375,10 @@ $(function(){
 
 	//*数据------------------------------------------
 	//定义数据表头 2014.11.14
-		date_tDPS = ['91木桩','92木桩','93木桩','94木桩','DXC','QHL','NaN','NaN'];
-		date_tNX = ['翔舞','翔鸾舞柳','上元点鬟','王母挥袂','风袖低昂','回雪飘摇','玲珑箜篌','浮动区间'];
+		date_tDPS = ['91木桩','92木桩','93木桩','94木桩','DXC','QHL','太原之战','试炼之地'];
+		date_tNX = ['翔舞HOT','翔鸾瞬发','上元点鬟','上元末跳','王母挥袂','风袖低昂','回雪飘摇','玲珑箜篌'];
 		date_tNH = ['握针','彼针','述怀','清疏','局针','提针','长针','长针溅射'];
-		date_tND = ['醉舞九天','小冰蚕','大冰蚕','小圣手','大圣手','小蝴蝶','大蝴蝶','浮动区间'];
+		date_tND = ['醉舞九天','小冰蚕','大冰蚕','圣手织天','小千蝶','大千蝶','小蝴蝶','大蝴蝶'];
 		function ADD_DATE_NAME(){
 			$("#date th").html(function(i,value){
 					switch(ROLE){
@@ -524,7 +529,14 @@ $(function(){
 				skill_name : [0.2,0.1,0.1]  
 			},
 			nx : {
-				skill_name : [0.2,0.1,0.1]  
+				xiangwuhot : [1.08], 
+				xiangwufirst : [1.08], 
+				shangyuan : [1.08], 
+				shangyuanlast : [1.08], 
+				wangmu : [0,0.1], 
+				fengxiu : [0], 
+				huixue : [0.12,0.1,0.1], 
+				linglong : [0], 
 			},
 			nh : {
 				skill_name : [0.2,0.1,0.1]  
@@ -535,12 +547,12 @@ $(function(){
 		};
 
 	//定义目标系数 2014.11.17
-		//90木桩,91木桩,92木桩,93木桩,94木桩,DXC,QHL,副本..
-		var HT_NEED = [102.5,105,110,120,110,110],
-			WS_NEED = [15,20,25,30,25,35],
-			DF_TAR = [290,570,873,1145,873,873],
-			PF_CFT = [5964,6201,6439,6676,6439,6439],
-			PF_CEIL = [4763,5221,5702,6152,5702,5702];
+		//91木桩,92木桩,93木桩,94木桩,DXC,QHL,太原之战,试炼之地
+		var HT_NEED = [102.5,105,110,120,110,110,120,102.5],
+			WS_NEED = [15,20,25,30,25,35,35,0],
+			DF_TAR = [290,570,873,1145,873,873,1145,290],
+			PF_CFT = [5964,6201,6439,6676,6439,6439,6676,5964],
+			PF_CEIL = [4763,5221,5702,6152,5702,5702,6152,4763];
 			/*DF_NEED = [4295,4473,4651,4829,5007],*/
 
 	//定义增益兑换比例 2014.11.18
@@ -683,7 +695,7 @@ $(function(){
 				{},
 				{wg_PFc:0.0533},
 			],
-			[//22fy : 冰心 30/120*100% ~ 30%内功攻击
+			[//22bx : 冰心 30/120*100% ~ 30%内功攻击
 				{},
 				{ng_APc:0.075},
 			],
@@ -719,6 +731,14 @@ $(function(){
 				{zl_APc:0.15,ng_GC:0.03}, //14奶花，落星惊鸿阵
 				{zl_APc:0.1,ng_GC:0.03}, //15奶毒，妙手织天阵
 				{zl_APc:0.05,ng_GC:0.03}, //16奶秀，花月凌风阵
+			],
+			[//27焚影
+				{},
+				{ng_APs:0.05},
+			],
+			[//28花间
+				{},
+				{ng_APs:0.1},
 			],
 		]
 
@@ -773,7 +793,11 @@ $(function(){
 			this.addJZ= Number($("#addJZ").val());
 			this.addQQ= Number($("#addQQ").val());
 			this.addSP= Number($("#addSP").val());
+
 			this.addBY = Number($("#addBY").val());
+			this.addND = Number($("#addND").val());
+			this.addZLS = Number($("#addZLS").val());
+
 			this.addTX1= Number($("#addTX1").val());
 			this.addTX2= Number($("#addTX2").val());
 			this.addTX3 = Number($("#addTX3").val());
@@ -804,12 +828,15 @@ $(function(){
 			this.raidGB = $("#raidGB").prop('checked') ? 1 : 0;
 
 			this.raidJL = $("#raidJL").prop('checked') ? 1 : 0;
-			this.raidFY = $("#raidFY").prop('checked') ? 1 : 0;
+			this.raidBX = $("#raidBX").prop('checked') ? 1 : 0;
 			this.raidCSY= $("#raidCSY").prop('checked') ? 1 : 0;
 			this.raidDQ = $("#raidDQ").prop('checked') ? 1 : 0;
 			
 			this.raidJH = Number($("#raidJH input[name='raidJH']:checked").val());
 			this.raidKC = $("#raidKC").prop('checked') ? 1 : 0;
+			this.raidFY = $("#raidFY").prop('checked') ? 1 : 0;
+			this.raidHJ = $("#raidHJ").prop('checked') ? 1 : 0;
+
 			this.raidTC = $("#raidTC").prop('checked') ? 1 : 0;
 			
 			this.raidCW = $("#raidCW").prop('checked') ? 1 : 0;
@@ -823,7 +850,8 @@ $(function(){
 			this.addMS,this.addJZ,this.addQQ,this.addSP,
 			this.raidXQ,this.raidJH,this.raidL,this.raidQC,
 			this.raidMW,this.raidKC,this.raidJG,this.raidMY,this.raidCJ,this.raidGB,
-			this.addBY,this.raidJL,this.raidFY,this.raidCSY,this.raidDQ,this.raidTC,this.raidZF
+			this.addBY,this.raidJL,this.raidBX,this.raidCSY,this.raidDQ,this.raidTC,this.raidZF,
+			this.raidFY,this.raidHJ
 			];
 			//！important --- 待添加阵眼+特效+橙武buff等
 
@@ -946,8 +974,22 @@ $(function(){
 			//R会心 = 会心 + 会心增益
 				this.adCT1 = addBuff('ng_CT');
 				this.adCT2 = addBuff('wg_CT');
-				this.CT1_now = that.baseCT1/100 + that.adCT1;
-				this.CT2_now = that.baseCT2/100 + that.adCT2;
+				this.CT1_now = (function(){
+					var ct_now = that.baseCT1/100 + that.adCT1;
+					if (ct_now > 1) {
+						return 1;
+					}else{
+						return ct_now;
+					}
+				})();
+				this.CT2_now = (function(){
+					var ct_now = that.baseCT2/100 + that.adCT2;
+					if (ct_now > 1) {
+						return 1;
+					}else{
+						return ct_now;
+					}
+				})();
 				function GET_CT(missArr,ct_now){
 					var CT_space = [];
 					for (i=0;i<that.R_ST.length;i++){
@@ -992,12 +1034,12 @@ $(function(){
 				this.R_YS2 = 1+this.adYS2;
 			//R加速与技能实际运功时间方法
 				this.adSP = addBuff('ty_SP');
-				this.R_SP = this.baseSP/100 + this.adSP + adt[ROLE]['speedAd']/100; //ex:22.2
+				this.R_SP = this.baseSP/100 + this.adSP + adt[ROLE]['speedAd']/100; //ex:0.22
 				//R运功实际时间 = floor( T/0.0625*1024/floor(S*10.24+S1+1024) )*0.0625
 				//T = {} 技能初始释放时间  S=默认急速 S1 = 急速加成，转换为数值
 
 				//设置和入库技能原始时间
-				var skillTime = adSkill[ROLE]['skill_name'][4];
+				//var skillTime = adSkill[ROLE]['skill_name'][4];
 				//获取技能当前运功时间方法
 				function GET_SKT(skilltime){
 					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*1024+1024) )*0.0625;
@@ -1005,32 +1047,49 @@ $(function(){
 				//var test = GET_SKT(3);
 				//console.log(test);
 
-		//计算方法 - 2014.11.17
+		//计算方法 - 2014.11.17--
 			this.dpsMethod = Number($("#dpsMethod").val());
 			this.MethodList = [
 				function(){	//0未选择计算方案
 					alert('未选择计算方案');
 				},
-				function(){	//1龙蔡倍数通用算法
-						console.log('> 计算方案：龙蔡倍数通用算法');
+				function(){
 					//记录各项准备入库值
-						var result_to = this.realL + this.weapAP;
-						console.log(result_to);
+						var result_to = this.baseL + this.weapAP;
 					//声明存储数组
 						var result_list = [];
 					//执行命中迭代
 						(function(){
-							for(i=0;i<needHT.length;i++){
-								var result_go = result_to - needHT[i];
+							for(i=0;i<HT_NEED.length;i++){
+								var result_go = result_to - HT_NEED[i];
 								result_list.push(result_go);
 							}
 						})();
 					//console.log(result_list);
 						return result_list;
 				},
+				function(){ //2言秀·云裳
+					var nxArr = [];
+					console.log(adSkill.nx);
+					//翔舞+上元
+					nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*adSkill.nx.xiangwuhot[0]*that.addZLS);
+					nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*adSkill.nx.xiangwuhot[0]*that.addZLS);
+					//翔鸾舞柳
+					nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*adSkill.nx.xiangwufirst[0]*that.addZLS);
+					//上元末跳
+					nxArr[3]=0;
+					//王母挥袂
+					nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1.05*that.raidCW));
+					//风袖低昂
+					nxArr[5]=Math.round((that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
+					//回雪飘摇
+					nxArr[6]=Math.round((that.R_MAP3*0.083+200)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
+					//玲珑箜篌
+					nxArr[7]=Math.round((0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS);
+					return nxArr;
+				}
 			]
 			this.go = this.MethodList[this.dpsMethod];
-
 		}
 
 	//计算事件绑定 - 2014.11.17
@@ -1044,7 +1103,14 @@ $(function(){
 				console.log(ex);
 
 				//运算获取方案结果
-				/*var finalist = new JX3DPS().go();
+				window.finalist = new JX3DPS().go();
+
+				//添加时间戳
+				var time = new Date();
+				var now = time.getFullYear() + '/' + (time.getMonth()+1) + '/' + time.getDate() + ' ' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds();
+				window.finalist[8] = now;
+
+				//判断计算有效性
 				var validate_finalist = function(){
 					for(i=0;i<finalist.length;i++){
 						if ( isNaN(finalist[i]) ){
@@ -1060,36 +1126,151 @@ $(function(){
 					}
 				};
 				validate_finalist();
-				console.log(finalist);*/
+				//console.log(finalist);
 
 				//数据获取成功/错误提示
-				/*if (validate_finalist()){
+				if (validate_finalist()){
 					showdate();
 				}else{
 					errordate();
-				}*/
+				}
 				
 				//添加入数据面板
-				/*$("#date td").html(function(i){
+				$("#date td").html(function(i){
 					return finalist[i];
-				})*/
+				})
 			}
 		})
-	
+
 	//*存储------------------------------------------
-	/*//数据处理
-	$("#save").click(function(){
-		//如果成功
-			$("p.success").slideDown(200);
-			setTimeout(function(){
-				$("p.success").fadeOut();
-			},800)
-		//如果失败
-			$("p.error").slideDown(200);
-			setTimeout(function(){
-				$("p.error").fadeOut();
-			},2000)
-	})*/
+	//界面切换 - 2014.11.19
+		$("#all").on('click',function(){
+			$("#dpsForm").hide();
+			$("#datelist").show();
+		})
+		$("#back-dps,#logo").on('click',function(){
+			$("#datelist").hide();
+			$("#dpsForm").show();
+		})
 
+	//创建存储对象 - 2014.11.19
+		var date = {
+			dps:[],
+			nx:[],
+			nh:[],
+			nd:[],
+		}
+							
+	//数据处理 - 2014.11.19~20
+		//判断存储位置
+			var dpsLocation=window.localStorage;
+			$("input[name='storage']").change(function(){
+				if($("#localstorage").prop('checked')){
+					dpsLocation=window.localStorage;
+				}else{
+					dpsLocation=window.sessionStorage;
+				}
+			})
+			
+		//保存事件启动
 
+			//动态添加数据
+			function ADD_Line(role,z){
+				var which_append = '.storage-date:eq('+z+') tbody tr:first';
+				$(which_append).clone().insertBefore(which_append);
+			}
+			function ADD_Date(z){
+				var which_adddate = '.storage-date:eq('+z+') tbody tr'
+				$(which_adddate).eq(0).children('td').html(function(index){
+					return finalist[index];
+				})
+			}
+
+			$("#save").on('click',function(){
+				//将表格中的数据或此时的finalist数据添加到date对象中
+					if(window.finalist==undefined){
+						alert('你还未生成数据');
+					}else{
+						//根据类别推入子对象
+						switch(ROLE){
+							case 'nx':
+								date.nx.push(finalist);
+								ADD_Line('nx',1);
+								ADD_Date(1);
+								break;
+							case 'nh':
+								date.nh.push(finalist);
+								ADD_Line('nh',2);
+								ADD_Date(2);
+								break;
+							case 'nd':
+								date.nd.push(finalist);
+								ADD_Line('nd',3);
+								ADD_Date(3);
+								break;
+							default:
+								date.dps.push(finalist);
+								ADD_Line('dps',0);
+								ADD_Date(0);
+								break;
+						}
+
+						//将date对象转换为JSON存储到Storage
+						var dateJSON = JSON.stringify(date);
+						dpsLocation.setItem('jx3dps',dateJSON);
+
+						//判断浏览器是否支持存储，并出具提示信息
+						if(window.localStorage){
+							$("#save-success").slideDown(200);
+							setTimeout(function(){
+								$("#save-success").fadeOut();
+							},800)
+						}else{
+							$("#save-error").show(200);
+							setTimeout(function(){
+								$("#save-error").fadeOut();
+							},2000)
+						}
+
+					}
+			})
+
+	//加载storage数据 - 2014.11.20重写优化
+		function LOAD_DATE(){
+			//读取storage中的数据
+				var stodate = dpsLocation.getItem('jx3dps');
+			//将JSON转换为JS对象
+				var newdate = JSON.parse(stodate);
+			//动态创建克隆html元素 + 遍历对象对应的数组添加到表格中
+				function INDEX_DATE(){
+					var dateArr = ['dps','nx','nh','nd'];
+					for (z=0;z<4;z++){
+						var x = dateArr[z];
+						//创建克隆html元素
+						function creatLine(){
+							for (i=0;i<newdate[x].length-1;i++){
+								var which_append = '.storage-date:eq('+z+') tr:last';
+								$(which_append).clone().insertAfter(which_append);
+							}
+						}
+						creatLine();
+
+						//遍历添加数据
+						function addDATE(){
+							var j=newdate[x].length;
+							var which_adddate = '.storage-date:eq('+z+') tbody tr'
+							for(i=0;i<newdate[x].length;i++){
+								j--;
+								$(which_adddate).eq(i).children('td').html(function(index){
+									return newdate.dps[j][index];
+								})
+							}
+						}
+						addDATE();
+
+					}
+				}
+				INDEX_DATE();
+		}
+		LOAD_DATE();
 })

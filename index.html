@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" manifest="jx3dps.appcache">
 <head>
-<title>JX3DPS在线计算器 - JX3PVE.COM / JX3DPS.COM</title>
+<title>JX3DPS在线计算器 - JX3DPS.COM</title>
 <meta charset="utf-8"/>
 <base target="_blank">
 <meta name="keywords" content="剑三,剑网3,DPS,测试器,模拟器" />
@@ -15,7 +15,7 @@
 <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.js"></script>
 <link rel="stylesheet" href="css/jquery.ui.1.10.0.ie.css" type="text/css"/>
 <![endif]-->
-<!--[if lt IE 10]>
+<!--[if lt IE 9]>
 <style>#browser{display:block !important;}</style>
 <![endif]-->
 <script src="js/jquery-1-10-2.js"></script>
@@ -33,8 +33,8 @@
 
 	<div id="header">
 		<div id="title">
-			<h1><a href="http://jx3dps.com">Jx3dps</a></h1>
-			<span id="version" class="ui-button-primary" title="添加阵法及覆盖率类Buff数据">v.03 Beta</span>
+			<h1><a href="#" target="_self" id="logo">Jx3dps</a><i></i></h1>
+			<span id="version" class="ui-button-primary" title="添加存储功能、添加部分算法">v.06 Beta</span>
 			<div id="role-wrap">
 				<select name="role" id="role" placeholder="请选择一个心法 - jx3dps.com" value="">
 					<option></option>
@@ -60,10 +60,10 @@
 		
 		<div id="mz">
 			<div id="nav">
-				<a href="http://www.jx3pve.com/forum-313-1.html" title="添加自己的计算方案"><span class="iconfont">&#xe612;</span>提供方案</a>
+				<a href="http://www.jx3pve.com/forum-313-1.html" title="添加自己的计算方案"><span class="iconfont">&#xe612;</span>资料库</a>
 				<a href="http://www.jx3pve.com/bps" title="职业大神进阶宝典"><span class="iconfont">&#xe603;</span>白皮书</a>
 				<a href="http://www.j3pz.com/" title="方便直观地在线配装"><span class="iconfont">&#xe602;</span>配装器</a>
-				<!-- <a href="" title="请务必在IE9以上版本浏览器或Chrome/Firefox/Opera上使用本功能"><span class="iconfont">&#xe609;</span>使用帮助</a>
+				<!-- <a href="" title="请务必在IE10以上版本浏览器或Chrome/Firefox/Opera上使用本功能"><span class="iconfont">&#xe609;</span>使用帮助</a>
 				<a href="http://weibo.com/yuanzi0512" title="您有更好的建议？"><span class="iconfont">&#xe607;</span>反馈建议</a> -->
 
 
@@ -76,17 +76,20 @@
 			<div id="result">
 				<div class="date">
 					<table id="date">
-						<tr>
-							<th title="说明信息" id="date1-t">91木桩</th>
-							<th title="说明信息" id="date2-t">92木桩</th>
-							<th title="说明信息" id="date3-t">93木桩</th>
-							<th title="说明信息" id="date4-t">94木桩</th>
-							<th title="说明信息" id="date5-t">DXC</th>
-							<th title="说明信息" id="date6-t">QHL</th>
-							<th title="说明信息" id="date7-t">特殊情况</th>
-							<th title="说明信息" id="date8-t">浮动区间</th>
+						<thead>
+							<tr>
+							<th id="date1-t">91木桩</th>
+							<th id="date2-t">92木桩</th>
+							<th id="date3-t">93木桩</th>
+							<th id="date4-t">94木桩</th>
+							<th id="date5-t">DXC</th>
+							<th id="date6-t">QHL</th>
+							<th id="date7-t">太原之战</th>
+							<th title="试炼之地无无双需求" id="date8-t">试炼之地</th>
 						</tr>
-						<tr>
+						</thead>
+						<tbody>
+							<tr>
 							<td id="date1">0</td>
 							<td id="date2">0</td>
 							<td id="date3">0</td>
@@ -96,6 +99,7 @@
 							<td id="date7">0</td>
 							<td id="date8">0</td>
 						</tr>
+						</tbody>
 					</table>
 				</div>
 				<div id="date-button">
@@ -106,8 +110,8 @@
 		</div>
 
 		<div id="message" >
-			<p class="success" style="display:none"><span class="glyphicon glyphicon-ok"></span> 成功信息</p>
-			<p class="error" style="display:none"><span class="glyphicon glyphicon-remove"></span> 错误信息</p>
+			<p id="save-success" class="success" style="display:none"><span class="glyphicon glyphicon-ok"></span> 保存成功</p>
+			<p id="save-error" class="error" style="display:none"><span class="glyphicon glyphicon-remove"></span> 你的浏览器版本太低不支持Web Storage</p>
 			<noscript>
 				<div class="error"><span class="glyphicon glyphicon-remove"></span> 您的浏览器禁用了Javascript脚本,本工具无法使用</div>
 			</noscript>
@@ -115,8 +119,8 @@
 		</div>
 	</div>
 
-	<div id="main" class="">
-		<form action="index.html" id="dpsForm" >
+	<div id="main">
+		<form action="index.html" id="dpsForm">
 			<!-- 基础属性 -->
 			<ul class="dps-prop">
 				<li class="ng yuanqi tl"><label for="baseY">元气</label><input type="text" id="baseY" name="baseY" maxlength="4" autocomplete="on" /></li>
@@ -155,7 +159,7 @@
 				<li class="ty nozl"><label for="baseWS">无双</label><input type="text" id="baseWS" name="baseWS" maxlength="5" autocomplete="on" /><span class="units">%</span></li>
 			</ul>
 
-			<!-- 小药加成+节日特殊 -->
+			<!-- 小药加成+特效装备 -->
 			<ul class="dps-add">
 				<li class="ty"><label for="addFeast">团队宴席</label>
 					<select id="addFeast" name="addFeast">
@@ -259,7 +263,7 @@
 					</select>
 					<label for="addQQ" class="help info"><span>内功红球,外功蓝球</span></label>
 				</li>
-				<li class="ty"><label for="addSP">特殊食物</label>
+				<li class="ng wg"><label for="addSP">特殊食物</label>
 					<select name="addSP" id="addSP" placeholder="特殊食物">
 						<option value="0">无</option>
 						<option value="1">红烧青鱼</option>
@@ -271,7 +275,21 @@
 						<option value="1">急速不语</option>
 						<option value="2">会心不语</option>
 					</select>
-					<!-- <input type="checkbox" id="raidBY" name="raidBY" value="0"/><label for="raidBY">急速不语</label></input> -->
+				</li>
+				<li class="zl"><label for="addZLS">五彩石</label>
+					<select name="addZLS" id="addZLS" placeholder="选择特殊五彩石" >
+						<option value="1">无</option>
+						<option value="1.08">妙手5级</option>
+						<option value="1.1">妙手6级</option>
+					</select>
+				</li>
+				<li class="nd"><label for="addND">治疗腰坠</label>
+					<select name="addND" id="addND" placeholder="选择使用型特效腰坠" >
+						<option value="0">无</option>
+						<option value="1">+治疗量3300</option>
+						<option value="2">+治疗量4500</option>
+					</select>
+					<label for="addND" class="help info"><span>补天专用使用型特效腰坠,用于判断大蝴蝶治疗量</span></label>
 				</li>
 				<li class="ty filter"><label for="addTX1">雷特效</label>
 					<select name="addTX1" id="addTX1" placeholder="装备特效" disabled>
@@ -403,7 +421,7 @@
 				</li>
 				<li class="ng"><span class="raidbuff">易经</span>
 					<input type="checkbox" id="raidJG" name="raidJG" value="0"/><label for="raidJG">金刚怒目 <span class="coverage"> 100% </span></label></input>
-					<i class="info"><span>易经45%,其他职业15%</span></i>
+					<label class="info help"><span>易经45%,其他职业15%</span></label>
 				</li>
 				<li class="wg"><span class="raidbuff">惊羽</span>
 					<input type="checkbox" id="raidMY" name="raidMY" value="0"/><label for="raidMY">命陨 <span class="coverage"> 100% </span></label></input>
@@ -418,7 +436,7 @@
 					<input type="checkbox" id="raidJL" name="raidJL" value="0"/><label for="raidJL">激雷 <span class="coverage"> 26.67% </span></label></input>
 				</li>
 				<li class="ng"><span class="raidbuff">冰心</span>
-					<input type="checkbox" id="raidFY" name="raidFY" value="0"/><label for="raidFY">繁音急节 <span class="coverage"> 25% </span></label></input>
+					<input type="checkbox" id="raidBX" name="raidBX" value="0"/><label for="raidBX">繁音急节 <span class="coverage"> 25% </span></label></input>
 				</li>
 				<li class="ty nozl"><span class="raidbuff">明尊</span>
 					<input type="checkbox" id="raidCSY" name="raidCSY" value="0"/><label for="raidCSY">朝圣炎 <span class="coverage"> 5% </span></label></input>
@@ -432,11 +450,17 @@
 				<li class="ty nozl"><span class="raidbuff">毒经</span>
 					<input type="checkbox" id="raidKC" name="raidKC" value="0"/><label for="raidKC">蛇影枯残 6%</label></input>
 				</li>
+				<li class="fy bx yj"><span class="raidbuff">焚影</span>
+					<input type="checkbox" id="raidFY" name="raidFY" value="0"/><label for="raidFY">烈日斩 5%</label></input>
+				</li>
+				<li class="hj qc"><span class="raidbuff">花间</span>
+					<input type="checkbox" id="raidHJ" name="raidHJ" value="0"/><label for="raidHJ">噬骨 10%</label></input>
+				</li>
 				<li class="wg"><span class="raidbuff">傲血</span>
 					<input type="checkbox" id="raidTC" name="raidTC" value="0"/><label for="raidTC">破风+致残+致伤 1%</label></input>
 				</li>
 				<li class="ty"><span class="raidbuff">橙武</span>
-					<input disabled type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
+					<input type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
 				</li>
 				<!-- <li class="ty guanzi"><span class="raidbuff">罐子</span>
 					<input type="checkbox" id="raidDMZF" name="raidDMZF" value="0" disabled /><label for="raidDMZF">大漠的祝福 <span class="coverage"> 50% </span></label></input>
@@ -448,6 +472,12 @@
 
 			<!-- 职业秘籍+特殊镇派+输出套路/算法 -->
 			<ul class="dps-role"> 
+				<li class="ty filter"><label for="roleMJ">秘籍</label>
+					<select name="roleMJ" id="roleMJ" placeholder="秘籍特殊配置方案">
+						<option value="0">标准秘籍配置方案</option>
+					</select>
+					<!-- <label for="roleMJ" class="help info"><span>秘籍说明</span></label> -->
+				</li>
 				<li class="ty filter"><label for="roleTZ">套装</label>
 					<select disabled name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
 						<option value="0">未激活任何套装属性</option>
@@ -549,108 +579,6 @@
 						</optgroup>
 					</select>
 					<label for="raidTZ" class="help info"><span>套装说明</span></label>
-				</li>
-				<li class="ty filter"><label for="roleMJ">秘籍</label>
-					<select disabled name="roleMJ" id="roleMJ" placeholder="秘籍特殊配置方案">
-						<option value="0">标准秘籍配置方案</option>
-						<optgroup label="冰心" class="bx">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="花间" class="hj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="毒经" class="dj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="傲血" class="ax">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="焚影" class="fy">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="易经" class="yj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="气纯" class="qc">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="剑纯" class="jc">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="天罗" class="tl">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="惊羽" class="jy">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="藏剑" class="cj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="丐帮" class="gb">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="分山" class="fs">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="奶秀" class="nx">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="奶花" class="nh">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-						<optgroup label="奶毒" class="nd">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-						</optgroup>
-					</select>
-					<label for="roleMJ" class="help info"><span>秘籍说明</span></label>
 				</li>
 				<li class="ty filter"><label for="roleFM">附魔</label>
 					<select name="roleFM" id="roleFM" placeholder="请选择技能附魔方案">
@@ -789,7 +717,7 @@
 					<select name="dpsMethod" id="dpsMethod" placeholder="请选择计算方案">
 						<option value="0">请选择计算方案</option>
 						<optgroup label="冰心" class="bx">
-							<option value="">伤害比例法</option>
+							<option value="1">伤害比例法</option>
 							<option value="">循环套路法</option>
 							<option value="">特定输出环境1</option>
 							<option value="">特定输出环境2</option>
@@ -798,96 +726,51 @@
 						</optgroup>
 						<optgroup label="花间" class="hj">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="毒经" class="dj">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="傲血" class="ax">
 							<option value="1">龙蔡倍数通用算法</option>
-							<option value="2">蓝(外功)球10层</option>
-							<option value="3">蓝(外功)球10层</option>
-							<option value="4">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="焚影" class="fy">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="易经" class="yj">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="气纯" class="qc">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="剑纯" class="jc">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="天罗" class="tl">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="惊羽" class="jy">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="藏剑" class="cj">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="丐帮" class="gb">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="分山" class="fs">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="奶秀" class="nx">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="2">云裳技能预期(by言秀)</option>
 						</optgroup>
 						<optgroup label="奶花" class="nh">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 						<optgroup label="奶毒" class="nd">
 							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
 						</optgroup>
 					</select>
-					<label for="dpsMethod" class="help info"><span>算法说明</span></label>
+					<label for="dpsMethod" class="help info"><span>具体算法请参见论坛相应作者说明贴</span></label>
 				</li>
 
 				<div id="to">
@@ -905,9 +788,131 @@
 
 			<div class="hr"></div>
 		</form>
+
+		<div id="datelist" style="display:none">
+			<span id="back-dps">返回</span>
+			<ul class="ty">
+			<li class="ty"><a href="#dps-list">DPS</a></li>
+			<li class="ty"><a href="#hps-nx">奶秀</a></li>
+			<li class="ty"><a href="#hps-nh">奶花</a></li>
+			<li class="ty"><a href="#hps-nd">奶毒</a></li>
+			</ul>
+			<div id="dps-list">
+				<table class="storage-date" id="date-dps">
+					<thead>
+					<tr>
+						<th>91木桩</th>
+						<th>92木桩</th>
+						<th>93木桩</th>
+						<th>94木桩</th>
+						<th>DXC</th>
+						<th>QHL</th>
+						<th>太原之战</th>
+						<th>试炼之地</th>
+						<th>保存时间</th>
+					</tr>
+					</thead>
+					<tr>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div id="hps-nx">
+				<table class="storage-date" id="date-nx">
+					<thead>
+						<tr>
+						<th>翔舞HOT</th>
+						<th>翔鸾瞬发</th>
+						<th>上元点鬟</th>
+						<th>上元末跳</th>
+						<th>王母挥袂</th>
+						<th>风袖低昂</th>
+						<th>回雪飘摇</th>
+						<th>玲珑箜篌</th>
+						<th>保存时间</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div id="hps-nh">
+				<table class="storage-date" id="date-nh">
+					<thead>
+						<tr>
+						<th>握针</th>
+						<th>彼针</th>
+						<th>述怀</th>
+						<th>清疏</th>
+						<th>局针</th>
+						<th>提针</th>
+						<th>长针</th>
+						<th>长针溅射</th>
+						<th>保存时间</th>
+						</tr>
+					</thead>
+					<tr>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div id="hps-nd">
+				<table class="storage-date" id="date-nd">
+					<thead>
+					<tr>
+						<th>醉舞九天</th>
+						<th>小冰蚕</th>
+						<th>大冰蚕</th>
+						<th>圣手织天</th>
+						<th>小千蝶</th>
+						<th>大千蝶</th>
+						<th>小蝴蝶</th>
+						<th>大蝴蝶</th>
+						<th>保存时间</th>
+					</tr>
+					</thead>
+					<tr>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 
-	<div id="footer" class="">
+	<div id="footer">
 		<ul class="download">
 			<li><a href="https://github.com/iRuxu/jx3dps"><span class="iconfont">&#xe615;</span>Github</a></li>
 			<li><a href="https://github.com/iRuxu/jx3dps/archive/gh-pages.zip"><span class="iconfont">&#xe618;</span>离线版</a></li>
@@ -919,7 +924,7 @@
 			<a href="http://weibo.com/yuanzi0512" title="Author:浮烟"><img src="img/yz.jpg" alt="iRuxu@浮烟"><i></i></a>
 			<a href="http://weibo.com/u/2948185517/home?topnav=1&wvr=6" title="Contributor:萧南歌"><img src="img/xng.jpg" alt="萧南歌"><i></i></a>
 			<a href="http://www.weibo.com/u/1695852775/home?wvr=5" title="Contributor:龙蔡"><img src="img/lc.png" alt="龙蔡"><i></i></a>
-			<a href="javascript:void(0)" title="More+" id="more"><img src="img/more.png"><i></i></a>
+			<a href="#" title="More+" id="more" target="_self"><img src="img/more.png"><i></i></a>
 		</ul>
 		
 		<ul class="links">
@@ -942,7 +947,7 @@
 			</li>
 			<li>数据存储：
 				<input type="radio" id="localstorage"  name="storage" value="local" checked /> <label for="localstorage">本地永久</label>
-				<input type="checkbox" id="sessionstorage"  name="storage" value="session"/> <label for="localstorage" title="关闭浏览器则清空">本地临时</label>
+				<input type="radio" id="sessionstorage"  name="storage" value="session"/> <label for="sessionstorage" title="关闭浏览器则清空">本地临时</label>
 			</li>
 		</ul>
 	</div>
@@ -952,14 +957,17 @@
 		<a href="http://weibo.com/u/2948185517/home?topnav=1&wvr=6" title="Contributor:萧南歌"><img src="img/xng.jpg" alt="萧南歌"><i></i></a>
 		<a href="http://www.weibo.com/u/1695852775/home?wvr=5" title="Contributor:龙蔡"><img src="img/lc.png" alt="龙蔡"><i></i></a>
 		<a href="http://weibo.com/u/3830052730" title="Support:泠落"><img src="img/lingluo.jpg" alt="泠落"><i></i></a>
+		<a href="http://shang.qq.com/wpa/qunwpa?idkey=a098fe08a2ba02897269e183a3d52990a8c56dd2a3ba2da3015db8570ebca85c" title="Contributor:言秀"><img src="img/yanxiu.png" alt="言秀"><i></i></a>
 		<a href="http://weibo.com/u/1360089194" title="Contributor:绝对规则"><img src="img/juedui.jpg" alt="绝对规则"><i></i></a>
 		<a href="http://weibo.com/678099560" title="Contributor:松狮"><img src="img/ss.jpg" alt="松狮"><i></i></a>
 		<a href="http://weibo.com/u/1907431734" title="Contributor:红诗"><img src="img/hongshi.jpg" alt="红诗"><i></i></a>
 		<a href="http://weibo.com/kakaluoshi" title="Contributor:唐掏裆"><img src="img/ttd.png" alt="唐掏裆"><i></i></a>
+		<a href="http://weibo.com/antchen" title="Support:蚂蚁"><img src="img/mayi.jpg" alt="蚂蚁"><i></i></a>
 		<a href="http://weibo.com/p/1005051625334777/home?from=page_100505&mod=TAB#place" title="Union:胖叔叔"><img src="img/ps.jpg" alt="胖叔叔"><i></i></a>
+		<a href="http://weibo.com/241306180" title="Contributor:zhbconan"><img src="img/zhbconan.jpg" alt="zhbconan"><i></i></a>
 		<a href="http://www.jx3pve.com/forum-313-1.html" title="+你"><img src="img/more.png"><i></i></a>
 	</div>
 </div>
-<div style="display:none"><script src="http://s96.cnzz.com/z_stat.php?id=1000192850&web_id=1000192850" language="JavaScript"></script></div>
+<!-- <div style="display:none"><script src="http://s96.cnzz.com/z_stat.php?id=1000192850&web_id=1000192850" language="JavaScript"></script></div> -->
 </body>
 </html>
