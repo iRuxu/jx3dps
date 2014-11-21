@@ -1064,14 +1064,17 @@ $(function(){
 					if (ct > 1) {
 						return 1;
 					}
+					else{
+						return ct;
+					}
 				}
 				//最终会心 = 填入会心 + 会心增益%
 				//+ 主属性增益点数×（1+主属性点数倍数增益加成+职业奇穴主属性倍数增益）× 主属性职业会心加成
 				//+ 主类型（根骨/身法）增益点数 × （1+属性点数倍数增益加成）× 通用属性加成
 				this.CT1_now = that.baseCT1/100 + that.adCT1 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_GADD*tyAdd.G[1]/s_CT;
-				this.CT1_now = Round_CT(that.CT1_now);
+				//this.CT1_now = Round_CT(that.CT1_now);
 				this.CT2_now = that.baseCT2/100 + that.adCT2 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_SADD*tyAdd.S[1]/s_CT;
-				this.CT2_now = Round_CT(that.CT2_now);
+				//this.CT2_now = Round_CT(that.CT2_now);
 				function GET_CT(missArr,ct_now){
 					var CT_space = [];
 					for (i=0;i<that.R_ST.length;i++){
