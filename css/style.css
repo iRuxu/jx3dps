@@ -1272,6 +1272,10 @@ label {
   }
   #box #header #title #s2id_role {
     margin-left: 0;
+    float: none;
+    display: block;
+    clear: both;
+    width: 100%;
   }
   #box #header #mz #nav a {
     width: 30%;
