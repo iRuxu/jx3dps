@@ -184,6 +184,11 @@ $(function(){
 			}
 		})
 
+	//手机端回到顶部 2014.11.22
+		$("#go").click(function(event) {
+			 $("html,body").animate({scrollTop:"0"},100);
+		});
+
 	//数据生成提示 2014.11.17
 		function showdate(){
 			$(".date").addClass('update');

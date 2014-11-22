@@ -348,6 +348,7 @@ CSS file for jx3dps.com
 
     @-moz-document url-prefix(){#title h1 a{padding-top:20px;}}
     #box{width:1000px;margin:0 auto;padding:0 20px;
+        a{cursor:pointer;}
 
         #header{.clear;.pr;padding-bottom:10px;border-bottom: 1px solid #ccc;
 
@@ -491,7 +492,7 @@ CSS file for jx3dps.com
                     .zhenfai,.buyu{vertical-align: top;}
                     .iradio_square-blue{margin:0 5px 0 0;}
                     .icheckbox_square-blue{margin:0 5px 0 0;}
-    
+
 
                     .ui-button{min-width:80px;}
                     li.ui-buttonset .ui-button{min-width:0;}
@@ -683,7 +684,7 @@ CSS file for jx3dps.com
                     ul.dps-prop{
                         li{
                             label:first-child{width:48px !important;.dbi;}
-                            input{width:~"calc(100% - 100px)"}
+                            input{width:~"calc(100% - 110px)"}
                             label.info{.pa;right:0;left:auto;margin:0;.dbi;padding:0;min-width:14px;background-position:0 10px;}
                         }
 
@@ -691,27 +692,30 @@ CSS file for jx3dps.com
                     ul.dps-add{
                         li{
                              label.info{right:0 !important;left:auto;padding:0;margin:0;}
-                             .ui-selectmenu-button{width:~"calc(100% - 90px)"!important;}
+                             .ui-selectmenu-button{width:~"calc(100% - 100px)"!important;}
                         }
                     }
                     ul.dps-raid{
                         li{
-                            span:first-child{width:48px !important;.dbi;}
+                            span:first-child{width:50px !important;.dbi;}
                             span.ui-icon{width:14px !important;}
-                            .ui-selectmenu-button{width:~"calc(100% - 90px)"!important;}
-                            .ui-button{width:62%;
+                            .ui-selectmenu-button{width:~"calc(100% - 100px)"!important;}
+                            .ui-button{width:52%;
                                 .ui-button-text{width:100% !important;}
                             }
                             &.ui-buttonset .ui-button{width:15%;}
                             .coverage{.none !important;}
                             i{.none;}
                             label[for='raidQC1'],label[for='raidQC2']{width:25%;}
-
+                            label.info.help{padding:0;
+                                span{.none;}}
                         }
                     }
                     ul.dps-role{
                         li{
                             width:100%;
+                            label:first-child{width:48px;.dbi;margin:0;}
+                            .ui-selectmenu-button{width:180px !important;}
                         }
                     }
                 }
@@ -729,6 +733,7 @@ CSS file for jx3dps.com
                 p{.x;padding:0;margin-top: 10px;}
             }
         }
+        .ui-dialog{width:90% !important;}
     }
 
     

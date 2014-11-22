@@ -570,6 +570,9 @@ label {
   margin: 0 auto;
   padding: 0 20px;
 }
+#box a {
+  cursor: pointer;
+}
 #box #header {
   position: relative;
   *zoom: 1;
@@ -1364,8 +1367,8 @@ label {
     *zoom: 1;
   }
   #box #main #dpsForm ul.dps-prop li input {
-    width: -webkit-calc(100% - 100px);
-    width: calc(100% - 100px);
+    width: -webkit-calc(100% - 110px);
+    width: calc(100% - 110px);
   }
   #box #main #dpsForm ul.dps-prop li label.info {
     position: absolute;
@@ -1386,11 +1389,11 @@ label {
     margin: 0;
   }
   #box #main #dpsForm ul.dps-add li .ui-selectmenu-button {
-    width: -webkit-calc(100% - 90px) !important;
-    width: calc(100% - 90px) !important;
+    width: -webkit-calc(100% - 100px) !important;
+    width: calc(100% - 100px) !important;
   }
   #box #main #dpsForm ul.dps-raid li span:first-child {
-    width: 48px !important;
+    width: 50px !important;
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -1399,11 +1402,11 @@ label {
     width: 14px !important;
   }
   #box #main #dpsForm ul.dps-raid li .ui-selectmenu-button {
-    width: -webkit-calc(100% - 90px) !important;
-    width: calc(100% - 90px) !important;
+    width: -webkit-calc(100% - 100px) !important;
+    width: calc(100% - 100px) !important;
   }
   #box #main #dpsForm ul.dps-raid li .ui-button {
-    width: 62%;
+    width: 52%;
   }
   #box #main #dpsForm ul.dps-raid li .ui-button .ui-button-text {
     width: 100% !important;
@@ -1421,8 +1424,24 @@ label {
   #box #main #dpsForm ul.dps-raid li label[for='raidQC2'] {
     width: 25%;
   }
+  #box #main #dpsForm ul.dps-raid li label.info.help {
+    padding: 0;
+  }
+  #box #main #dpsForm ul.dps-raid li label.info.help span {
+    display: none;
+  }
   #box #main #dpsForm ul.dps-role li {
     width: 100%;
+  }
+  #box #main #dpsForm ul.dps-role li label:first-child {
+    width: 48px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin: 0;
+  }
+  #box #main #dpsForm ul.dps-role li .ui-selectmenu-button {
+    width: 180px !important;
   }
   #box #main #back-dps {
     display: none !important;
@@ -1468,5 +1487,8 @@ label {
     text-align: center;
     padding: 0;
     margin-top: 10px;
+  }
+  .ui-dialog {
+    width: 90% !important;
   }
 }
