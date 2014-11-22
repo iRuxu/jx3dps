@@ -1308,7 +1308,7 @@ $(function(){
 						console.log('Q1=' + SK_DPS(Q1));
 						console.log('Q2=' + SK_DPS(Q2));
 						console.log('Q3=' + SK_DPS(Q3));
-						console.log('Q3=' + SK_DPS(Q33));
+						console.log('Q33=' + SK_DPS(Q33));
 						//判断技能附魔
 						if(that.roleFM==1){
 							return SK_DPS(Q33);
