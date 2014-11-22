@@ -729,7 +729,8 @@ $(function(){
 			WS_NEED = [15,20,25,30,25,35,35,0],
 			DF_TAR = [290,570,873,1145,873,873,1145,290],
 			PF_CFT = [5964,6201,6439,6676,6439,6439,6676,5964],
-			PF_CEIL = [4763,5221,5702,6152,5702,5702,6152,4763];
+			PF_CEIL = [4763,5221,5702,6152,5702,5702,6152,4763],
+			LIST = [0,0,0,0,0,0,0,0];
 			/*DF_NEED = [4295,4473,4651,4829,5007],*/
 
 	//定义增益兑换比例 2014.11.18
@@ -950,7 +951,6 @@ $(function(){
 			}
 		}; 
 		TraversalBuff();
-
 		
 	//构造数据对象 - 2014.11.15～2014.11.18
 		function JX3DPS(){
@@ -1167,7 +1167,7 @@ $(function(){
 				//+ 最终主属性增益点数 × 主属性职业会效加成
 				//+ 最终主类型增益点数 × 通用属性加成
 				this.CF1_now = this.baseCF1/100 + this.adCF1 + this.R_PROPADD*adt[ROLE]['propCFAdd']/s_CF + this.R_GADD*(1+addBuff('ng_GC'))*tyAdd.G[2]/s_CF;
-				this.CF2_now = this.baseCF2/100 + this.adCF2 + this.R_PROPADD*adt[ROLE]['propCFAdd']/s_CF + this.R_SADD*(1+addBuff('ng_SC'))*tyAdd.S[2]/s_CF;
+				this.CF2_now = this.baseCF2/100 + this.adCF2 + this.R_PROPADD*adt[ROLE]['propCFAdd']/s_CF + this.R_SADD*(1+addBuff('wg_SC'))*tyAdd.S[2]/s_CF;
 				function Round_CF(cf){
 					if(cf<1.75){
 						cf=1.75;
@@ -1194,7 +1194,7 @@ $(function(){
 				//+ 主类型（根骨/身法）增益点数 × （1+属性点数倍数增益加成）× 通用属性加成
 				this.CT1_now = that.baseCT1/100 + that.adCT1 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_GADD*(1+addBuff('ng_GC'))*tyAdd.G[1]/s_CT;
 				this.CT1_now = Round_CT(that.CT1_now);
-				this.CT2_now = that.baseCT2/100 + that.adCT2 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_SADD*(1+addBuff('ng_SC'))*tyAdd.S[1]/s_CT;
+				this.CT2_now = that.baseCT2/100 + that.adCT2 + this.R_PROPADD*adt[ROLE]['propCTAdd']/s_CT + this.R_SADD*(1+addBuff('wg_SC'))*tyAdd.S[1]/s_CT;
 				this.CT2_now = Round_CT(that.CT2_now);
 				function GET_CT(missArr,ct_now){
 					var CT_space = [];
@@ -1265,7 +1265,7 @@ $(function(){
 
 				//获取技能当前运功时间方法
 				function GET_SKT(skilltime){
-					return Math.floor( skillTime / 0.0625*1024 / Math.floor(that.R_SP*1024+1024) )*0.0625;
+					return Math.floor( skilltime / 0.0625*1024 / Math.floor(that.R_SP*1024+1024) )*0.0625;
 				};
 				//外功技能频率与平砍频率
 				function GET_WGSKT(){
@@ -1279,8 +1279,50 @@ $(function(){
 			this.MethodList = {
 				//冰心----------------
 				bx : [
-					function(){
-						
+					function(){ //
+						//定义求单技能预期
+						function SK_AP(a,b,c,d,e){
+							var SK_AP=[];
+							for (i=0;i<LIST.length;i++){
+								SK_AP[i] = (a*that.R_MAP1+b)*that.R_PA1[i]*(1-that.R_MISS1[i]-that.R_ST[i]+that.R_ST[i]*0.25+(that.R_CT1[i]+c)*(that.R_CF1-d))*that.R_YS1*e	
+							}
+							return SK_AP;
+						};
+						//定义求最终DPS预期
+						function SK_DPS(x){
+							var SK_DPS=[];
+							for (i=0;i<LIST.length;i++){
+								SK_DPS[i] = Math.round((Q1[i]+Q2[i]*(12-GET_SKT(1.5))/GET_SKT(0.8)+x[i]*12/GET_SKT(3))/12);
+							}
+							return SK_DPS;
+						};
+						//取值参数
+						var JP_ = 1.3+1.1*that.roleTZ,
+							DX_ = (adSkill.bx.daixian[0]+that.raidCW)*1.208;
+						var Q1 = SK_AP(1.38,256,0,1,JP_),
+							Q2 = SK_AP(0.396,201,0.1,0.9,DX_),
+							Q3 = SK_AP(0.444,312,0,1,1),
+							Q33 = SK_AP(0.592,416,0,1,1);
+						console.log(SK_DPS(Q33));
+						//判断技能附魔
+						if(that.roleFM==1){
+							return SK_DPS(Q33);
+						}else{
+							return SK_DPS(Q3);
+						}
+						/*var Q1 = (1.38*that.R_MAP1+256)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0)*(that.R_CF1-1))*that.R_YS1*(1.3+1.1*that.roleTZ);
+						var Q2 = (0.396*that.R_MAP1+201)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0.1)*(that.R_CF1-0.9))*that.R_YS1*(adSkill.bx.daixian[0]+that.raidCW)*1.208;
+						var Q3 = (0.444*that.R_MAP1+312)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0)*(that.R_CF1-1))*that.R_YS1;
+						var Q33 = (0.592*that.R_MAP1+416)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0)*(that.R_CF1-1))*that.R_YS1;*/
+						/*if(that.roleFM==1){
+							test = (Q1+Q2*(12-GET_SKT(1.5))/GET_SKT(0.8)+Q33*12/GET_SKT(3))/12;
+							console.log(test);
+							return test;
+						}else{
+							test = (Q1+Q2*(12-GET_SKT(1.5))/GET_SKT(0.8)+Q3*12/GET_SKT(3))/12;
+							console.log(test);
+							return test;
+						}*/
 					},
 				],
 				//花间----------------
