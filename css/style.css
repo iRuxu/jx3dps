@@ -1453,6 +1453,16 @@ label {
   #box #footer .download {
     clear: both;
     margin: 0 auto;
+    width: 320px;
+    float: none !important;
+    *zoom: 1;
+    display: none;
+  }
+  #box #footer .download:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
   }
   #box #footer .download li {
     width: 50% !important;
@@ -1460,7 +1470,7 @@ label {
   #box #footer .author {
     clear: both;
     margin: 0 auto;
-    width: 100%;
+    width: 200px;
     float: none;
     *zoom: 1;
   }
