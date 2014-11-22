@@ -949,8 +949,18 @@ label {
 #box #main #dpsForm ul.dps-raid .icheckbox_square-blue {
   margin: 0 5px 0 0;
 }
+#box #main #dpsForm ul.dps-raid .ui-button {
+  min-width: 80px;
+}
+#box #main #dpsForm ul.dps-raid li.ui-buttonset .ui-button {
+  min-width: 0;
+}
+#box #main #dpsForm ul.dps-raid li#raidQC .ui-button {
+  min-width: 0;
+}
 #box #main #dpsForm ul.dps-raid .coverage {
   color: #777;
+  display: none;
 }
 #box #main #dpsForm ul.dps-raid .ui-state-active .coverage {
   color: #ccc;

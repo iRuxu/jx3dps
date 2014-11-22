@@ -457,20 +457,27 @@
 					<input class="ng zl tl" type="checkbox" id="raidQC1" name="raidQC" value="1"/><label for="raidQC1" class="ng zl tl">破苍穹</label></input>
 					<input class="wg tl" type="checkbox" id="raidQC2" name="raidQC" value="2"/><label for="raidQC2" class="wg tl">碎星辰</label></input>
 				</li>
+				<li class="ty"><span class="raidbuff">橙武</span>
+					<input type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
+				</li>
+				<li class="ty nozl"><span class="raidbuff">套装</span>
+					<input type="checkbox" id="raidCHEN" name="raidCHEN" value="0"/><label for="raidCHEN">嗔怒 10%</label></input>
+				</li>
 				<li class="ty nozl"><span class="raidbuff">曼舞</span>
 					<input type="checkbox" id="raidMW" name="raidMW" value="0"/><label for="raidMW">曼舞6层 <span class="coverage"> 100% </span></label></input>
 				</li>
 				<li class="ty nozl"><span class="raidbuff">大旗</span>
 					<input type="checkbox" id="raidDQ" name="raidDQ" value="0"/><label for="raidDQ">义薄云天 <span class="coverage"> 12.5% </span></label></input>
 				</li>
-				<li class="ty"><span class="raidbuff">橙武</span>
-					<input type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
-				</li>
 				<li class="ty nozl"><span class="raidbuff">明尊</span>
 					<input type="checkbox" id="raidCSY" name="raidCSY" value="0"/><label for="raidCSY">朝圣炎 <span class="coverage"> 5% </span></label></input>
 				</li>
 				<li class="ng"><span class="raidbuff">冰心</span>
 					<input type="checkbox" id="raidBX" name="raidBX" value="0"/><label for="raidBX">繁音急节 <span class="coverage"> 25% </span></label></input>
+				</li>
+				<li class="bx fy"><span class="raidbuff">阴性</span>
+					<input type="checkbox" id="raidDX" name="raidDX" value="0"/><label for="raidDX">玳弦 15%</label></input>
+					<label class="info help"><span>冰心15%,焚影7.5%</span></label>
 				</li>
 				<li class="hj qc"><span class="raidbuff">混元</span>
 					<input type="checkbox" id="raidHJ" name="raidHJ" value="0"/><label for="raidHJ">噬骨 10%</label></input>
@@ -496,7 +503,7 @@
 					<input type="checkbox" id="raidJL" name="raidJL" value="0"/><label for="raidJL">激雷 <span class="coverage"> 26.67% </span></label></input>
 				</li>
 				<li class="wg"><span class="raidbuff">傲血</span>
-					<input type="checkbox" id="raidTC" name="raidTC" value="0"/><label for="raidTC">破风+致残+致伤 1%</label></input>
+					<input type="checkbox" id="raidTC" name="raidTC" value="0"/><label for="raidTC">破风致残致伤</label></input>
 				</li>
 				<li class="wg tl"><span class="raidbuff">藏剑</span>
 					<input type="checkbox" id="raidCJ" name="raidCJ" value="0"/><label for="raidCJ">梅隐香 <span class="coverage"> 100% </span></label></input>
@@ -520,110 +527,126 @@
 
 			<!-- 职业秘籍+特殊镇派+输出套路/算法 -->
 			<ul class="dps-role"> 
-				<li class="ty filter"><label for="roleMJ">秘籍</label>
+				<li class="ty"><label for="roleMJ">秘籍</label>
 					<select name="roleMJ" id="roleMJ" placeholder="秘籍特殊配置方案">
 						<option value="0">标准秘籍配置方案</option>
 					</select>
 					<!-- <label for="roleMJ" class="help info"><span>秘籍说明</span></label> -->
 				</li>
-				<li class="ty filter"><label for="roleTZ">套装</label>
-					<select disabled name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
-						<option value="0">未激活任何套装属性</option>
+				<!-- <li class="ty filter"><label for="roleQX">奇穴</label>
+					<select disabled name="roleQX" id="roleQX" placeholder="请选择奇穴方案">
+						<option value="0">默认奇穴方案</option>
 						<optgroup label="冰心" class="bx">
-							<option value="1">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">新妆流</option>
+							<option value="1">玉素流</option>
 						</optgroup>
 						<optgroup label="花间" class="hj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">焚玉流</option>
+							<option value="1">快雪流</option>
 						</optgroup>
 						<optgroup label="毒经" class="dj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="傲血" class="ax">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">灭渊</option>
+							<option value="1">龙吟渊</option>
+							<option value="2">龙胆</option>
 						</optgroup>
 						<optgroup label="焚影" class="fy">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">天地流</option>
+							<option value="1">生灭流</option>
 						</optgroup>
 						<optgroup label="易经" class="yj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="气纯" class="qc">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="剑纯" class="jc">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">切玉流</option>
+							<option value="1">八荒流</option>
 						</optgroup>
 						<optgroup label="天罗" class="tl">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">暴雨流</option>
+							<option value="1">鸡蛋流</option>
 						</optgroup>
 						<optgroup label="惊羽" class="jy">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">暴雨流</option>
+							<option value="1">夺魄流</option>
 						</optgroup>
 						<optgroup label="藏剑" class="cj">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="丐帮" class="gb">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">斜打流</option>
+							<option value="1">明辨流</option>
 						</optgroup>
 						<optgroup label="分山" class="fs">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="奶秀" class="nx">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="奶花" class="nh">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
 						</optgroup>
 						<optgroup label="奶毒" class="nd">
-							<option value="0">红(内功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
-							<option value="1">蓝(外功)球10层</option>
+							<option value="0">标准方案</option>
+						</optgroup>
+					</select>
+					<label for="roleQX" class="help info"><span>奇穴说明</span></label>
+				</li> -->
+				<li class="ty filter"><label for="roleTZ">套装</label>
+					<select name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
+						<option value="0">额外套装属性</option>
+						<optgroup label="冰心" class="bx">
+							<option value="0">无</option>
+							<option value="1">激活剑破+10%</option>
+						</optgroup>
+						<optgroup label="花间" class="hj">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="毒经" class="dj">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="傲血" class="ax">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="焚影" class="fy">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="易经" class="yj">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="气纯" class="qc">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="剑纯" class="jc">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="天罗" class="tl">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="惊羽" class="jy">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="藏剑" class="cj">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="丐帮" class="gb">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="分山" class="fs">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="奶秀" class="nx">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="奶花" class="nh">
+							<option value="0">无</option>
+						</optgroup>
+						<optgroup label="奶毒" class="nd">
+							<option value="0">无</option>
 						</optgroup>
 					</select>
 					<label for="raidTZ" class="help info"><span>套装说明</span></label>
@@ -636,141 +659,73 @@
 							<option value="2">七秀·剑舞霓裳·玄天</option>
 						</optgroup>
 						<optgroup label="花间" class="hj">
-							<option value="3">万花·青岩太玄·变天</option>
-							<option value="4">万花·青岩太玄·钧天</option>
+							<option value="1">万花·青岩太玄·变天</option>
+							<option value="2">万花·青岩太玄·钧天</option>
 						</optgroup>
 						<optgroup label="毒经" class="dj">
-							<option value="5">五毒·五仙秘法·变天</option>
-							<option value="6">五毒·五仙秘法·钧天</option>
+							<option value="1">五毒·五仙秘法·变天</option>
+							<option value="2">五毒·五仙秘法·钧天</option>
 						</optgroup>
 						<optgroup label="傲血" class="ax">
-							<option value="7">天策·百战心得·变天</option>
-							<option value="8">天策·百战心得·钧天</option>
+							<option value="1">天策·百战心得·变天</option>
+							<option value="2">天策·百战心得·钧天</option>
 						</optgroup>
 						<optgroup label="焚影" class="fy">
-							<option value="9">明教·妙火琉璃·旻天</option>
-							<option value="10">明教·妙火琉璃·玄天</option>
+							<option value="1">明教·妙火琉璃·旻天</option>
+							<option value="2">明教·妙火琉璃·玄天</option>
 						</optgroup>
 						<optgroup label="易经" class="yj">
-							<option value="11">少林·禅音伏魔·变天</option>
-							<option value="12">少林·禅音伏魔·钧天</option>
+							<option value="1">少林·禅音伏魔·变天</option>
+							<option value="2">少林·禅音伏魔·钧天</option>
 						</optgroup>
 						<optgroup label="气纯" class="qc">
-							<option value="13">纯阳·寻剑玄境·变天</option>
-							<option value="14">纯阳·寻剑玄境·钧天</option>
+							<option value="1">纯阳·寻剑玄境·变天</option>
+							<option value="2">纯阳·寻剑玄境·钧天</option>
 						</optgroup>
 						<optgroup label="剑纯" class="jc">
-							<option value="15">纯阳·寻剑玄境·旻天</option>
-							<option value="16">纯阳·寻剑玄境·玄天</option>
+							<option value="1">纯阳·寻剑玄境·旻天</option>
+							<option value="2">纯阳·寻剑玄境·玄天</option>
 						</optgroup>
 						<optgroup label="天罗" class="tl">
-							<option value="17">唐门·乾坤断羽·旻天</option>
-							<option value="18">唐门·乾坤断羽·玄天</option>
+							<option value="1">唐门·乾坤断羽·旻天</option>
+							<option value="2">唐门·乾坤断羽·玄天</option>
 						</optgroup>
 						<optgroup label="惊羽" class="jy">
-							<option value="19">唐门·乾坤断羽·变天</option>
-							<option value="20">唐门·乾坤断羽·钧天</option>
+							<option value="1">唐门·乾坤断羽·变天</option>
+							<option value="2">唐门·乾坤断羽·钧天</option>
 						</optgroup>
 						<optgroup label="藏剑" class="cj">
-							<option value="21">藏剑·剑意心诀·钧天</option>
-							<option value="22">藏剑·剑意心诀·玄天</option>
+							<option value="1">藏剑·剑意心诀·钧天</option>
+							<option value="2">藏剑·剑意心诀·玄天</option>
 						</optgroup>
 						<optgroup label="丐帮" class="gb">
-							<option value="23">丐帮·逍遥烟雨·变天</option>
-							<option value="24">丐帮·逍遥烟雨·钧天</option>
+							<option value="1">丐帮·逍遥烟雨·变天</option>
+							<option value="2">丐帮·逍遥烟雨·钧天</option>
 						</optgroup>
 						<optgroup label="分山" class="fs">
-							<option value="25">暂无</option>
-							<option value="26">暂无</option>
+							<option value="1">暂无</option>
+							<option value="2">暂无</option>
 						</optgroup>
 						<optgroup label="奶秀" class="nx">
-							<option value="27">七秀·剑舞霓裳·变天</option>
-							<option value="28">七秀·剑舞霓裳·钧天</option>
+							<option value="1">七秀·剑舞霓裳·变天</option>
+							<option value="2">七秀·剑舞霓裳·钧天</option>
 						</optgroup>
 						<optgroup label="奶花" class="nh">
-							<option value="29">万花·青岩太玄·昊天</option>
-							<option value="30">万花·青岩太玄·玄天</option>
+							<option value="1">万花·青岩太玄·昊天</option>
+							<option value="2">万花·青岩太玄·玄天</option>
 						</optgroup>
 						<optgroup label="奶毒" class="nd">
-							<option value="31">五毒·五仙秘法·旻天</option>
-							<option value="32">五毒·五仙秘法·玄天</option>
+							<option value="1">五毒·五仙秘法·旻天</option>
+							<option value="2">五毒·五仙秘法·玄天</option>
 						</optgroup>
 					</select>
 					<label for="raidFM" class="help info"><span>附魔说明</span></label>
 				</li>
-				<li class="ty filter"><label for="roleQX">奇穴</label>
-					<select name="roleQX" id="roleQX" placeholder="请选择奇穴方案">
-						<option value="0">请选择一套奇穴方案</option>
-						<optgroup label="冰心" class="bx">
-							<option value="1">新妆流</option>
-							<option value="2">玉素流</option>
-						</optgroup>
-						<optgroup label="花间" class="hj">
-							<option value="3">焚玉流</option>
-							<option value="4">快雪流</option>
-						</optgroup>
-						<optgroup label="毒经" class="dj">
-							<option value="5">标准方案</option>
-						</optgroup>
-						<optgroup label="傲血" class="ax">
-							<option value="6">灭渊</option>
-							<option value="7">龙吟渊</option>
-							<option value="8">龙胆</option>
-						</optgroup>
-						<optgroup label="焚影" class="fy">
-							<option value="9">天地流</option>
-							<option value="10">生灭流</option>
-						</optgroup>
-						<optgroup label="易经" class="yj">
-							<option value="11">标准方案</option>
-						</optgroup>
-						<optgroup label="气纯" class="qc">
-							<option value="12">标准方案</option>
-						</optgroup>
-						<optgroup label="剑纯" class="jc">
-							<option value="13">切玉流</option>
-							<option value="14">八荒流</option>
-						</optgroup>
-						<optgroup label="天罗" class="tl">
-							<option value="15">暴雨流</option>
-							<option value="16">鸡蛋流</option>
-						</optgroup>
-						<optgroup label="惊羽" class="jy">
-							<option value="17">暴雨流</option>
-							<option value="18">夺魄流</option>
-						</optgroup>
-						<optgroup label="藏剑" class="cj">
-							<option value="19">标准方案</option>
-						</optgroup>
-						<optgroup label="丐帮" class="gb">
-							<option value="20">斜打流</option>
-							<option value="21">明辨流</option>
-						</optgroup>
-						<optgroup label="分山" class="fs">
-							<option value="22">标准方案</option>
-						</optgroup>
-						<optgroup label="奶秀" class="nx">
-							<option value="23">标准方案</option>
-						</optgroup>
-						<optgroup label="奶花" class="nh">
-							<option value="24">标准方案</option>
-						</optgroup>
-						<optgroup label="奶毒" class="nd">
-							<option value="25">标准方案</option>
-						</optgroup>
-					</select>
-					<label for="roleQX" class="help info"><span>奇穴说明</span></label>
-				</li>
 				<li class="ty filter"><label for="dpsMethod">算法</label>
 					<select name="dpsMethod" id="dpsMethod" placeholder="请选择计算方案">
-						<option value="0">请选择计算方案</option>
+						<option value="0">默认计算方案</option>
 						<optgroup label="冰心" class="bx">
-							<option value="1">伤害比例法</option>
-							<option value="">循环套路法</option>
-							<option value="">特定输出环境1</option>
-							<option value="">特定输出环境2</option>
-							<option value="">A宏</option>
-							<option value="">B宏</option>
+							<option value="0">新妆技能预期</option>
 						</optgroup>
 						<optgroup label="花间" class="hj">
 							<option value="0">待添加方案</option>
@@ -779,7 +734,7 @@
 							<option value="0">待添加方案</option>
 						</optgroup>
 						<optgroup label="傲血" class="ax">
-							<option value="1">龙蔡倍数通用算法</option>
+							<option value="0">龙蔡倍数通用算法</option>
 						</optgroup>
 						<optgroup label="焚影" class="fy">
 							<option value="0">待添加方案</option>
@@ -809,7 +764,7 @@
 							<option value="0">待添加方案</option>
 						</optgroup>
 						<optgroup label="奶秀" class="nx">
-							<option value="2">云裳技能预期（by言秀）</option>
+							<option value="0">云裳技能预期（by言秀）</option>
 						</optgroup>
 						<optgroup label="奶花" class="nh">
 							<option value="0">待添加方案</option>
@@ -1013,6 +968,7 @@
 		<a href="http://weibo.com/antchen" title="Support:蚂蚁"><img src="img/mayi.jpg" alt="蚂蚁"><i></i></a>
 		<a href="http://weibo.com/p/1005051625334777/home?from=page_100505&mod=TAB#place" title="Union:胖叔叔"><img src="img/ps.jpg" alt="胖叔叔"><i></i></a>
 		<a href="http://weibo.com/241306180" title="Contributor:zhbconan"><img src="img/zhbconan.jpg" alt="zhbconan"><i></i></a>
+		<a href="mailto:1040359409@qq.com" title="Contributor:淡淡稻花香"><img src="img/daohuaxiang.png" alt="淡淡稻花香"><i></i></a>
 		<a href="http://www.jx3pve.com/forum-313-1.html" title="+你"><img src="img/more.png"><i></i></a>
 	</div>
 </div>

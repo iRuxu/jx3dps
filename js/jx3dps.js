@@ -138,14 +138,14 @@ $(function(){
 				$(this).children('span').hide();
 			}
 		)
-		$(".coverage").hover(
+		/*$(".coverage").hover(
 			function(){
 				var cover = $(this).html();
 				$(this).attr('title',function(){
 					return '以' + cover + '覆盖率计算';
 				});
 			}
-		)
+		)*/
 		console.log('> 帮助信息载入完成');
 
 	//设置面板  2014.11.13
@@ -354,21 +354,118 @@ $(function(){
 			if(CAT=='zl'){
 				$(".nozl").hide();
 			}
-			//7次过滤：重定义部分对象数值·金刚怒目
+			//7次过滤：重定义部分对象数值
+			//和尚·金刚怒目
 			if(ROLE=='yj'){
+				$("#raidJG").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
 				buff[16][1]['ng_APc']=0.45;
 			}else{
+				$("#raidJG").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
 				buff[16][1]['ng_APc']=0.15;
 			}
 
-			//8次过滤：重定义部分对象数值·拿云式+普渡四方
-			if(ROLE=='fy'){
-				buff[31][1]['ng_APs']=0.0515;
-			}else if(ROLE=='yj'){
+			//和尚·拿云式+普渡四方
+			if(ROLE=='yj'){
+				$("#raidHS").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
 				buff[31][1]['ng_APs']=0.103;
+			}else if(ROLE=='fy'){
+				$("#raidHS").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+				buff[31][1]['ng_APs']=0.0515;
 			}else{
+				$("#raidHS").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
 				buff[31][1]['ng_APs']=0;
 			}
+
+			//冰心·繁音+玳弦
+			if(ROLE=='bx'){
+				$("#raidBX").prop('checked',true);
+				$("#raidDX").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+				buff[32][1]['ng_APs']=0.15;
+			}else if(ROLE=='fy'){
+				$("#raidBX").prop('checked',false);
+				$("#raidDX").prop('checked',false);
+				
+				buff[32][1]['ng_APs']=0.075;
+			}else{
+				$("#raidBX").prop('checked',false);
+				$("#raidDX").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+				buff[32][1]['ng_APs']=0;
+			}
+
+			//花间·噬骨
+			if(ROLE=='hj'){
+				$("#raidHJ ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidHJ ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+			//焚影·烈日
+			if(ROLE=='fy'){
+				$("#raidFY ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidFY ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+
+			//傲血·激雷+破风
+			if(ROLE=='ax'){
+				$("#raidJL ").prop('checked',true);
+				$("#raidTC ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidJL ").prop('checked',false);
+				$("#raidTC ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+			//藏剑
+			if(ROLE=='cj'){
+				$("#raidCJ ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidCJ ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+			//惊羽
+			if(ROLE=='jy'){
+				$("#raidMY ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidMY ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+			//丐帮
+			if(ROLE=='gb'){
+				$("#raidGB ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidGB ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+			//苍云
+			if(ROLE=='fs'){
+				$("#raidCY ").prop('checked',true);
+				$(".dps-raid").buttonset('refresh');
+			}else{
+				$("#raidCY ").prop('checked',false);
+				$(".dps-raid").buttonset('refresh');
+			}
+
+
 
 
 
@@ -564,7 +661,8 @@ $(function(){
 		//各职业技能循环算法需求基数之奇穴,秘籍,技能基础攻击单独加成
 		//0基础攻击加成,1会心加成,2会效加成,3命中,4运功时间,5破防,6无双,7急速
 			bx : {
-				skill_name : [0.4,0.4,0.2,0.12,3]   
+				daixian : [0.12], 
+				jianqi : [0.1], 
 			},
 			hj : {
 				skill_name : [0.2,0.1,0.1]   
@@ -829,6 +927,10 @@ $(function(){
 				{},
 				{ng_APs:0.103},
 			],
+			[//32bx : 冰心代弦 15%阴性易伤
+				{},
+				{ng_APc:0.15},
+			],
 		]
 		//遍历定义未定义属性为0
 		function TraversalBuff(){
@@ -912,6 +1014,7 @@ $(function(){
 				}
 			})();
 			this.raidMW = $("#raidMW").prop('checked') ? 1 : 0;
+			this.raidCHEN = $("#raidCHEN").prop('checked') ? 1 : 0;
 			
 			this.raidJG = $("#raidJG").prop('checked') ? 1 : 0;
 			this.raidMY = $("#raidMY").prop('checked') ? 1 : 0;
@@ -920,6 +1023,7 @@ $(function(){
 
 			this.raidJL = $("#raidJL").prop('checked') ? 1 : 0;
 			this.raidBX = $("#raidBX").prop('checked') ? 1 : 0;
+			this.raidDX = $("#raidDX").prop('checked') ? 1 : 0;
 			this.raidCSY= $("#raidCSY").prop('checked') ? 1 : 0;
 			this.raidDQ = $("#raidDQ").prop('checked') ? 1 : 0;
 			
@@ -937,8 +1041,8 @@ $(function(){
 			this.raidCW = $("#raidCW").prop('checked') ? 1 : 0;
 		//职业方案索引取值
 			this.roleTZ = Number($("#roleTZ").val());
-			this.roleMJ = Number($("#roleMJ").val());
-			this.roleQX = Number($("#roleQX").val());
+			//this.roleMJ = Number($("#roleMJ").val());
+			//this.roleQX = Number($("#roleQX").val());
 			this.roleFM = Number($("#roleFM").val());
 		//计算过渡值 - 2014.11.18
 			var buffValue = [this.addFeast,this.addFish,this.addSP1,this.addSP2,this.addYP1,this.addYP2,
@@ -946,7 +1050,7 @@ $(function(){
 			this.raidXQ,this.raidJH,this.raidL,this.raidQC,
 			this.raidMW,this.raidKC,this.raidJG,this.raidMY,this.raidCJ,this.raidGB,
 			this.addBY,this.raidJL,this.raidBX,this.raidCSY,this.raidDQ,this.raidTC,this.raidZF,
-			this.raidFY,this.raidHJ,this.raidXS,this.raidCY,this.raidHS
+			this.raidFY,this.raidHJ,this.raidXS,this.raidCY,this.raidHS,this.raidDX
 			];
 			//！important --- 待添加阵眼+特效+橙武buff等
 
@@ -982,9 +1086,7 @@ $(function(){
 				this.R_PROPADD = addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']);
 			//propAP额外攻击&治疗量
 				//额外治疗量 = 【填入根骨×(1+%阵法增益) + 增益根骨×(1+%奇穴增益)】× 职业属性加成 + 原始额外
-				this.propAP = (adtBase[adt[ROLE]['propAdCat']]*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))
-						+addBuff(adtProp[adt[ROLE]['propAdCat']])*(1+adt[ROLE]['propCountAdd']))
-						*adt[ROLE]['propApAdd'];
+				this.propAP = (adtBase[adt[ROLE]['propAdCat']]*(1+addBuff(adtPPAD[adt[ROLE]['propAdCat']]))+this.R_PROPADD)*adt[ROLE]['propApAdd'];
 			//R_AP基础攻击 = （原始基础攻击 + 基础攻击增益点数 + 元气力道天然攻击加成）×（1+基础攻击增益百分比）
 				//基础攻击增益点数 = 食品类 + BUFF类
 				this.adAP1 = addBuff('ng_AP');
@@ -1167,51 +1269,124 @@ $(function(){
 				function GET_PKSKT(){
 					return 16/Math.floor(1.625*16*1024/(1024+Math.floor(that.R_SP*1024)))
 				}
-
-		//计算方法 - 2014.11.17--
+		//计算方法 - 2014.11.17--2014.11.22
 			this.dpsMethod = Number($("#dpsMethod").val());
-			this.MethodList = [
-				function(){	//0未选择计算方案
-					alert('未选择计算方案');
-				},
-				function(){
-					return [0,0,0,0,0,0,0,0];
-					/*//记录各项准备入库值
-						var result_to = this.baseL + this.weapAP;
-					//声明存储数组
-						var result_list = [];
-					//执行命中迭代
-						(function(){
-							for(i=0;i<HT_NEED.length;i++){
-								var result_go = result_to - HT_NEED[i];
-								result_list.push(result_go);
-							}
-						})();
-					//console.log(result_list);
-						return result_list;*/
-				},
-				function(){ //2言秀·云裳
-					var nxArr = [];
-					//翔舞+上元
-					nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.xiangwu[0])*that.addZLS);
-					//翔鸾舞柳
-					nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
-					//上元点鬟
-					nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
-					//上元末跳
-					nxArr[3]=Math.round((that.R_MAP3*0.417+640)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
-					//王母挥袂
-					nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1+0.05*that.raidCW));
-					//风袖低昂
-					nxArr[5]=Math.round((that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
-					//回雪飘摇
-					nxArr[6]=Math.round((that.R_MAP3*0.25+382)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
-					//玲珑箜篌
-					nxArr[7]=Math.round((0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS);
-					return nxArr;
-				}
-			]
-			this.go = this.MethodList[this.dpsMethod];
+			this.MethodList = {
+				//冰心----------------
+				bx : [
+					function(){
+						
+					},
+				],
+				//花间----------------
+				hj : [
+					function(){
+						
+					},
+				],
+				//花间----------------
+				dj : [
+					function(){
+						
+					},
+				],
+				//傲血----------------
+				ax : [
+					function(){
+						
+					},
+				],
+				//焚影----------------
+				fy : [
+					function(){
+						
+					},
+				],
+				//易经----------------
+				yj : [
+					function(){
+						
+					},
+				],
+				//气纯----------------
+				qc : [
+					function(){
+						
+					},
+				],
+				//剑纯----------------
+				jc : [
+					function(){
+						
+					},
+				],
+				//天罗----------------
+				tl : [
+					function(){
+						
+					},
+				],
+				//惊羽----------------
+				jy : [
+					function(){
+						
+					},
+				],
+				//藏剑----------------
+				cj : [
+					function(){
+						
+					},
+				],
+				//丐帮----------------
+				gb : [
+					function(){
+						
+					},
+				],
+				//分山----------------
+				fs : [
+					function(){
+						
+					},
+				],
+				//奶秀----------------
+				nx : [
+					function(){ //0言秀·云裳
+						var nxArr = [];
+						//翔舞+上元
+						nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.xiangwu[0])*that.addZLS);
+						//翔鸾舞柳
+						nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
+						//上元点鬟
+						nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
+						//上元末跳
+						nxArr[3]=Math.round((that.R_MAP3*0.417+640)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
+						//王母挥袂
+						nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1+0.05*that.raidCW));
+						//风袖低昂
+						nxArr[5]=Math.round((that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
+						//回雪飘摇
+						nxArr[6]=Math.round((that.R_MAP3*0.25+382)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
+						//玲珑箜篌
+						nxArr[7]=Math.round((0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS);
+						return nxArr;
+					},
+				],
+				//奶花----------------
+				nh : [
+					function(){
+						
+					},
+				],
+				//奶毒----------------
+				nd : [
+					function(){
+						
+					},
+				]
+			};
+			this.go = this.MethodList[ROLE][this.dpsMethod];
 		}
 
 	//计算事件绑定 - 2014.11.17
