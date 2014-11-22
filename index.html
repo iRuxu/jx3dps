@@ -34,7 +34,7 @@
 	<div id="header">
 		<div id="title">
 			<h1><a href="#" target="_self" id="logo">Jx3dps</a><i></i></h1>
-			<span id="version" class="ui-button-primary" title="添加存储功能、添加部分算法">v.06 Beta</span>
+			<span id="version" class="ui-button-primary" title="修改部分底层算法/更新若干BUG">v.07 Beta</span>
 			<div id="role-wrap">
 				<select name="role" id="role" placeholder="请选择一个心法 - jx3dps.com" value="">
 					<option></option>
@@ -131,18 +131,18 @@
 					<label for="baseAP1" class="help">攻击<span>内功基础攻击</span></label><input type="text" id="baseAP1" name="baseAP1" placeholder="* 基础攻击" maxlength="5" autocomplete="on" />
 					<label for="baseAP1" class="help info"><span>基础攻击，非面板攻击</span></label>
 				</li>
-				<li class="ng tl">
+				<!-- <li class="ng tl">
 					<label for="baseMAP1" class="help">攻击<span>内功面板攻击</span></label><input type="text" id="baseMAP1" name="baseMAP1" placeholder="* 面板攻击" maxlength="5" autocomplete="on" />
 					<label for="baseMAP1" class="help info"><span>面板攻击，非基础攻击</span></label>
-				</li>
+				</li> -->
 				<li class="wg">
 					<label for="baseAP2" class="help">攻击<span>外功基础攻击</span></label><input type="text" id="baseAP2" name="baseAP2" placeholder="* 基础攻击" maxlength="5" autocomplete="on" />
 					<label for="baseAP2" class="help info"><span>基础攻击，非面板攻击</span></label>
 				</li>
-				<li class="wg">
+				<!-- <li class="wg">
 					<label for="baseMAP2" class="help">攻击<span>外功面板攻击</span></label><input type="text" id="baseMAP2" name="baseMAP2" placeholder="* 基础攻击" maxlength="5" autocomplete="on" />
 					<label for="baseMAP2" class="help info"><span>面板攻击，非基础攻击</span></label>
-				</li>
+				</li> -->
 				<li class="zl">
 					<label for="baseAP3">治疗</label><input type="text" id="baseAP3" name="baseAP3" placeholder="* 面板治疗量" maxlength="5" autocomplete="on" />
 					<label for="baseAP3" class="help info"><span>七秀为满剑舞治疗量,其他治疗职业为默认治疗量</span></label>
@@ -450,6 +450,9 @@
 				<li class="wg" id="raidL"><span class="raidbuff">天策</span>
 					<input type="radio" id="raidL1" name="raidL" value="0" checked/><label for="raidL1">无</label></input><input type="radio" id="raidL2" name="raidL" value="1" /><label for="raidL2">憾如雷</label></input>
 				</li>
+				<li class="ty nozl" id="raidJH"><span class="raidbuff">戒火</span>
+					<input type="radio" id="raidJH_no" name="raidJH" value="0" checked/><label for="raidJH_no">无</label></input><input type="radio" id="raidJH_big" name="raidJH" value="1" /><label for="raidJH_big">5%</label></input><input type="radio" id="raidJH_small" name="raidJH" value="2" /><label for="raidJH_small">3%</label></input>
+				</li>
 				<li class="ty" id="raidQC"><span class="raidbuff">气场</span>
 					<input class="ng zl tl" type="checkbox" id="raidQC1" name="raidQC" value="1"/><label for="raidQC1" class="ng zl tl">破苍穹</label></input>
 					<input class="wg tl" type="checkbox" id="raidQC2" name="raidQC" value="2"/><label for="raidQC2" class="wg tl">碎星辰</label></input>
@@ -457,48 +460,55 @@
 				<li class="ty nozl"><span class="raidbuff">曼舞</span>
 					<input type="checkbox" id="raidMW" name="raidMW" value="0"/><label for="raidMW">曼舞6层 <span class="coverage"> 100% </span></label></input>
 				</li>
-				<li class="ng"><span class="raidbuff">易经</span>
-					<input type="checkbox" id="raidJG" name="raidJG" value="0"/><label for="raidJG">金刚怒目 <span class="coverage"> 100% </span></label></input>
-					<label class="info help"><span>易经45%,其他职业15%</span></label>
+				<li class="ty nozl"><span class="raidbuff">大旗</span>
+					<input type="checkbox" id="raidDQ" name="raidDQ" value="0"/><label for="raidDQ">义薄云天 <span class="coverage"> 12.5% </span></label></input>
 				</li>
-				<li class="wg"><span class="raidbuff">惊羽</span>
-					<input type="checkbox" id="raidMY" name="raidMY" value="0"/><label for="raidMY">命陨 <span class="coverage"> 100% </span></label></input>
-				</li>
-				<li class="wg tl"><span class="raidbuff">藏剑</span>
-					<input type="checkbox" id="raidCJ" name="raidCJ" value="0"/><label for="raidCJ">梅隐香 <span class="coverage"> 100% </span></label></input>
-				</li>
-				<li class="wg"><span class="raidbuff">丐帮</span>
-					<input type="checkbox" id="raidGB" name="raidGB" value="0"/><label for="raidGB">酣畅淋漓 <span class="coverage"> 100% </span></label></input>
-				</li>
-				<li class="wg"><span class="raidbuff">傲血</span>
-					<input type="checkbox" id="raidJL" name="raidJL" value="0"/><label for="raidJL">激雷 <span class="coverage"> 26.67% </span></label></input>
-				</li>
-				<li class="ng"><span class="raidbuff">冰心</span>
-					<input type="checkbox" id="raidBX" name="raidBX" value="0"/><label for="raidBX">繁音急节 <span class="coverage"> 25% </span></label></input>
+				<li class="ty"><span class="raidbuff">橙武</span>
+					<input type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
 				</li>
 				<li class="ty nozl"><span class="raidbuff">明尊</span>
 					<input type="checkbox" id="raidCSY" name="raidCSY" value="0"/><label for="raidCSY">朝圣炎 <span class="coverage"> 5% </span></label></input>
 				</li>
-				<li class="ty nozl"><span class="raidbuff">大旗</span>
-					<input type="checkbox" id="raidDQ" name="raidDQ" value="0"/><label for="raidDQ">义薄云天 <span class="coverage"> 12.5% </span></label></input>
+				<li class="ng"><span class="raidbuff">冰心</span>
+					<input type="checkbox" id="raidBX" name="raidBX" value="0"/><label for="raidBX">繁音急节 <span class="coverage"> 25% </span></label></input>
 				</li>
-				<li class="ty nozl" id="raidJH"><span class="raidbuff">戒火</span>
-					<input type="radio" id="raidJH_no" name="raidJH" value="0" checked/><label for="raidJH_no">无</label></input><input type="radio" id="raidJH_big" name="raidJH" value="1" /><label for="raidJH_big">5%</label></input><input type="radio" id="raidJH_small" name="raidJH" value="2" /><label for="raidJH_small">3%</label></input>
+				<li class="hj qc"><span class="raidbuff">混元</span>
+					<input type="checkbox" id="raidHJ" name="raidHJ" value="0"/><label for="raidHJ">噬骨 10%</label></input>
 				</li>
 				<li class="ty nozl"><span class="raidbuff">毒经</span>
 					<input type="checkbox" id="raidKC" name="raidKC" value="0"/><label for="raidKC">蛇影枯残 6%</label></input>
 				</li>
+				<li class="ng"><span class="raidbuff">洗髓</span>
+					<input type="checkbox" id="raidXS" name="raidXS" value="0"/><label for="raidXS">立地成佛 15%</label></input>
+				</li>
+				<li class="ng"><span class="raidbuff">金刚</span>
+					<input type="checkbox" id="raidJG" name="raidJG" value="0"/><label for="raidJG">金刚怒目 <span class="coverage"> 100% </span></label></input>
+					<label class="info help"><span>易经45%,其他职业15%</span></label>
+				</li>
+				<li class="yj fy"><span class="raidbuff">阳性</span>
+					<input type="checkbox" id="raidHS" name="raidHS" value="0"/><label for="raidHS">普渡+拿云</label></input>
+					<label class="info help"><span>阳性易伤,易经以10%计算,焚影5%计算</span></label>
+				</li>
 				<li class="fy bx yj"><span class="raidbuff">焚影</span>
 					<input type="checkbox" id="raidFY" name="raidFY" value="0"/><label for="raidFY">烈日斩 5%</label></input>
 				</li>
-				<li class="hj qc"><span class="raidbuff">花间</span>
-					<input type="checkbox" id="raidHJ" name="raidHJ" value="0"/><label for="raidHJ">噬骨 10%</label></input>
+				<li class="wg"><span class="raidbuff">傲血</span>
+					<input type="checkbox" id="raidJL" name="raidJL" value="0"/><label for="raidJL">激雷 <span class="coverage"> 26.67% </span></label></input>
 				</li>
 				<li class="wg"><span class="raidbuff">傲血</span>
 					<input type="checkbox" id="raidTC" name="raidTC" value="0"/><label for="raidTC">破风+致残+致伤 1%</label></input>
 				</li>
-				<li class="ty"><span class="raidbuff">橙武</span>
-					<input type="checkbox" id="raidCW" name="raidCW" value="0"/><label for="raidCW">橙武buff <span class="coverage"> 20% </span></label></input>
+				<li class="wg tl"><span class="raidbuff">藏剑</span>
+					<input type="checkbox" id="raidCJ" name="raidCJ" value="0"/><label for="raidCJ">梅隐香 <span class="coverage"> 100% </span></label></input>
+				</li>
+				<li class="wg"><span class="raidbuff">惊羽</span>
+					<input type="checkbox" id="raidMY" name="raidMY" value="0"/><label for="raidMY">命陨 <span class="coverage"> 100% </span></label></input>
+				</li>
+				<li class="wg"><span class="raidbuff">丐帮</span>
+					<input type="checkbox" id="raidGB" name="raidGB" value="0"/><label for="raidGB">酣畅淋漓 <span class="coverage"> 100% </span></label></input>
+				</li>
+				<li class="wg"><span class="raidbuff">苍云</span>
+					<input type="checkbox" id="raidCY" name="raidCY" value="0"/><label for="raidCY">盾飞 10%</label></input>
 				</li>
 				<!-- <li class="ty guanzi"><span class="raidbuff">罐子</span>
 					<input type="checkbox" id="raidDMZF" name="raidDMZF" value="0" disabled /><label for="raidDMZF">大漠的祝福 <span class="coverage"> 50% </span></label></input>
