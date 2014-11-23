@@ -1258,9 +1258,6 @@ label {
     width: 100%;
     margin: 10px auto;
   }
-  #box #main #dpsForm ul.dps-role #to #add-method {
-    display: none;
-  }
   .ui-dialog-titlebar span.ui-button-text {
     display: none;
   }
@@ -1470,7 +1467,7 @@ label {
   #box #footer .author {
     clear: both;
     margin: 0 auto;
-    width: 200px;
+    width: 260px;
     float: none;
     *zoom: 1;
   }

@@ -34,7 +34,7 @@
 	<div id="header">
 		<div id="title">
 			<h1><a target="_self" id="logo">Jx3dps</a><i></i></h1>
-			<span id="version" class="ui-button-primary" title="修改部分底层算法/更新若干BUG">v.07 Beta</span>
+			<span id="version" class="ui-button-primary" title="新增配装器导入功能">v.08 Beta</span>
 			<div id="role-wrap">
 				<select name="role" id="role" placeholder="请选择一个心法 - jx3dps.com" value="">
 					<option></option>
@@ -144,8 +144,8 @@
 					<label for="baseMAP2" class="help info"><span>面板攻击，非基础攻击</span></label>
 				</li> -->
 				<li class="zl">
-					<label for="baseAP3">治疗</label><input type="text" id="baseAP3" name="baseAP3" placeholder="* 面板治疗量" maxlength="5" autocomplete="on" />
-					<label for="baseAP3" class="help info"><span>七秀为满剑舞治疗量,其他治疗职业为默认治疗量</span></label>
+					<label for="baseAP3_X">治疗</label><input type="text" id="baseAP3_X" name="baseAP3_X" placeholder="* 面板治疗量" maxlength="5" autocomplete="on" />
+					<label for="baseAP3_X" class="help info"><span>七秀为满剑舞治疗量,其他治疗职业为默认治疗量</span></label>
 				</li>
 				<li class="wg">
 					<label for="weapAP1" class="help">武器-<span>外功武器最低攻击值</span></label><input type="text" id="weapAP1" name="weapAP1" placeholder="* 武器最低攻击" maxlength="5" autocomplete="on" />
@@ -163,7 +163,9 @@
 				<li class="wg tl"><label for="baseCF2" class="help">会效<span>外功会效</span></label><input type="text" id="baseCF2" name="baseCF2" maxlength="6" autocomplete="on" /><span class="units">%</span></li>
 				<li class="ng tl"><label for="basePF1" class="help">破防<span>内功破防</span></label><input type="text" id="basePF1" name="basePF1" maxlength="4" autocomplete="on" /></li>
 				<li class="wg"><label for="basePF2" class="help">破防<span>外功破防</span></label><input type="text" id="basePF2" name="basePF2" maxlength="4" autocomplete="on" /></li>
-				<li class="ty"><label for="baseSP">加速</label><input type="text" id="baseSP" name="baseSP"  maxlength="4" autocomplete="on" /><span class="units">%</span></li>
+				<li class="ty"><label for="baseSP">加速</label><input type="text" id="baseSP" name="baseSP"  maxlength="4" autocomplete="on" placeholder="* 加速数值" />
+				<label for="baseSP" class="help info"><span>加速数值,非百分比</span></label>
+				</li>
 				<li class="ty nozl"><label for="baseWS">无双</label><input type="text" id="baseWS" name="baseWS" maxlength="5" autocomplete="on" /><span class="units">%</span></li>
 			</ul>
 
@@ -726,6 +728,7 @@
 						<option value="0">默认计算方案</option>
 						<optgroup label="冰心" class="bx">
 							<option value="0">新妆技能预期（by言秀）</option>
+							<option value="1">玉素技能预期（by言秀）</option>
 						</optgroup>
 						<optgroup label="花间" class="hj">
 							<option value="0">待添加方案</option>
@@ -778,6 +781,7 @@
 
 				<div id="to">
 					<input type="button" value="计算" id="go" class="btn ui-button-success">
+					<input type="button" value="配装器导入" id="pz-date" class="btn">
 					<input type="button" value="导入" id="date-in" class="btn" disabled>
 					<input type="button" value="导出" id="date-out" class="btn" disabled>
 					<input type="button" value="分析图" id="date-map" class="btn" disabled>
@@ -927,6 +931,7 @@
 			<a href="http://weibo.com/yuanzi0512" title="Author:浮烟"><img src="img/yz.jpg" alt="iRuxu@浮烟"><i></i></a>
 			<a href="http://weibo.com/u/2948185517/home?topnav=1&wvr=6" title="Contributor:萧南歌"><img src="img/xng.jpg" alt="萧南歌"><i></i></a>
 			<a href="http://www.weibo.com/u/1695852775/home?wvr=5" title="Contributor:龙蔡"><img src="img/lc.png" alt="龙蔡"><i></i></a>
+			<a href="http://weibo.com/p/1005051625334777/home?from=page_100505&mod=TAB#place" title="Union:胖叔叔"><img src="img/ps.jpg" alt="胖叔叔"><i></i></a>
 			<a title="More+" id="more" target="_self"><img src="img/more.png"><i></i></a>
 		</ul>
 		
