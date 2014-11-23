@@ -1280,192 +1280,321 @@ $(function(){
 				this.dpsMethod = Number($("#dpsMethod").val());
 				this.MethodList = {
 					//冰心----------------
-					bx : [
-					//言秀·新妆
-						function(){ 
-							//定义求单技能预期
-							function SK_AP(a,b,c,d,e){
-								var SK_AP=[];
-								for (i=0;i<LIST.length;i++){
-									SK_AP[i] = (a*that.R_MAP1+b)*that.R_PA1[i]*(1-that.R_MISS1[i]-that.R_ST[i]+that.R_ST[i]*0.25+(that.R_CT1[i]+c)*(that.R_CF1-d))*that.R_YS1*e	
-								}
-								return SK_AP;
-							};
-							//定义求最终DPS预期
-							function SK_DPS(x){
-								var SK_DPS=[];
-								for (i=0;i<LIST.length;i++){
-									SK_DPS[i] = Math.round((Q1[i]+Q2[i]*(12-GET_SKT(1.5))/GET_SKT(0.8)+x[i]*12/GET_SKT(3))/12);
-								}
-								return SK_DPS;
-							};
-							//取值参数
-								var Q1_E = 1.3+1.1*that.roleTZ,
-									Q2_E = (1+adSkill.bx.daixian[0]+0.05*that.raidCW)*1.208;
-								var Q1 = SK_AP(1.38,256,0,1,Q1_E),
-									Q2 = SK_AP(0.396,201,0.1,0.9,Q2_E),
-									Q3 = SK_AP(0.444,312,0,1,1),
-									Q33 = SK_AP(0.592,416,0,1,1);
-								console.log('Q1=' + SK_DPS(Q1));
-								console.log('Q2=' + SK_DPS(Q2));
-								console.log('Q3=' + SK_DPS(Q3));
-								console.log('Q33=' + SK_DPS(Q33));
-							//判断技能附魔
-								if(that.roleFM==1){
-									return SK_DPS(Q33);
-								}else{
-									return SK_DPS(Q3);
-								}
-						},
-						function(){
-							//定义单技能期望
+						bx : [
+						//0言秀·新妆
+							function(){ 
+								//定义求单技能预期
 								function SK_AP(a,b,c,d,e){
 									var SK_AP=[];
 									for (i=0;i<LIST.length;i++){
-										SK_AP[i] = (a*that.R_MAP1+b)*that.R_PA1[i]*(1-that.R_MISS1[i]-that.R_ST[i]+that.R_ST[i]*0.25+(that.R_CT1[i]+c)*(that.R_CF1-d))*R_YS1*e;
+										SK_AP[i] = (a*that.R_MAP1+b)*that.R_PA1[i]*(1-that.R_MISS1[i]-that.R_ST[i]+that.R_ST[i]*0.25+(that.R_CT1[i]+c)*(that.R_CF1-d))*that.R_YS1*e	
 									}
 									return SK_AP;
-								}
-							//定义求最终DPS预期
-								function SK_DPS(x,y,z,w){
+								};
+								//定义求最终DPS预期
+								function SK_DPS(x){
 									var SK_DPS=[];
 									for (i=0;i<LIST.length;i++){
-										SK_DPS[i] = Math.round((W1[i]+W2[i]*9+W3[i]+W4[i]+W5[i]*x+W6[i]*y+W7[i]*z)/(GET_SKT(3)*w+GET_SKT(1.5)));
+										SK_DPS[i] = Math.round((Q1[i]+Q2[i]*(12-GET_SKT(1.5))/GET_SKT(0.8)+x[i]*12/GET_SKT(3))/12);
 									}
 									return SK_DPS;
 								};
-							//取值参数
-								var W1_E = (1.1+adSkill.bx.jianqi[0])*1.25,
-									W2_E = 1+adSkill.bx.daixian[0]+0.05*that.raidCW;
-								var W1= SK_AP(0.87,876,0.05,1,W1_E),	//剑气
-									W2= SK_AP(0.396,201,0.1,0.9,W2_E),	//代弦
-									W3= SK_AP(0.148,104,0.1,0.9,1),	//1急曲
-									W4= SK_AP(0.296,208,0.1,0.9,1),	//2急曲
-									W5= SK_AP(0.444,312,0.1,0.9,1),	//3急曲
-									W6= SK_AP(2.664,1872,0.1,0.9,1);	//爆3急曲
-									W7= SK_AP(3.552,2496,0.1,0.9,1);	//爆4急曲
-									console.log('W1=' + W1);
-									console.log('W2=' + W2);
-									console.log('W3=' + W3);
-									console.log('W4=' + W4);
-									console.log('W5=' + W5);
-									console.log('W6=' + W6);
-									console.log('W7=' + W7);
-							//判断技能附魔
-								if(that.roleFM==1){
-									return SK_DPS(0,1,0,3);
-								}else{
-									return SK_DPS(1,0,1,4);
+								//取值参数
+									var Q1_E = 1.3+1.1*that.roleTZ,
+										Q2_E = (1+adSkill.bx.daixian[0]+0.05*that.raidCW)*1.208;
+									var Q1 = SK_AP(1.38,256,0,1,Q1_E),
+										Q2 = SK_AP(0.396,201,0.1,0.9,Q2_E),
+										Q3 = SK_AP(0.444,312,0,1,1),
+										Q33 = SK_AP(0.592,416,0,1,1);
+									console.log('Q1=' + SK_DPS(Q1));
+									console.log('Q2=' + SK_DPS(Q2));
+									console.log('Q3=' + SK_DPS(Q3));
+									console.log('Q33=' + SK_DPS(Q33));
+								//判断技能附魔
+									if(that.roleFM==1){
+										return SK_DPS(Q33);
+									}else{
+										return SK_DPS(Q3);
+									}
+							},
+						//1言秀·玉素
+							function(){
+								//定义单技能期望
+									function SK_AP(a,b,c,d,e){
+										var SK_AP=[];
+										for (i=0;i<LIST.length;i++){
+											SK_AP[i] = (a*that.R_MAP1+b)*that.R_PA1[i]*(1-that.R_MISS1[i]-that.R_ST[i]+that.R_ST[i]*0.25+(that.R_CT1[i]+c)*(that.R_CF1-d))*R_YS1*e;
+										}
+										return SK_AP;
+									}
+								//定义求最终DPS预期
+									function SK_DPS(x,y,z,w){
+										var SK_DPS=[];
+										for (i=0;i<LIST.length;i++){
+											SK_DPS[i] = Math.round((W1[i]+W2[i]*9+W3[i]+W4[i]+W5[i]*x+W6[i]*y+W7[i]*z)/(GET_SKT(3)*w+GET_SKT(1.5)));
+										}
+										return SK_DPS;
+									};
+								//取值参数
+									var W1_E = (1.1+adSkill.bx.jianqi[0])*1.25,
+										W2_E = 1+adSkill.bx.daixian[0]+0.05*that.raidCW;
+									var W1= SK_AP(0.87,876,0.05,1,W1_E),	//剑气
+										W2= SK_AP(0.396,201,0.1,0.9,W2_E),	//代弦
+										W3= SK_AP(0.148,104,0.1,0.9,1),	//1急曲
+										W4= SK_AP(0.296,208,0.1,0.9,1),	//2急曲
+										W5= SK_AP(0.444,312,0.1,0.9,1),	//3急曲
+										W6= SK_AP(2.664,1872,0.1,0.9,1);	//爆3急曲
+										W7= SK_AP(3.552,2496,0.1,0.9,1);	//爆4急曲
+										console.log('W1=' + W1);
+										console.log('W2=' + W2);
+										console.log('W3=' + W3);
+										console.log('W4=' + W4);
+										console.log('W5=' + W5);
+										console.log('W6=' + W6);
+										console.log('W7=' + W7);
+								//判断技能附魔
+									if(that.roleFM==1){
+										return SK_DPS(0,1,0,3);
+									}else{
+										return SK_DPS(1,0,1,4);
+									}
+							},
+						//2莫问·KAP
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
 								}
-						}
-					],
+								return Z;
+							},	
+						],
 					//花间----------------
-					hj : [
-						function(){
-							
-						},
-					],
-					//花间----------------
-					dj : [
-						function(){
-							
-						},
-					],
+						hj : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
+					//毒经----------------
+						dj : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//傲血----------------
-					ax : [
-						function(){
-							
-						},
-					],
+						ax : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP2*(1+that.R_PA2[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//焚影----------------
-					fy : [
-						function(){
-							
-						},
-					],
+						fy : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//易经----------------
-					yj : [
-						function(){
-							
-						},
-					],
+						yj : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//气纯----------------
-					qc : [
-						function(){
-							
-						},
-					],
+						qc : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//剑纯----------------
-					jc : [
-						function(){
-							
-						},
-					],
+						jc : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP2*(1+that.R_PA2[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//天罗----------------
-					tl : [
-						function(){
-							
-						},
-					],
+						tl : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//惊羽----------------
-					jy : [
-						function(){
-							
-						},
-					],
+						jy : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP2*(1+that.R_PA2[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//藏剑----------------
-					cj : [
-						function(){
-							
-						},
-					],
+						cj : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP2*(1+that.R_PA2[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//丐帮----------------
-					gb : [
-						function(){
-							
-						},
-					],
+						gb : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP2*(1+that.R_PA2[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//分山----------------
-					fs : [
-						function(){
-							
-						},
-					],
+						fs : [
+							function(){
+								return ;
+							},
+							function(){
+								return ;
+							},
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP2*(1+that.R_PA2[i])*((that.R_CF2-1)*that.R_CT2[i]+that.R_HT2+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},
+						],
 					//奶秀----------------
-					nx : [
-						function(){ //0言秀·云裳
-							var nxArr = [];
-							//翔舞+上元
-							nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.xiangwu[0])*that.addZLS);
-							//翔鸾舞柳
-							nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
-							//上元点鬟
-							nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
-							//上元末跳
-							nxArr[3]=Math.round((that.R_MAP3*0.417+640)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
-							//王母挥袂
-							nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1+0.05*that.raidCW));
-							//风袖低昂
-							nxArr[5]=Math.round((that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
-							//回雪飘摇
-							nxArr[6]=Math.round((that.R_MAP3*0.25+382)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
-							//玲珑箜篌
-							nxArr[7]=Math.round((0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS);
-							return nxArr;
-						},
-					],
+						nx : [
+							function(){ //0言秀·云裳
+								var nxArr = [];
+								//翔舞+上元
+								nxArr[0]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.xiangwu[0])*that.addZLS);
+								//翔鸾舞柳
+								nxArr[1]=Math.round((that.R_MAP3*0.2+200)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
+								//上元点鬟
+								nxArr[2]=Math.round((that.R_MAP3*0.083+200)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
+								//上元末跳
+								nxArr[3]=Math.round((that.R_MAP3*0.417+640)*(1+that.CT1_now*(that.R_CF1-1))*(1+adSkill.nx.shangyuan[0])*that.addZLS);
+								//王母挥袂
+								nxArr[4]=Math.round((that.R_MAP3*0.7812+1622)*(1+(that.CT1_now+adSkill.nx.wangmu[1])*(that.R_CF1-1))*that.addZLS*(1+0.05*that.raidCW));
+								//风袖低昂
+								nxArr[5]=Math.round((that.R_MAP3*0.9896+702)*(1+that.CT1_now*(that.R_CF1-1))*that.addZLS);
+								//回雪飘摇
+								nxArr[6]=Math.round((that.R_MAP3*0.25+382)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS*(1+adSkill.nx.huixue[0]+(0.05*that.raidCW)));
+								//玲珑箜篌
+								nxArr[7]=Math.round((0.25*that.R_AP3+0.083*that.propAP+201)*(1+(that.CT1_now)*(that.R_CF1-1))*that.addZLS);
+								return nxArr;
+							},
+						],
 					//奶花----------------
-					nh : [
-						function(){
-							
-						},
-					],
+						nh : [
+							function(){
+								
+							},
+						],
 					//奶毒----------------
-					nd : [
-						function(){
-							
-						},
-					]
+						nd : [
+							function(){
+								
+							},
+						]
 				};
 				this.go = this.MethodList[ROLE][this.dpsMethod];
 			}
@@ -1514,7 +1643,11 @@ $(function(){
 					}
 					
 					//添加入数据面板
-					$("#date td").html(function(i){
+					$("#date td").html(function(i,value){
+						var whichMethod = $("#dpsMethod").val();
+						if(whichMethod=='2'){
+							return finalist[i]+'K';
+						}
 						return finalist[i];
 					})
 				}
