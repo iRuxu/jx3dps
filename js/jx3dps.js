@@ -344,15 +344,15 @@ $(function(){
 				o_spshow();
 				//5次过滤：特殊职业天罗单独过滤
 				if(ROLE=='tl'){
-					$(".dps-add .filter optgroup").hide();
-					$(".dps-add .filter option").hide();
+					$(".dps-add .filter optgroup").show();
+					$(".dps-add .filter option").show();
 					$(".tl").show();
 					$(".dps-add").on('selectmenuopen','.filter select',function(event,ui){
-						$("#addSP1-menu li:eq(2)").show();
-						$("#addSP2-menu li:eq(3),#addSP2-menu li:eq(5)").show();
-						$("#addYP1-menu li:eq(3),#addYP1-menu li:eq(4),#addYP1-menu li:eq(7)").show();
-						$("#addYP2-menu li:eq(6),#addYP2-menu li:eq(7),#addYP2-menu li:eq(8)").show();
-						$("#addMS-menu li:eq(2)").show();
+						$("#addSP1-menu li").show();
+						$("#addSP2-menu li").show();
+						$("#addYP1-menu li").show();
+						$("#addYP2-menu li").show();
+						$("#addMS-menu li").show();
 						$("#addTX1-menu li,#addTX2-menu li,#addTX3-menu li").show();
 					});
 				}
@@ -780,6 +780,11 @@ $(function(){
 					{wg_CF:195/s_CF}, //3佳·佛手排骨(会效)
 					{wg_PF:195}, //4佳·芋丝蒸肉糕(破防)
 					{wg_AP:220}, //5佳·麻香软骨脆(外功基础)
+					{wg_AP:256}, //6苍·麻香软骨脆(攻击)
+					{ng_AP:308}, //7苍·走油蹄膀
+					{zl_AP:607}, //8苍·葱爆肉丁(疗伤)
+					{wg_PF:227}, //9苍·健体汤(破防)
+					{ng_PF:227}, //10苍·提神汤(破防)
 				],
 				[//4yp1 :药品辅助
 					{},
@@ -800,6 +805,11 @@ $(function(){
 					{ng_CF:292/s_CF},//4尚·上品万花丹(会效)
 					{ng_CT:195/s_CT}, //5中品万花丹(会心)
 					{ng_HT:195/s_HT}, //6中品聚神丹(命中)
+					{wg_AP:385}, //7苍·上品亢龙丹(攻击)
+					{ng_AP:461}, //8苍·上品展凤丹(攻击)
+					{zl_AP:911}, //9苍·上品静心丸(疗伤)
+					{wg_PF:195}, //10苍·健体香囊(破防)
+					{ng_PF:195}, //11苍·提神香囊(破防)
 				],
 				[//6moshi :磨石
 					{},
@@ -1800,7 +1810,7 @@ $(function(){
 			//访问API获取数据
 			$.getJSON(pzURL,function(json){
 				//如果取不到数据
-				if (json['error'] == '此方案尚未保存数值'){
+				if (json['error'] == 'true'){
 					alert('此方案在配装器上尚未保存数值');
 					return;
 				}
