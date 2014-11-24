@@ -1235,8 +1235,8 @@ $(function(){
 					this.rbasePF1 = this.basePF1 - this.baseY*adt[ROLE]['propPFAdd'];
 					this.rbasePF2 = this.basePF2 - this.baseL*adt[ROLE]['propPFAdd'];
 					//最终基础破防 = [真实基础破防 + ( 力道增益×(1+力道百分比增益) + 原始力道*力道百分比增益）*力道兑破防天然比 + 破防增益]×（1+最终破防值增益加成）
-					this.R_basePF1 = ( rbasePF1 + (addBuff('ng_Y')*(1+addBuff('ng_YC'))+this.baseY*addBuff('ng_YC'))*tyAdd['Y'][3] + this.adPF1)*(1+this.adPF1c);
-					this.R_basePF1 = ( rbasePF2 + (addBuff('wg_L')*(1+addBuff('wg_LC'))+this.baseL*addBuff('wg_LC'))*tyAdd['L'][3] + this.adPF2)*(1+this.adPF2c);
+					this.R_basePF1 = ( this.rbasePF1 + (addBuff('ng_Y')*(1+addBuff('ng_YC'))+this.baseY*addBuff('ng_YC'))*tyAdd['Y'][3] + this.adPF1)*(1+this.adPF1c);
+					this.R_basePF1 = ( this.rbasePF2 + (addBuff('wg_L')*(1+addBuff('wg_LC'))+this.baseL*addBuff('wg_LC'))*tyAdd['L'][3] + this.adPF2)*(1+this.adPF2c);
 					//额外破防 = （填入力道+增益力道）×（1+%属性增益）× 职业属性破防加成
 					this.R_propPF1 = (this.baseY + addBuff('ng_Y'))*(1+addBuff('ng_YC'))*adt[ROLE]['propPFAdd'];
 					this.R_propPF2 = (this.baseL + addBuff('wg_L'))*(1+addBuff('wg_LC'))*adt[ROLE]['propPFAdd'];
@@ -1293,22 +1293,27 @@ $(function(){
 						return 16/Math.floor(1.625*16*1024/(1024+Math.floor(that.R_SP*1024)))
 					}
 				//萧南歌通用计算法
-					function AP(x,y,z,w,a,b,c,origin){
-						//origin自身默认整体基础攻击加成，冰心1.3027(剑舞30%)，其他职业一般为1
-						//a技能秘籍加成
-						//x技能面板攻击加成，y技能基础攻击加成，z技能固定伤害，
-
-						
-						var MAP = that.R_AP1*origin+that.propAP;  //面板攻击
-						var AP = that.R_AP1*origin; //基础攻击
-						var base = z; //技能固定伤害
+					function AP(x,y,z,a,b,q,w,o){
+						//o自身默认整体基础攻击加成，冰心0.3027(剑舞30%)，其他职业一般为0
+						//x技能面板攻击加成,y技能基础攻击加成,z技能固定伤害,a技能秘籍攻击加成,b技能奇穴攻击加成
+						var MAP = that.R_AP1*(1+o)+that.propAP;  //面板攻击
+						var AP = that.R_AP1*(1+o); //基础攻击
 						//技能伤害=（面板攻击*技能加成+基础攻击*技能基础攻击加成+技能固定伤害）*（1+秘籍伤害加成）*（1+奇穴伤害加成）* (1+破防加成)
-						var SK_AP = ( MAP*(1+x) + AP*(1+y) + base ) * ( 1 + z) * (1 + w) * (1+that.R_PA1);
+						var SK_AP = [];
+						$.each(that.R_PA1,function(n,val){
+							SK_AP[n] = ( MAP*(1+x) + AP*(1+y) + z ) * ( 1 + a) * (1 + b) * (1+val);
+						})
+						//q技能会心加成,w技能会效加成,
+						var CT_now = that.CT1_now+q; //会心率
+						var CT = GET_CT(CT_now); //会心率
+						var CF_now = that.CF1_now+w; //会效率
+						var CF = GET_CT(CF_now); //会效率
 						//技能期望伤害=技能伤害*[（会心率*会效率+不会心+识破率*0.25]
-						/*var X*/
-
-
-
+						var XAP = [];
+						$.each(SK_AP,function(m,val){
+							XAP[m] = val*(CT[m]*CF + that.R_ST[m]*0.25 + (1-that.R_MISS1[m]-that.R_ST[m]-CT[m]))
+						})
+						return XAP;
 					}
 					
 			//计算方法 - 2014.11.17--2014.11.22
@@ -1316,14 +1321,6 @@ $(function(){
 				this.MethodList = {
 					//冰心----------------
 						bx : [
-						//0萧南歌·新妆
-							function(){
-								
-							},
-						//1萧南歌·玉素
-							function(){
-								
-							},
 						//2莫问·KAP
 							function(){
 								var Z=[];
@@ -1332,7 +1329,7 @@ $(function(){
 								}
 								return Z;
 							},	
-						//3言秀·新妆
+						//0言秀·新妆
 							function(){ 
 								//定义求单技能预期
 								function SK_AP(a,b,c,d,e){
@@ -1368,7 +1365,7 @@ $(function(){
 										return SK_DPS(Q3);
 									}
 							},
-						//4言秀·玉素
+						//1言秀·玉素
 							function(){
 								//定义单技能期望
 									function SK_AP(a,b,c,d,e,f){
@@ -1409,6 +1406,15 @@ $(function(){
 									}else{
 										return SK_DPS(1,0,1,4);
 									}
+							},
+						//3萧南歌·新妆
+							function(){
+								//新妆代弦
+								return AP(0.396,0,201,0.12,0.25,0.1,0.1,0.3027);
+							},
+						//4萧南歌·玉素
+							function(){
+								
 							},
 						],
 					//花间----------------
