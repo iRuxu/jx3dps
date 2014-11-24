@@ -1319,11 +1319,11 @@ $(function(){
 						//0萧南歌·新妆
 							function(){
 								
-							}
+							},
 						//1萧南歌·玉素
 							function(){
 								
-							}
+							},
 						//2莫问·KAP
 							function(){
 								var Z=[];
