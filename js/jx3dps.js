@@ -1293,27 +1293,55 @@ $(function(){
 						return 16/Math.floor(1.625*16*1024/(1024+Math.floor(that.R_SP*1024)))
 					}
 				//萧南歌通用计算法
-					function AP(x,y,z,a,b,q,w,o){
+					function AP(x,y,z,a,b,c,h,H,G,o){
+						//x技能固定伤害,y技能面板攻击加成,z技能基础攻击加成
+						//a技能秘籍攻击加成,b技能奇穴攻击加成,c套装攻击加成
+						//h技能秘籍会心加成,H奇穴会心加成,G技能奇穴会效加成
 						//o自身默认整体基础攻击加成，冰心0.3027(剑舞30%)，其他职业一般为0
-						//x技能面板攻击加成,y技能基础攻击加成,z技能固定伤害,a技能秘籍攻击加成,b技能奇穴攻击加成
-						var MAP = that.R_AP1*(1+o)+that.propAP;  //面板攻击
-						var AP = that.R_AP1*(1+o); //基础攻击
-						//技能伤害=（面板攻击*技能加成+基础攻击*技能基础攻击加成+技能固定伤害）*（1+秘籍伤害加成）*（1+奇穴伤害加成）* (1+破防加成)
-						var SK_AP = [];
-						$.each(that.R_PA1,function(n,val){
-							SK_AP[n] = ( MAP*(1+x) + AP*(1+y) + z ) * ( 1 + a) * (1 + b) * (1+val);
-						})
-						//q技能会心加成,w技能会效加成,
-						var CT_now = that.CT1_now+q; //会心率
+						if(o==undefined){o=0};
+						//原基础攻击
+						if(CAT=='ng'){
+							var R_AP = that.R_AP1;
+							var CT_E = that.CT1_now;
+							var CF_E = that.R_CF1;
+							var MISS = that.R_MISS1;
+							var PF = that.R_PA1;
+							var YS = that.R_YS1;
+						}else if(CAT=='wg'){
+							var R_AP = that.R_AP2;
+							var CT_E = that.CT2_now;
+							var CF_E = that.R_CF2;
+							var MISS = that.R_MISS2;
+							var PF = that.R_PA2;
+							var YS = that.R_YS2;
+						}else{
+							var R_AP = that.R_AP1;
+							var CT_E = that.CT2_now;
+							var CF_E = that.R_CF2;
+							var MISS = that.R_MISS2;
+							var PF = that.R_PA1;
+							var YS = that.R_YS1;
+						}
+						var MAP = R_AP*(1+o)+that.propAP;  //面板攻击
+						var AP = R_AP*(1+o); //基础攻击
+						//技能伤害=（面板攻击*技能加成+基础攻击*技能基础攻击加成+技能固定伤害）*（1+秘籍伤害加成）*（1+奇穴伤害加成）* (1+套装伤害加成)
+						var SK_AP = (x + MAP*(1 + y) + AP*(1 + z)) * (1 + a) * (1 + b) * (1 + c*that.roleTZ);
+						var CT_now = CT_E+h+H; //会心率
 						var CT = GET_CT(CT_now); //会心率
-						var CF_now = that.CF1_now+w; //会效率
-						var CF = GET_CT(CF_now); //会效率
-						//技能期望伤害=技能伤害*[（会心率*会效率+不会心+识破率*0.25]
+						var CF_now = CF_E+G; //会效率
+						var CF = Round_CF(CF_now); //会效率
+						//技能期望伤害=技能伤害*[（会心率*会效率+不会心+识破率*0.25]*(1+破防加成)*易伤
 						var XAP = [];
-						$.each(SK_AP,function(m,val){
-							XAP[m] = val*(CT[m]*CF + that.R_ST[m]*0.25 + (1-that.R_MISS1[m]-that.R_ST[m]-CT[m]))
-						})
+						for (m=0;m<LIST.length;m++){
+							XAP[m] = Math.round(SK_AP*(CT[m]*CF + that.R_ST[m]*0.25 + (1-MISS[m]-that.R_ST[m]-CT[m]))*(1+PF[m])*YS);	
+						}
 						return XAP;
+					}
+
+					function DPS(){
+						this.skill = function(){
+							
+						}
 					}
 					
 			//计算方法 - 2014.11.17--2014.11.22
@@ -1410,7 +1438,7 @@ $(function(){
 						//3萧南歌·新妆
 							function(){
 								//新妆代弦
-								return AP(0.396,0,201,0.12,0.25,0.1,0.1,0.3027);
+								return AP(201,0.396,0,0.12,0.25,0.1,0.1,0.1,0.3027);
 							},
 						//4萧南歌·玉素
 							function(){
