@@ -458,7 +458,7 @@ label {
   border-radius: 6px !important;
 }
 .ui-widget-overlay {
-  height: 120%;
+  height: 200%;
 }
 .ui-dialog .ui-dialog-titlebar-close {
   right: 20px;
@@ -1019,6 +1019,27 @@ label {
   width: 180px;
   height: 28px;
   margin-bottom: 10px;
+}
+#box #main #dpsForm #to .ui-button-text {
+  padding: 0;
+  height: 28px;
+  line-height: 28px;
+}
+#box #main #dpsForm #to a.btn {
+  width: 180px;
+  height: 28px;
+  padding: 0;
+  color: #333333;
+  position: relative;
+  *zoom: 1;
+}
+#box #main #dpsForm #to #date-in {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 #box #main #datelist {
   border: 1px solid #ccc;

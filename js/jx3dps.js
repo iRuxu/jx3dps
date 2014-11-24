@@ -17,6 +17,7 @@ $(function(){
 			$("#main select").selectmenu();
 			$("#role").select2();
 			$("input[type='button']").button();
+			$("#to a").button();
 			$(".dps-raid").buttonset();
 			$("#raidZY,#raidXQ,#raidL,#raidJH").buttonset();
 			$("#raidALL").button('destroy');
@@ -1113,8 +1114,9 @@ $(function(){
 					this.adAP2c = addBuff('wg_APc');
 					this.adAP3c = addBuff('zl_APc');
 					//天然加成攻击 = 增益力道/元气×力道/元气固定攻击加成
-					this.R_AP1 = ( this.baseAP1 + this.adAP1 + this.adY*(1+this.adYC)*tyAdd.Y[0] ) * ( 1 + this.adAP1c);
-					this.R_AP2 = ( this.baseAP2 + this.adAP2 + this.adL*(1+this.adLC)*tyAdd.L[0] ) * ( 1 + this.adAP2c);
+					//最终基础攻击 = （原始基础攻击 + 所有攻击值增益 + ( 所有力道值增益*(1+所有力道百分比增益) + 原始力道*所有力道百分比增益)*力道天然兑换攻击比 ）×（1+%基础攻击增益）
+					this.R_AP1 = ( this.baseAP1 + this.adAP1 + (this.adY*(1+this.adYC) + this.baseY*this.adYC)*tyAdd.Y[0] ) * ( 1 + this.adAP1c);
+					this.R_AP2 = ( this.baseAP2 + this.adAP2 + (this.adL*(1+this.adLC) + this.baseL*this.adLC)*tyAdd.L[0] ) * ( 1 + this.adAP2c);
 					//原始基础治疗量 = 原始面板治疗量 - 原始额外治疗量
 					this.baseAP3_X = Number($("#baseAP3_X").val());
 					function GET_BASEZLAP(){
@@ -1229,11 +1231,12 @@ $(function(){
 					this.adPF1c = addBuff('ng_PFc');
 					this.adPF2 = addBuff('wg_PF');
 					this.adPF2c = addBuff('wg_PFc');
-					
-					//最终基础破防 = 【真实基础破防 + 力道增益×（1+力道百分比增益)*力道兑破防天然比 + 破防增益】×（1+最终破防值增益加成）
 					//真实基础破防 = 填入破防 - 填入力道×职业属性加成
-					this.R_basePF1 = ((this.basePF1 - this.baseY*adt[ROLE]['propPFAdd'])+addBuff('ng_Y')*(1+addBuff('ng_YC'))*tyAdd['Y'][3] + this.adPF1)*(1+this.adPF1c);
-					this.R_basePF2 = ((this.basePF2 - this.baseL*adt[ROLE]['propPFAdd'])+addBuff('wg_L')*(1+addBuff('wg_LC'))*tyAdd['L'][3] + this.adPF2)*(1+this.adPF2c);
+					this.rbasePF1 = this.basePF1 - this.baseY*adt[ROLE]['propPFAdd'];
+					this.rbasePF2 = this.basePF2 - this.baseL*adt[ROLE]['propPFAdd'];
+					//最终基础破防 = [真实基础破防 + ( 力道增益×(1+力道百分比增益) + 原始力道*力道百分比增益）*力道兑破防天然比 + 破防增益]×（1+最终破防值增益加成）
+					this.R_basePF1 = ( rbasePF1 + (addBuff('ng_Y')*(1+addBuff('ng_YC'))+this.baseY*addBuff('ng_YC'))*tyAdd['Y'][3] + this.adPF1)*(1+this.adPF1c);
+					this.R_basePF1 = ( rbasePF2 + (addBuff('wg_L')*(1+addBuff('wg_LC'))+this.baseL*addBuff('wg_LC'))*tyAdd['L'][3] + this.adPF2)*(1+this.adPF2c);
 					//额外破防 = （填入力道+增益力道）×（1+%属性增益）× 职业属性破防加成
 					this.R_propPF1 = (this.baseY + addBuff('ng_Y'))*(1+addBuff('ng_YC'))*adt[ROLE]['propPFAdd'];
 					this.R_propPF2 = (this.baseL + addBuff('wg_L'))*(1+addBuff('wg_LC'))*adt[ROLE]['propPFAdd'];
@@ -1289,19 +1292,53 @@ $(function(){
 					function GET_PKSKT(){
 						return 16/Math.floor(1.625*16*1024/(1024+Math.floor(that.R_SP*1024)))
 					}
+				//萧南歌通用计算法
+					function AP(x,y,z,w,a,b,c,origin){
+						//origin自身默认整体基础攻击加成，冰心1.3027(剑舞30%)，其他职业一般为1
+						//a技能秘籍加成
+						//x技能面板攻击加成，y技能基础攻击加成，z技能固定伤害，
+
+						
+						var MAP = that.R_AP1*origin+that.propAP;  //面板攻击
+						var AP = that.R_AP1*origin; //基础攻击
+						var base = z; //技能固定伤害
+						//技能伤害=（面板攻击*技能加成+基础攻击*技能基础攻击加成+技能固定伤害）*（1+秘籍伤害加成）*（1+奇穴伤害加成）* (1+破防加成)
+						var SK_AP = ( MAP*(1+x) + AP*(1+y) + base ) * ( 1 + z) * (1 + w) * (1+that.R_PA1);
+						//技能期望伤害=技能伤害*[（会心率*会效率+不会心+识破率*0.25]
+						/*var X*/
+
+
+
+					}
 					
 			//计算方法 - 2014.11.17--2014.11.22
 				this.dpsMethod = Number($("#dpsMethod").val());
 				this.MethodList = {
 					//冰心----------------
 						bx : [
-						//0言秀·新妆
+						//0萧南歌·新妆
+							function(){
+								
+							}
+						//1萧南歌·玉素
+							function(){
+								
+							}
+						//2莫问·KAP
+							function(){
+								var Z=[];
+								for (i=0;i<LIST.length;i++){
+									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
+								}
+								return Z;
+							},	
+						//3言秀·新妆
 							function(){ 
 								//定义求单技能预期
 								function SK_AP(a,b,c,d,e){
 									var SK_AP=[];
 									for (x=0;x<LIST.length;x++){
-										SK_AP[x] = (a*that.R_MAP1+b)*that.R_PA1[x]*(1-that.R_MISS1[x]-that.R_ST[x]+that.R_ST[x]*0.25+GET_CT(that.CT1_now+c)[x]*(Round_CF(that.R_CF1+d)-1))*that.R_YS1*e;
+										SK_AP[x] = (a*(that.propAP+that.R_AP*1.3027)+b)*that.R_PA1[x]*(1-that.R_MISS1[x]-that.R_ST[x]+that.R_ST[x]*0.25+GET_CT(that.CT1_now+c)[x]*(Round_CF(that.R_CF1+d)-1))*that.R_YS1*e;
 									}
 									return SK_AP;
 								};
@@ -1331,13 +1368,13 @@ $(function(){
 										return SK_DPS(Q3);
 									}
 							},
-						//1言秀·玉素
+						//4言秀·玉素
 							function(){
 								//定义单技能期望
 									function SK_AP(a,b,c,d,e,f){
 										var SK_AP=[];
 										for (x=0;x<LIST.length;x++){
-											SK_AP[x] = (a*that.R_MAP1+b)*that.R_PA1[x]*(1-that.R_MISS1[x]-that.R_ST[x]+that.R_ST[x]*0.25+(GET_CT(that.CT1_now+c)[x]+d)*(Round_CF(that.R_CF1+e)-1))*that.R_YS1*f;
+											SK_AP[x] = (a*(that.propAP+that.R_AP*1.3027)+b)*that.R_PA1[x]*(1-that.R_MISS1[x]-that.R_ST[x]+that.R_ST[x]*0.25+(GET_CT(that.CT1_now+c)[x]+d)*(Round_CF(that.R_CF1+e)-1))*that.R_YS1*f;
 										}
 										return SK_AP;
 									}
@@ -1373,14 +1410,6 @@ $(function(){
 										return SK_DPS(1,0,1,4);
 									}
 							},
-						//2莫问·KAP
-							function(){
-								var Z=[];
-								for (i=0;i<LIST.length;i++){
-									Z[i] = Math.round(that.R_MAP1*(1+that.R_PA1[i])*((that.R_CF1-1)*that.R_CT1[i]+that.R_HT1+0.75*that.R_WS+(1-HT_NEED[i]/100-0.75*WS_NEED[i]/100)));
-								}
-								return Z;
-							},	
 						],
 					//花间----------------
 						hj : [
@@ -1803,83 +1832,91 @@ $(function(){
 
 	//*导入------------------------------------------
 		//配装器导入 - 2014.11.23
-		$("#pz-date").click(function(event) {
-			//获取配装方案ID
-			var pzID = prompt('请填写在配装器网站上保存的方案索引编号，可在用户设置-方案设置中查看');
-			var pzURL = 'http://www.j3pz.com/getAttriById.php?id='+pzID+'&jsoncallback=?';
-			//访问API获取数据
-			$.getJSON(pzURL,function(json){
-				//如果取不到数据
-				if (json['error'] == 'true'){
-					alert('此方案在配装器上尚未保存数值');
-					return;
-				}
-				//获取职业对接并更新界面
-				var pzROLE = {
-					bingxin : 'bx',
-					huajian : 'hj',
-					dujing : 'dj',
-					aoxue : 'ax',
-					fenying : 'fy',
-					yijin : 'yj',
-					zixia : 'qc',
-					taixu : 'jc',
-					tianluo : 'tl',
-					jingyu : 'jy',
-					cangjian : 'cj',
-					xiaochen : 'gb',
-					fenshan : 'fs',
-					yunchang : 'nx',
-					lijing : 'nh',
-					butian : 'nd',
-				}
-				window.ROLE = pzROLE[json.menpai];
-				$("#role").val(ROLE).trigger('change');
-				
-				//遍历获取值，未定义项重定义为0，更改数据类型字符串->数字
-				var pzBase = [json.spunk,json.spirit,json.sthength,json.agility,
-				json.baseAttack,json.baseHeal,json.heal,
-				json.hit,json.crit,json.critEffect,json.overcome,
-				json.strain,json.haste];
-				for (i=0;i<pzBase.length;i++){
-					if (pzBase[i]==undefined){
-						pzBase[i]=0;
+			$("#pz-date").click(function(event) {
+				//获取配装方案ID
+				var pzID = prompt('请填写在配装器网站上保存的方案索引编号，可在用户设置-方案设置中查看');
+				var pzURL = 'http://www.j3pz.com/getAttriById.php?id='+pzID+'&jsoncallback=?';
+				//访问API获取数据
+				$.getJSON(pzURL,function(json){
+					//如果取不到数据
+					if (json['error'] == 'true'){
+						alert('此方案在配装器上尚未保存数值');
+						return;
 					}
-					pzBase[i] = parseFloat(pzBase[i]);
-				}
+					//获取职业对接并更新界面
+					var pzROLE = {
+						bingxin : 'bx',
+						huajian : 'hj',
+						dujing : 'dj',
+						aoxue : 'ax',
+						fenying : 'fy',
+						yijin : 'yj',
+						zixia : 'qc',
+						taixu : 'jc',
+						tianluo : 'tl',
+						jingyu : 'jy',
+						cangjian : 'cj',
+						xiaochen : 'gb',
+						fenshan : 'fs',
+						yunchang : 'nx',
+						lijing : 'nh',
+						butian : 'nd',
+					}
+					window.ROLE = pzROLE[json.menpai];
+					$("#role").val(ROLE).trigger('change');
+					
+					//遍历获取值，未定义项重定义为0，更改数据类型字符串->数字
+					var pzBase = [json.spunk,json.spirit,json.sthength,json.agility,
+					json.baseAttack,json.baseHeal,json.heal,
+					json.hit,json.crit,json.critEffect,json.overcome,
+					json.strain,json.haste];
+					for (i=0;i<pzBase.length;i++){
+						if (pzBase[i]==undefined){
+							pzBase[i]=0;
+						}
+						pzBase[i] = parseFloat(pzBase[i]);
+					}
 
-				//创建新的实例，属性对应变更
-				window.ex = new JX3DPS();
-				ex.baseY = pzBase[0];
-				ex.baseG = pzBase[1];
-				ex.baseL = pzBase[2];
-				ex.baseS = pzBase[3];
-				ex.baseAP1 = pzBase[4];
-				ex.baseAP2 = pzBase[4];
-				ex.baseAP3 = pzBase[5];
-				ex.baseAP3_X = pzBase[6];
-				ex.baseHT1 = pzBase[7];
-				ex.baseHT2 = pzBase[7];
-				ex.baseCT1 = pzBase[8];
-				ex.baseCT2 = pzBase[8];
-				ex.baseCF1 = pzBase[9];
-				ex.baseCF2 = pzBase[9];
-				ex.basePF1 = pzBase[10];
-				ex.basePF2 = pzBase[10];
-				ex.baseWS = pzBase[11];
-				ex.baseSP = pzBase[12];
-				console.log(ex);
+					//创建新的实例，属性对应变更
+					window.ex = new JX3DPS();
+					ex.baseY = pzBase[0];
+					ex.baseG = pzBase[1];
+					ex.baseL = pzBase[2];
+					ex.baseS = pzBase[3];
+					ex.baseAP1 = pzBase[4];
+					ex.baseAP2 = pzBase[4];
+					ex.baseAP3 = pzBase[5];
+					ex.baseAP3_X = pzBase[6];
+					ex.baseHT1 = pzBase[7];
+					ex.baseHT2 = pzBase[7];
+					ex.baseCT1 = pzBase[8];
+					ex.baseCT2 = pzBase[8];
+					ex.baseCF1 = pzBase[9];
+					ex.baseCF2 = pzBase[9];
+					ex.basePF1 = pzBase[10];
+					ex.basePF2 = pzBase[10];
+					ex.baseWS = pzBase[11];
+					ex.baseSP = pzBase[12];
+					console.log(ex);
 
-				//更新界面属性
-				function RefreshUI(item){
-					var _item = '#'+item;
-					$(_item).val(ex[item]).trigger('change');
-				};
-				var itemlist = ['baseY','baseG','baseL','baseS','baseAP1','baseAP2','baseAP3_X','baseHT1','baseHT2','baseCT1','baseCT2','baseCF1','baseCF2','basePF1','basePF2','baseWS','baseSP'];
-				for (j=0;j<itemlist.length;j++){
-					RefreshUI(itemlist[j]);
-				}
+					//更新界面属性
+					function RefreshUI(item){
+						var _item = '#'+item;
+						$(_item).val(ex[item]).trigger('change');
+					};
+					var itemlist = ['baseY','baseG','baseL','baseS','baseAP1','baseAP2','baseAP3_X','baseHT1','baseHT2','baseCT1','baseCT2','baseCF1','baseCF2','basePF1','basePF2','baseWS','baseSP'];
+					for (j=0;j<itemlist.length;j++){
+						RefreshUI(itemlist[j]);
+					}
 
-			})
-		});
+				})
+			});
+
+		//本地导入
+		
+			
+
+
+
+
 })

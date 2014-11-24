@@ -60,7 +60,7 @@
 		
 		<div id="mz">
 			<div id="nav">
-				<a href="http://www.jx3pve.com/forum-313-1.html" title="添加自己的计算方案"><span class="iconfont">&#xe612;</span>资料库</a>
+				<a href="http://www.jx3pve.com/forum-313-1.html" title="计算方案说明"><span class="iconfont">&#xe612;</span>资料库</a>
 				<a href="http://www.jx3pve.com/bps" title="职业大神进阶宝典"><span class="iconfont">&#xe603;</span>白皮书</a>
 				<a href="http://www.j3pz.com/" title="方便直观地在线配装"><span class="iconfont">&#xe602;</span>配装器</a>
 				<!-- <a href="" title="请务必在IE10以上版本浏览器或Chrome/Firefox/Opera上使用本功能"><span class="iconfont">&#xe609;</span>使用帮助</a>
@@ -609,7 +609,7 @@
 					<label for="roleQX" class="help info"><span>奇穴说明</span></label>
 				</li> -->
 				<li class="ty filter"><label for="roleTZ">套装</label>
-					<select name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
+					<select disabled name="roleTZ" id="roleTZ" placeholder="请选择已激活的套装属性方案">
 						<option value="0">额外套装属性</option>
 						<optgroup label="冰心" class="bx">
 							<option value="0">无</option>
@@ -737,8 +737,10 @@
 					<select name="dpsMethod" id="dpsMethod" placeholder="请选择计算方案">
 						<option value="0">默认计算方案</option>
 						<optgroup label="冰心" class="bx">
-							<option value="0">新妆技能预期（by言秀）</option>
-							<option value="1">玉素技能预期（by言秀）</option>
+							<option value="0">通用算法新妆预期（by萧南歌）</option>
+							<option value="1">通用算法玉素预期（by萧南歌）</option>
+							<option value="3">新妆技能预期（by言秀）</option>
+							<option value="4">玉素技能预期（by言秀）</option>
 							<option value="2">KAP倍数预期（by莫问）</option>
 						</optgroup>
 						<optgroup label="花间" class="hj">
@@ -794,10 +796,14 @@
 				<div id="to">
 					<input type="button" value="计算" id="go" class="btn ui-button-success">
 					<input type="button" value="配装器导入" id="pz-date" class="btn">
-					<input type="button" value="导入" id="date-in" class="btn" disabled>
+					<!-- <a href="javascript:void(0)" class="btn">
+						<span>导入</span>
+						<input type="file" value="导入" id="date-in" >
+					</a> -->
 					<input type="button" value="导出" id="date-out" class="btn" disabled>
 					<input type="button" value="分析图" id="date-map" class="btn" disabled>
-					<a href="http://www.jx3pve.com/forum-313-1.html" target="_blank"><input type="button" value="添加计算方案" id="add-method" class="btn"></a>
+					<a href="http://www.jx3pve.com/forum-313-1.html" target="_blank" id="add-method" class="btn">
+					<span>添加计算方案</span></a>
 				</div>
 
 				<div id="gotips" style="display:none">
