@@ -1,0 +1,115 @@
+【剑破套装】  
+roleTZ ===有为1，没为0
+【橙武】      
+raidCW ===有为1，没为0
+【嗔怒】
+raidCHEN === 有为1，没为0  将此值×频率加在基础攻击上？
+
+【技能附魔1或2，无为0】
+roleFM
+
+
+
+var Q1 = (1.38*that.R_MAP1+256)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0)*(that.R_CF1-1))*that.R_YS1*(1.3+1.1*that.roleTZ);
+var Q2 = (0.396*that.R_MAP1+201)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0.1)*(that.R_CF1-0.9))*that.R_YS1*(adSkill.bx.daixian[0]+that.raidCW)*1.208;
+var Q3 = (0.444*that.R_MAP1+312)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0)*(that.R_CF1-1))*that.R_YS1;
+var Q33 = (0.592*that.R_MAP1+416)*that.R_PA1*(1-that.R_MISS1-that.R_ST+that.R_ST*0.25+(that.R_CT1+0)*(that.R_CF1-1))*that.R_YS1;*/
+
+有附魔 roleFM=1
+(Q1+Q2*(12-GET_SKT(1.5))/GET_SKT(0.8)+Q33*12/GET_SKT(3))/12;
+没附魔 roleFM=0/2					
+(Q1+Q2*(12-GET_SKT(1.5))/GET_SKT(0.8)+Q3*12/GET_SKT(3))/12;
+						
+ 
+
+
+
+
+
+
+
+
+
+
+
+R_MAP1 最终面板攻击
+R_MISS1 最终偏离
+R_ST 最终识破
+R_CF1 最终会效
+Z_CF1 最终真实会效
+R_CT1 最终会心
+Z_CF1 最终真实会心
+R_PA1 破防加成
+R_YS1 易伤加成--------- 易伤加成，固定整体加成1.15
+GET_SKT 技能时间
+
+MJ_1 玳弦秘籍加成--0.12 adSkill.bx.daixian[0]
+MJ_2 剑气秘籍加成--0.1 adSkill.bx.jianqi[0]
+CW  橙武加成 代弦0.05
+===============
+新妆流算法：
+
+剑破期望：Q1
+（1.38*R_MAP1+256）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+R_CT1*（R_CF1-1））*R_YS1*(1.3+TZ_J)
+
+玳弦期望：Q2
+（0.396*R_MAP1+201）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1*(MJ+CW)*1.208
+
+急曲期望：Q3
+（0.444*R_MAP1+312）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+R_CT1*（R_CF1-1））*R_YS1
+
+GET_SKT(0.8)
+GET_SKT(3)
+GET_SKT(1.5)
+
+DPS:
+(Q1+Q2*(12-GET_SKT(1.5))/GET_SKT(0.8)+Q3*12/GET_SKT(3))/12
+
+
+
+新妆流附魔算法：
+
+急曲期望：Q33
+（0.592*R_MAP1+416）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+R_CT1*（R_CF1-1））*R_YS1
+
+DPS:
+(Q1+Q2*(12-GET_SKT(1.5))/GET_SKT(0.8)+Q33*12/GET_SKT(3))/12
+
+
+================================================================
+
+玉素流：
+
+
+剑气期望：W1
+（0.87*R_MAP1+876）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.05）*（R_CF1-1））*R_YS1*(1.1+MJ_2)*1.25
+
+玳弦期望：W2
+（0.396*R_MAP1+201）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1*(MJ+CW)
+
+1层急曲期望:W3
+（0.148*R_MAP1+104）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1
+
+2层急曲期望:W4
+（0.296*R_MAP1+208）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1
+
+3层急曲期望:W5
+（0.444*R_MAP1+312）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1
+
+爆3层急曲期望:W6
+（2.664*R_MAP1+1872）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1
+
+爆4层急曲期望:W7
+（3.552*R_MAP1+2496）*R_PA1*（1-R_MISS1-R_ST+R_ST*0.25+（R_CT1+0.1）*（R_CF1-0.9））*R_YS1
+
+GET_SKT(1.5)
+GET_SKT(1)
+GET_SKT(3)
+
+DPS（普通）：
+
+（W1+W2*9+W3+W4+W6）/（GET_SKT(3)*3+GET_SKT(1.5)）
+
+DPS（附魔）：
+
+（W1+W2*9+W3+W4+W5+W7）/（GET_SKT(3)*4+GET_SKT(1.5)）
